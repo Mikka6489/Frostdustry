@@ -5,25 +5,18 @@ import mindustry.content.*;
 import mindustry.type.*;
 import mindustry.world.*;
 import frostdustry.world.blocks.defense.*;
+import mindustry.world.blocks.storage.*;
+import mindustry.world.*;
 
 import static mindustry.type.ItemStack.*;
 
-public class StormBlock{
+public class FrostBlocks{
     //environment
-    public static Block reverseOverdrive;
+    public static Block reverseOverdrive, generator;
 
     public static void load() {
             reverseOverdrive = new ReverseOverdrive("reverse-overdrive"){{
-            requirements(Category.defense, with(Items.copper, 60, Items.sand, 15, Items.metaglass, 40));
-
-//            hasItems = true;
-//            itemDuration = 60f;
-
-//            warmupSpeed = 0.01f;
-//            explosionRadius = 6;
-//            explosionDamage = 500;
-//            squareSprite = false;
-
+            requirements(Category.effect, with(Items.copper, 60, Items.sand, 15, Items.metaglass, 40));
             size = 2;
             health = 300;
 //            powerProduction = 8.5f;
@@ -41,7 +34,14 @@ public class StormBlock{
             hasBoost = true;
             baseColor = Color.valueOf("feb380");
             phaseColor = Color.valueOf("ffd59e");
+            }};
 
-        }};
-    };
-}
+            generator = new CoreBlock("generator"){{
+            requirements(Category.effect, with(Items.copper, 60, Items.sand, 15, Items.metaglass, 40));
+            size = 5;
+            health = 5000;
+            itemCapacity = 9000;
+            consumeLiquid(Liquids.oil, 0.1f);
+            }};
+        };
+    }

@@ -35,7 +35,7 @@ public class Storm extends ParticleWeather {
         soundVol = 0.5f;
         duration = 7f * Time.toMinutes;
         attrs.set(Attribute.light, 0.3f);
-        attrs.set(ColdAttribute.cold, 1f);
+        attrs.set(FrostAttribute.cold, 1f);
     }
 
     @Override

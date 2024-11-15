@@ -6,7 +6,7 @@ import mindustry.mod.*;
 public class Frostdustry extends Mod{
     @Override
     public void loadContent(){
-        StormBlock.load();
-        StormWeather.load();
+        FrostBlocks.load();
+        FrostWeather.load();
     }
 }
