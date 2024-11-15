@@ -1,0 +1,8 @@
+{
+    "name": "Frostdustry",
+    "author": "Mikka",
+    "description": "If the Generator goes down, all hope is lost.",
+    "minGameVersion": "145",
+    "java": true,
+    "main":  "frostdustry.Frostdustry"
+}
