@@ -35,9 +35,9 @@ public class Storm extends ParticleWeather {
         soundVol = 0.5f;
         duration = 7f * Time.toMinutes;
         attrs.set(Attribute.light, 0.3f);
-        attrs.set(FrostAttribute.cold, 1f);
+        attrs.set(FrostAttribute.cold, 0.5f);
     }
-
+/*
     @Override
     public void update(WeatherState state){
         float speed = force * state.intensity * Time.delta * 0.5f;
@@ -136,4 +136,5 @@ public class Storm extends ParticleWeather {
 
         Draw.reset();
     }
+*/
 }
