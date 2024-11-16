@@ -6,31 +6,19 @@ import mindustry.type.*;
 import mindustry.world.*;
 import frostdustry.world.blocks.defense.*;
 import frostdustry.world.blocks.production.*;
-import frostdustry.content.*;
-import frostdustry.world.*;
 import mindustry.world.blocks.storage.*;
-import mindustry.world.*;
-import mindustry.world.blocks.*;
-
-import mindustry.type.weather.*;
 
 import static mindustry.type.ItemStack.*;
 
 public class FrostBlocks{
     
-    public static Block reverseOverdrive, generator, graphiteClamp, refridgerator;
+    public static Block reverseOverdrive, generator, graphiteClamp, refridgerator, heater;
 
     public static void load() {
             reverseOverdrive = new ReverseOverdrive("reverse-overdrive"){{
             requirements(Category.effect, with(Items.copper, 60, Items.sand, 15, Items.metaglass, 40));
                 size = 2;
                 health = 300;
-//                powerProduction = 8.5f;
-//                ambientSound = Sounds.pulse;
-//                ambientSoundVolume = 0.05f;
-//                consumePower(2.5f);
-//                consumeLiquid(Liquids.water, 0.1f);
-//                outputItem = new ItemStack(Items.graphite, 1);
                 reload = 1f;
                 range = 9999f;
                 speedBoost = 1.5f;
@@ -51,11 +39,13 @@ public class FrostBlocks{
             }};
 
             graphiteClamp = new FrostGCrafter("graphite-clamp"){{
-                requirements(Category.production, with(Items.copper, 60, Items.sand, 15, Items.metaglass, 40));
-                size = 2;
-                health = 100;
-                consumeLiquid(Liquids.water, 0.1f);
+                requirements(Category.crafting, with(Items.copper, 75, Items.lead, 30));
+                craftEffect = Fx.pulverizeMedium;
                 outputItem = new ItemStack(Items.graphite, 1);
+                craftTime = 90f;
+                size = 2;
+                hasItems = true;
+                consumeItem(Items.coal, 2);
             }};
 /*
             refridgerator = new FrostBlock("refridgerator"){{
@@ -65,5 +55,11 @@ public class FrostBlocks{
                 attrs.set(FrostAttribute.cold, 1f);
             }};
 */
+            heater = new Heater("heater"){{
+                requirements(Category.effect, with(Items.lead, 100, Items.titanium, 75, Items.silicon, 75, Items.plastanium, 30));
+//                consumePower(3.50f);
+                size = 2;
+//                consumeItem(Items.phaseFabric).boost();
+            }};
         };
     }

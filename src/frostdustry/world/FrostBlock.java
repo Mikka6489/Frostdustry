@@ -1,24 +1,14 @@
 package frostdustry.world;
 
 import arc.*;
-import arc.graphics.*;
-import arc.graphics.g2d.*;
-import arc.math.*;
-import arc.math.geom.*;
-import arc.util.*;
-import arc.util.io.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
-import mindustry.logic.*;
 import mindustry.ui.*;
 import mindustry.world.*;
-import mindustry.world.consumers.*;
 import mindustry.world.meta.*;
 
 import frostdustry.content.*;
 import frostdustry.world.meta.*;
-
-import static mindustry.Vars.*;
 
 public class FrostBlock extends Block{
     @Deprecated
@@ -57,8 +47,19 @@ public class FrostBlock extends Block{
 
     public class FrostBuilding extends Building {
         public float attrsum;
+
+        @Override
+        public float getProgressIncrease(float base){
+            return super.getProgressIncrease(base) * efficiencyMultiplier();
+        }
+
+        @Override
+        public float efficiencyScale(){
+            return scaleLiquidConsumption ? efficiencyMultiplier() : super.efficiencyScale();
+        }
+
         public float efficiencyMultiplier(){
-            return baseEfficiency + Math.min(maxBoost, boostScale * attrsum) + attribute.env();
+            return baseEfficiency + Math.min(maxBoost, boostScale * attrsum) - attribute.env();
         }
 
     }
