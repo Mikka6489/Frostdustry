@@ -6,6 +6,7 @@ import mindustry.graphics.*;
 import mindustry.ui.*;
 import mindustry.world.*;
 import mindustry.world.meta.*;
+import mindustry.world.blocks.*;
 
 import frostdustry.content.*;
 import frostdustry.world.meta.*;
@@ -13,7 +14,12 @@ import frostdustry.world.meta.*;
 public class FrostBlock extends Block{
     @Deprecated
     
-    public final Attribute attribute = FrostAttribute.cold;
+    public final Attribute coldattr = FrostAttribute.cold;
+    public Attributes attrs = new Attributes();
+    public boolean heated = false;
+
+    private transient float timeScale = 1f, timeScaleDuration;
+
     public float baseEfficiency = 1f;
     public float boostScale = 1f;
     public float maxBoost = 1f;
@@ -22,15 +28,20 @@ public class FrostBlock extends Block{
     public boolean displayEfficiency = true;
     public boolean scaleLiquidConsumption = false;
 
+    
+
     public FrostBlock(String name){
         super(name);
+        attrs.set(coldattr, 0.75f);
+
+
     }
 
     @Override
     public void setStats(){
         super.setStats();
 
-        stats.add(FrostStat.cold, "-" + (attribute.env() * 10) + "°C");
+        stats.add(FrostStat.cold, "-" + (coldattr.env() * 10) + "°C");
     }
 
     @Override
@@ -38,13 +49,19 @@ public class FrostBlock extends Block{
         super.setBars();
         if(!displayEfficiency) return;
 
-        addBar("efficiency", (FrostBuilding entity) ->
+        addBar("Heat", (FrostBuilding entity) ->
             new Bar(
-            () -> Core.bundle.format("bar.efficiency", (int)(entity.efficiencyMultiplier() * 100 * displayEfficiencyScale)),
+            () -> Core.bundle.format("bar.cold", (int)(entity.efficiencyMultiplier() * 100 * displayEfficiencyScale)),
             () -> Pal.lightOrange,
             entity::efficiencyMultiplier));
     }
-
+    public void applyHeat(float intensity, float duration){
+        //do not refresh time scale when getting a weaker intensity
+        if(intensity >= this.timeScale - 0.001f){
+            timeScaleDuration = Math.max(timeScaleDuration, duration);
+        }
+        timeScale = Math.max(timeScale, intensity);
+    }
     public class FrostBuilding extends Building {
         public float attrsum;
 
@@ -59,8 +76,9 @@ public class FrostBlock extends Block{
         }
 
         public float efficiencyMultiplier(){
-            return baseEfficiency + Math.min(maxBoost, boostScale * attrsum) - attribute.env();
+            return baseEfficiency + Math.min(maxBoost, boostScale * attrsum) - attrs.get(coldattr);
         }
+
 
     }
 }

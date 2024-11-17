@@ -7,14 +7,14 @@ import arc.math.*;
 import arc.math.geom.*;
 import arc.util.*;
 import arc.util.io.*;
-import frostdustry.world.*;
 //import mindustry.annotations.Annotations.*;
 import mindustry.graphics.*;
 import mindustry.logic.*;
 import mindustry.ui.*;
 import mindustry.world.consumers.*;
 import mindustry.world.meta.*;
-import frostdustry.content.*;
+
+import frostdustry.world.*;
 
 import static mindustry.Vars.*;
 
@@ -22,10 +22,9 @@ public class Heater extends FrostBlock{
     @Deprecated
     public final int timerUse = timers++;
 
+    public float heat = 0.5f;
+
 //    public @Load("@-top") TextureRegion topRegion;
-
-    float envValue = FrostAttribute.cold.env();
-
     public float reload = 60f;
     public float range = 80f;
     public float speedBoost = 1.5f;
@@ -60,7 +59,7 @@ public class Heater extends FrostBlock{
 
         Drawf.dashCircle(x * tilesize + offset, y * tilesize + offset, range, baseColor);
 
-        indexer.eachBlock(player.team(), x * tilesize + offset, y * tilesize + offset, range, other -> other.block.canOverdrive, other -> Drawf.selected(other, Tmp.c1.set(baseColor).a(Mathf.absin(4f, 1f))));
+        indexer.eachBlock(player.team(), x * tilesize + offset, y * tilesize + offset, range, other -> other.block instanceof FrostBlock, other -> Drawf.selected(other, Tmp.c1.set(baseColor).a(Mathf.absin(4f, 1f))));
     }
 
     @Override
@@ -87,6 +86,7 @@ public class Heater extends FrostBlock{
     public class HeaterBuild extends FrostBuilding implements Ranged{
         public float heat, charge = Mathf.random(reload), phaseHeat, smoothEfficiency, useProgress;
 
+
         @Override
         public float range(){
             return range;
@@ -97,6 +97,7 @@ public class Heater extends FrostBlock{
             Drawf.light(x, y, lightRadius * smoothEfficiency, baseColor, 0.7f * smoothEfficiency);
         }
 
+        @SuppressWarnings("deprecation")
         @Override
         public void updateTile(){
             smoothEfficiency = Mathf.lerpDelta(smoothEfficiency, efficiency, 0.08f);
@@ -110,11 +111,21 @@ public class Heater extends FrostBlock{
             if(charge >= reload){
                 float realRange = range + phaseHeat * phaseRangeBoost;
 
+                charge = 0f;
+//                indexer.eachBlock(this, realRange, other -> other.block instanceof FrostBlock, other -> ((FrostBlock)other.block).applyHeat(realHeat(other), reload + 1f));
                 indexer.eachBlock(this, realRange, other -> other.block instanceof FrostBlock, other -> {
                     FrostBlock frostBlock = (FrostBlock) other.block;
-                    envValue -= 0.5f; // adjust the "cold" attribute
-            });
-    }
+                    float atrVal = frostBlock.attrs.get(frostBlock.coldattr);
+                    if (!((FrostBlock)other.block).heated) {
+                        frostBlock.coldattr.env();
+                        //frostBlock.attrs.set(frostBlock.coldattr.env(), atrVal - heat);
+                        Log.info("building heated");
+                        Log.info("what the freak: " + atrVal);
+                        ((FrostBlock)other.block).heated = true;
+                    }}
+                );
+                };
+            
 
             if(efficiency > 0){
                 useProgress += delta();
@@ -134,7 +145,7 @@ public class Heater extends FrostBlock{
         public void drawSelect(){
             float realRange = range + phaseHeat * phaseRangeBoost;
 
-            indexer.eachBlock(this, realRange, other -> other.block.canOverdrive, other -> Drawf.selected(other, Tmp.c1.set(baseColor).a(Mathf.absin(4f, 1f))));
+            indexer.eachBlock(this, realRange, other -> other.block instanceof FrostBlock, other -> Drawf.selected(other, Tmp.c1.set(baseColor).a(Mathf.absin(4f, 1f))));
 
             Drawf.dashCircle(x, y, realRange, baseColor);
         }

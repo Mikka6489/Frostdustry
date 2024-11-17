@@ -30,7 +30,6 @@ public class Storm extends ParticleWeather {
         duration = 7f * Time.toMinutes;
         attrs.set(Attribute.light, 0.3f);
         attrs.set(FrostAttribute.cold, 0.5f);
-    }
 /*
     @Override
     public void update(WeatherState state){
@@ -131,4 +130,4 @@ public class Storm extends ParticleWeather {
         Draw.reset();
     }
 */
-}
+}}
