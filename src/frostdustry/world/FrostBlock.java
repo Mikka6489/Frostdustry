@@ -1,6 +1,7 @@
 package frostdustry.world;
 
 import arc.*;
+import arc.util.Log;
 import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.ui.*;
@@ -40,8 +41,8 @@ public class FrostBlock extends Block{
     @Override
     public void setStats(){
         super.setStats();
-
-        stats.add(FrostStat.cold, "-" + (coldattr.env() * 10) + "°C");
+        stats.add(FrostStat.cold, "-" + (attrs.get(coldattr) * 10) + "°C");
+//        stats.add(FrostStat.cold, "-" + (coldattr.env() * 10) + "°C");
     }
 
     @Override
@@ -55,15 +56,31 @@ public class FrostBlock extends Block{
             () -> Pal.lightOrange,
             entity::efficiencyMultiplier));
     }
-    public void applyHeat(float intensity, float duration){
+
+    public void applyHeat(float intensity, float duration) {
         //do not refresh time scale when getting a weaker intensity
         if(intensity >= this.timeScale - 0.001f){
             timeScaleDuration = Math.max(timeScaleDuration, duration);
         }
         timeScale = Math.max(timeScale, intensity);
     }
+
+/*
+    while (true) {
+        // terrible but works
+        if (!(heated)) {
+            if (timeScale > 0) {
+                this.attrs.set(this.coldattr, this.attrs.get(this.coldattr) + intensity);
+            }
+        else {
+            if (timeScale = 0) {
+                this.attrs.set(this.coldattr, this.attrs.get(this.coldattr) - intensity);
+            }
+        }
+    }
+*/
     public class FrostBuilding extends Building {
-        public float attrsum;
+        public float attrsum;  
 
         @Override
         public float getProgressIncrease(float base){
@@ -79,7 +96,5 @@ public class FrostBlock extends Block{
             return baseEfficiency + Math.min(maxBoost, boostScale * attrsum) - attrs.get(coldattr);
         }
 
-
     }
 }
-

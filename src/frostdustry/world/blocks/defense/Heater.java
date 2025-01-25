@@ -97,7 +97,6 @@ public class Heater extends FrostBlock{
             Drawf.light(x, y, lightRadius * smoothEfficiency, baseColor, 0.7f * smoothEfficiency);
         }
 
-        @SuppressWarnings("deprecation")
         @Override
         public void updateTile(){
             smoothEfficiency = Mathf.lerpDelta(smoothEfficiency, efficiency, 0.08f);
@@ -112,8 +111,9 @@ public class Heater extends FrostBlock{
                 float realRange = range + phaseHeat * phaseRangeBoost;
 
                 charge = 0f;
-//                indexer.eachBlock(this, realRange, other -> other.block instanceof FrostBlock, other -> ((FrostBlock)other.block).applyHeat(realHeat(other), reload + 1f));
-                indexer.eachBlock(this, realRange, other -> other.block instanceof FrostBlock, other -> {
+                indexer.eachBlock(this, realRange, other -> other.block instanceof FrostBlock, other -> ((FrostBlock)other.block).applyHeat(realHeat((FrostBuilding)other), reload + 1f));
+                // dogshit
+/*                 indexer.eachBlock(this, realRange, other -> other.block instanceof FrostBlock, other -> {
                     FrostBlock frostBlock = (FrostBlock) other.block;
                     float atrVal = frostBlock.attrs.get(frostBlock.coldattr);
                     if (!((FrostBlock)other.block).heated) {
@@ -123,7 +123,7 @@ public class Heater extends FrostBlock{
                         Log.info("what the freak: " + atrVal);
                         ((FrostBlock)other.block).heated = true;
                     }}
-                );
+                );*/
                 };
             
 
@@ -139,6 +139,14 @@ public class Heater extends FrostBlock{
 
         public float realBoost(){
             return (speedBoost + phaseHeat * speedBoostPhase) * efficiency;
+        }
+
+        public float realHeat(FrostBuilding other){
+            FrostBlock frostBlock = (FrostBlock) other.block;
+            float atrVal = frostBlock.attrs.get(frostBlock.coldattr);
+//            Log.info("building heated");
+//            Log.info("what the freak: " + atrVal);
+            return atrVal - heat;
         }
 
         @Override
