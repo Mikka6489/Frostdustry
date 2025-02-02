@@ -109,23 +109,10 @@ public class Heater extends FrostBlock{
 
             if(charge >= reload){
                 float realRange = range + phaseHeat * phaseRangeBoost;
-
                 charge = 0f;
-                indexer.eachBlock(this, realRange, other -> other.block instanceof FrostBlock, other -> ((FrostBlock)other.block).applyHeat(realHeat((FrostBuilding)other), reload + 1f));
-                // dogshit
-/*                 indexer.eachBlock(this, realRange, other -> other.block instanceof FrostBlock, other -> {
-                    FrostBlock frostBlock = (FrostBlock) other.block;
-                    float atrVal = frostBlock.attrs.get(frostBlock.coldattr);
-                    if (!((FrostBlock)other.block).heated) {
-                        frostBlock.coldattr.env();
-                        //frostBlock.attrs.set(frostBlock.coldattr.env(), atrVal - heat);
-                        Log.info("building heated");
-                        Log.info("what the freak: " + atrVal);
-                        ((FrostBlock)other.block).heated = true;
-                    }}
-                );*/
-                };
-            
+                indexer.eachBlock(this, realRange, other -> other.block instanceof FrostBlock, other -> {((FrostBlock)other.block).applyHeat(realHeat((FrostBuilding)other), reload + 1f);
+                });
+            };
 
             if(efficiency > 0){
                 useProgress += delta();
@@ -144,8 +131,7 @@ public class Heater extends FrostBlock{
         public float realHeat(FrostBuilding other){
             FrostBlock frostBlock = (FrostBlock) other.block;
             float atrVal = frostBlock.attrs.get(frostBlock.coldattr);
-//            Log.info("building heated");
-//            Log.info("what the freak: " + atrVal);
+            Log.info("heated by: " + atrVal);
             return atrVal - heat;
         }
 

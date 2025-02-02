@@ -2,5 +2,6 @@
 /build/
 *.DS_STORE
 /bin/
+/Mindustry/
 /Mindustry-master/
 /crashes/

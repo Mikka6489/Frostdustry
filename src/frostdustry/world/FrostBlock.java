@@ -8,6 +8,7 @@ import mindustry.ui.*;
 import mindustry.world.*;
 import mindustry.world.meta.*;
 import mindustry.world.blocks.*;
+import java.util.concurrent.TimeUnit;
 
 import frostdustry.content.*;
 import frostdustry.world.meta.*;
@@ -17,9 +18,14 @@ public class FrostBlock extends Block{
     
     public final Attribute coldattr = FrostAttribute.cold;
     public Attributes attrs = new Attributes();
-    public boolean heated = false;
+
 
     private transient float timeScale = 1f, timeScaleDuration;
+
+    public boolean heated = false;
+    public boolean being_heated = false;
+
+
 
     public float baseEfficiency = 1f;
     public float boostScale = 1f;
@@ -33,7 +39,7 @@ public class FrostBlock extends Block{
 
     public FrostBlock(String name){
         super(name);
-        attrs.set(coldattr, 0.75f);
+        attrs.set(coldattr, 0);
 
 
     }
@@ -58,27 +64,12 @@ public class FrostBlock extends Block{
     }
 
     public void applyHeat(float intensity, float duration) {
-        //do not refresh time scale when getting a weaker intensity
-        if(intensity >= this.timeScale - 0.001f){
-            timeScaleDuration = Math.max(timeScaleDuration, duration);
-        }
-        timeScale = Math.max(timeScale, intensity);
-    }
 
-/*
-    while (true) {
-        // terrible but works
-        if (!(heated)) {
-            if (timeScale > 0) {
-                this.attrs.set(this.coldattr, this.attrs.get(this.coldattr) + intensity);
-            }
-        else {
-            if (timeScale = 0) {
-                this.attrs.set(this.coldattr, this.attrs.get(this.coldattr) - intensity);
-            }
+        Log.info("applyHeat triggered");
+
         }
-    }
-*/
+    
+
     public class FrostBuilding extends Building {
         public float attrsum;  
 
