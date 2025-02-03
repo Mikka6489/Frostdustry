@@ -14,6 +14,7 @@ import mindustry.ui.*;
 import mindustry.world.consumers.*;
 import mindustry.world.meta.*;
 
+import frostdustry.world.blocks.sandbox.*;
 import frostdustry.world.*;
 
 import static mindustry.Vars.*;
@@ -22,10 +23,9 @@ public class Heater extends FrostBlock{
     @Deprecated
     public final int timerUse = timers++;
 
-    public float heat = 0.5f;
+    public float heat = 1.5f;
 
 //    public @Load("@-top") TextureRegion topRegion;
-    public float reload = 60f;
     public float range = 80f;
     public float speedBoost = 1.5f;
     public float speedBoostPhase = 0.75f;
@@ -38,13 +38,14 @@ public class Heater extends FrostBlock{
     public Heater(String name){
         super(name);
         solid = true;
-        update = true;
+//        update = true;
         group = BlockGroup.projectors;
         hasPower = true;
         hasItems = true;
-        canOverdrive = false;
+        canBeHeated = false;
         emitLight = true;
         lightRadius = 50f;
+        reload = 60f;
         envEnabled |= Env.space;
     }
 
@@ -110,8 +111,8 @@ public class Heater extends FrostBlock{
             if(charge >= reload){
                 float realRange = range + phaseHeat * phaseRangeBoost;
                 charge = 0f;
-                indexer.eachBlock(this, realRange, other -> other.block instanceof FrostBlock, other -> {((FrostBlock)other.block).applyHeat(realHeat((FrostBuilding)other), reload + 1f);
-                });
+                Log.info(indextimer);
+                indexer.eachBlock(this, realRange, other -> other.block instanceof FrostBlock && ((FrostBlock)other.block).canBeHeated, other -> {((FrostBlock)other.block).applyHeat(realHeat((FrostBuilding)other), reload + 1f);});
             };
 
             if(efficiency > 0){
@@ -131,8 +132,9 @@ public class Heater extends FrostBlock{
         public float realHeat(FrostBuilding other){
             FrostBlock frostBlock = (FrostBlock) other.block;
             float atrVal = frostBlock.attrs.get(frostBlock.coldattr);
-            Log.info("heated by: " + atrVal);
-            return atrVal - heat;
+//            float temp = atrVal + heat;
+//            Log.info("this block: " + frostBlock + " | heatable? " + frostBlock.canBeHeated + " | heat value: " + Math.round(heat));
+            return Math.round(heat);
         }
 
         @Override

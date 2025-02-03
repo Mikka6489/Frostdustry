@@ -4,17 +4,20 @@ import arc.graphics.*;
 import mindustry.content.*;
 import mindustry.type.*;
 import mindustry.world.*;
+import frostdustry.world.*;
 import frostdustry.world.blocks.defense.*;
 import frostdustry.world.blocks.production.*;
+import frostdustry.world.blocks.sandbox.*;
 import mindustry.world.blocks.storage.*;
 
 import static mindustry.type.ItemStack.*;
 
 public class FrostBlocks{
     
-    public static Block reverseOverdrive, generator, graphiteClamp, refridgerator, heater;
+    public static Block reverseOverdrive, generator, graphiteClamp, refridgerator, heater, ohno, graphiteClamp2, clock;
 
     public static void load() {
+/*
             reverseOverdrive = new ReverseOverdrive("reverse-overdrive"){{
             requirements(Category.effect, with(Items.copper, 60, Items.sand, 15, Items.metaglass, 40));
                 size = 2;
@@ -29,8 +32,8 @@ public class FrostBlocks{
                 baseColor = Color.valueOf("feb380");
                 phaseColor = Color.valueOf("ffd59e");
             }};
-
-            generator = new CoreBlock("generator"){{
+*/
+            generator = new Heater("generator"){{
                 requirements(Category.effect, with(Items.copper, 60, Items.sand, 15, Items.metaglass, 40));
                 size = 5;
                 health = 5000;
@@ -47,6 +50,16 @@ public class FrostBlocks{
                 hasItems = true;
                 consumeItem(Items.coal, 2);
             }};
+
+            graphiteClamp2 = new FrostACrafter("graphite-clamp2"){{
+                requirements(Category.crafting, with(Items.copper, 75, Items.lead, 30));
+                craftEffect = Fx.pulverizeMedium;
+                outputItem = new ItemStack(Items.graphite, 1);
+                craftTime = 90f;
+                size = 2;
+                hasItems = true;
+                consumeItem(Items.coal, 2);
+            }};
 /*
             refridgerator = new FrostBlock("refridgerator"){{
                 requirements(Category.effect, with(Items.copper, 60, Items.sand, 15, Items.metaglass, 40));
@@ -55,6 +68,17 @@ public class FrostBlocks{
                 attrs.set(FrostAttribute.cold, 1f);
             }};
 */
+
+            ohno = new FrostBlock("ohno"){{
+                requirements(Category.effect, with(Items.lead, 100));
+                size = 2;
+            }};
+
+            clock = new Clock("clock"){{
+                requirements(Category.effect, with(Items.copper, 0));
+                size = 1;
+            }};
+
             heater = new Heater("heater"){{
                 requirements(Category.effect, with(Items.lead, 100, Items.titanium, 75, Items.silicon, 75, Items.plastanium, 30));
 //                consumePower(3.50f);
