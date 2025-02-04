@@ -219,8 +219,8 @@ public class FrostGCrafter extends FrostBlock{
         }
 
         @Override
-        public void updateTile(){
-//            Log.info("work????");
+        public void updateTile(){    
+
             if(efficiency > 0){
 
                 progress += getProgressIncrease(craftTime);

@@ -1,39 +1,20 @@
 package frostdustry.content;
 
-import arc.graphics.*;
 import mindustry.content.*;
 import mindustry.type.*;
 import mindustry.world.*;
 import frostdustry.world.*;
 import frostdustry.world.blocks.defense.*;
 import frostdustry.world.blocks.production.*;
-import frostdustry.world.blocks.sandbox.*;
-import mindustry.world.blocks.storage.*;
 
 import static mindustry.type.ItemStack.*;
 
 public class FrostBlocks{
     
-    public static Block reverseOverdrive, generator, graphiteClamp, refridgerator, heater, ohno, graphiteClamp2, clock;
+    public static Block generator, graphiteClamp, refridgerator, heater, ohno, graphiteClamp2;
 
     public static void load() {
-/*
-            reverseOverdrive = new ReverseOverdrive("reverse-overdrive"){{
-            requirements(Category.effect, with(Items.copper, 60, Items.sand, 15, Items.metaglass, 40));
-                size = 2;
-                health = 300;
-                reload = 1f;
-                range = 9999f;
-                speedBoost = 1.5f;
-                speedBoostPhase = 0.75f;
-                useTime = 400f;
-                phaseRangeBoost = 20f;
-                hasBoost = true;
-                baseColor = Color.valueOf("feb380");
-                phaseColor = Color.valueOf("ffd59e");
-            }};
-*/
-            generator = new Heater("generator"){{
+                generator = new Heater("generator"){{
                 requirements(Category.effect, with(Items.copper, 60, Items.sand, 15, Items.metaglass, 40));
                 size = 5;
                 health = 5000;
@@ -72,11 +53,6 @@ public class FrostBlocks{
             ohno = new FrostBlock("ohno"){{
                 requirements(Category.effect, with(Items.lead, 100));
                 size = 2;
-            }};
-
-            clock = new Clock("clock"){{
-                requirements(Category.effect, with(Items.copper, 0));
-                size = 1;
             }};
 
             heater = new Heater("heater"){{

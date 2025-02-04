@@ -14,7 +14,6 @@ import mindustry.ui.*;
 import mindustry.world.consumers.*;
 import mindustry.world.meta.*;
 
-import frostdustry.world.blocks.sandbox.*;
 import frostdustry.world.*;
 
 import static mindustry.Vars.*;
@@ -87,7 +86,6 @@ public class Heater extends FrostBlock{
     public class HeaterBuild extends FrostBuilding implements Ranged{
         public float heat, charge = Mathf.random(reload), phaseHeat, smoothEfficiency, useProgress;
 
-
         @Override
         public float range(){
             return range;
@@ -111,8 +109,7 @@ public class Heater extends FrostBlock{
             if(charge >= reload){
                 float realRange = range + phaseHeat * phaseRangeBoost;
                 charge = 0f;
-                Log.info(indextimer);
-                indexer.eachBlock(this, realRange, other -> other.block instanceof FrostBlock && ((FrostBlock)other.block).canBeHeated, other -> {((FrostBlock)other.block).applyHeat(realHeat((FrostBuilding)other), reload + 1f);});
+                indexer.eachBlock(this, realRange, other -> other.block instanceof FrostBlock && ((FrostBlock)other.block).canBeHeated, other -> {((FrostBlock)other.block).applyHeat(realBoost(), reload + 1f);});
             };
 
             if(efficiency > 0){
@@ -130,8 +127,6 @@ public class Heater extends FrostBlock{
         }
 
         public float realHeat(FrostBuilding other){
-            FrostBlock frostBlock = (FrostBlock) other.block;
-            float atrVal = frostBlock.attrs.get(frostBlock.coldattr);
 //            float temp = atrVal + heat;
 //            Log.info("this block: " + frostBlock + " | heatable? " + frostBlock.canBeHeated + " | heat value: " + Math.round(heat));
             return Math.round(heat);
