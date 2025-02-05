@@ -1,16 +1,24 @@
 package frostdustry.type.weather;
 
+import arc.*;
 import arc.graphics.*;
+import arc.graphics.g2d.*;
+import arc.math.*;
 import arc.util.*;
 import frostdustry.content.*;
 import mindustry.gen.*;
 import mindustry.type.weather.*;
 import mindustry.world.meta.*;
 
+import static mindustry.Vars.*;
+
 public class Storm extends ParticleWeather {
+//    public Effect hitEffect = MindyFx.ionHit;
     public Color blinkColor = Color.white;
     public float blinkDuration = 45f, blinkGap = 300f;
 
+    public float waveVal;
+    
     public Storm(String name){
         super(name);
 //        color = noiseColor = Pal2.drift.cpy().lerp(Color.white, 0.5f);
@@ -29,14 +37,23 @@ public class Storm extends ParticleWeather {
         soundVol = 0.5f;
         duration = 7f * Time.toMinutes;
         attrs.set(Attribute.light, 0.3f);
-        attrs.set(FrostAttribute.cold, 0.5f);
-/*
+//        attrs.set(FrostAttribute.cold, Mathf.round(state.wave * 0.1f)); // this will never update
+    }
+
+    public void update() {
+        if (String.valueOf(state.wave).contains("0")) {
+            waveVal = state.wave / 10;
+            Log.info("changed value of waveVal to: " + waveVal);
+        }
+        attrs.set(FrostAttribute.cold, Mathf.round(waveVal * 0.1f)); //might update
+    }
+
     @Override
     public void update(WeatherState state){
         float speed = force * state.intensity * Time.delta * 0.5f;
         if(speed > 0.001f){
             float windx = state.windVector.x * speed, windy = state.windVector.y * speed;
-            float rot = state.windVector.angle();
+//            float rot = state.windVector.angle();
 
             for(Bullet b : Groups.bullet){
                 if(b.type != null && b.type.hittable){
@@ -129,5 +146,4 @@ public class Storm extends ParticleWeather {
 
         Draw.reset();
     }
-*/
-}}
+}

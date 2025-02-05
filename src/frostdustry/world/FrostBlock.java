@@ -1,7 +1,6 @@
 package frostdustry.world;
 
 import arc.*;
-import arc.math.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.ui.*;
