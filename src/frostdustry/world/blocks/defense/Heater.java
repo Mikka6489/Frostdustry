@@ -23,6 +23,7 @@ public class Heater extends FrostBlock{
     public final int timerUse = timers++;
 
     public float heat = 1.5f;
+    public float reload = 60f;
 
 //    public @Load("@-top") TextureRegion topRegion;
     public float range = 80f;
@@ -37,14 +38,13 @@ public class Heater extends FrostBlock{
     public Heater(String name){
         super(name);
         solid = true;
-//        update = true;
+        update = true;
         group = BlockGroup.projectors;
         hasPower = true;
         hasItems = true;
         canBeHeated = false;
         emitLight = true;
         lightRadius = 50f;
-        reload = 60f;
         envEnabled |= Env.space;
     }
 

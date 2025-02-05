@@ -1,23 +1,20 @@
 package frostdustry.type.weather;
 
-import arc.*;
 import arc.graphics.*;
-import arc.graphics.g2d.*;
-import arc.math.*;
 import arc.util.*;
 import frostdustry.content.*;
+import mindustry.*;
 import mindustry.gen.*;
 import mindustry.type.weather.*;
 import mindustry.world.meta.*;
-
-import static mindustry.Vars.*;
 
 public class Storm extends ParticleWeather {
 //    public Effect hitEffect = MindyFx.ionHit;
     public Color blinkColor = Color.white;
     public float blinkDuration = 45f, blinkGap = 300f;
 
-    public float waveVal;
+    public int waveVal = 0;
+//    public GameState sate = state;
     
     public Storm(String name){
         super(name);
@@ -37,17 +34,18 @@ public class Storm extends ParticleWeather {
         soundVol = 0.5f;
         duration = 7f * Time.toMinutes;
         attrs.set(Attribute.light, 0.3f);
-//        attrs.set(FrostAttribute.cold, Mathf.round(state.wave * 0.1f)); // this will never update
     }
 
-    public void update() {
-        if (String.valueOf(state.wave).contains("0")) {
-            waveVal = state.wave / 10;
-            Log.info("changed value of waveVal to: " + waveVal);
+    public void update(WeatherState state) {
+        int wave = Vars.state.wave;
+        if (String.valueOf(wave).contains("0")) {
+            waveVal = wave / 10;
+//            Log.info("current value of waveVal to: " + waveVal);
         }
-        attrs.set(FrostAttribute.cold, Mathf.round(waveVal * 0.1f)); //might update
+        attrs.set(FrostAttribute.cold, (waveVal * 0.1f)); //might update
     }
-
+}
+/*
     @Override
     public void update(WeatherState state){
         float speed = force * state.intensity * Time.delta * 0.5f;
@@ -147,3 +145,4 @@ public class Storm extends ParticleWeather {
         Draw.reset();
     }
 }
+*/

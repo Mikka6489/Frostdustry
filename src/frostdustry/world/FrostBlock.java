@@ -1,6 +1,7 @@
 package frostdustry.world;
 
 import arc.*;
+import arc.util.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.ui.*;
@@ -21,8 +22,6 @@ public class FrostBlock extends Block{
 
     public boolean canBeHeated = true;
 
-    public float reload = 60f;
-
     public float baseEfficiency = 1f;
     public float boostScale = 1f;
     public float maxBoost = 1f;
@@ -33,14 +32,12 @@ public class FrostBlock extends Block{
 
     public FrostBlock(String name){
         super(name);
-        update = true;
-        this.attrs.set(this.coldattr, 0);
     }
 
     @Override
     public void setStats(){
         super.setStats();
-        stats.add(FrostStat.cold, (this.attrs.get(this.coldattr) * 10) + "°C");
+        stats.add(FrostStat.cold, (coldattr.env() * 10) + "°C");
     }
 
     @Override
@@ -62,6 +59,7 @@ public class FrostBlock extends Block{
         }
 
         this.timeScale = Math.max(this.timeScale, intensity);
+        Log.info("current value of cold: " + FrostAttribute.cold.env());
     }
 
     public class FrostBuilding extends Building {
@@ -78,7 +76,7 @@ public class FrostBlock extends Block{
         }
 
         public float efficiencyMultiplier(){
-            return baseEfficiency + Math.min(maxBoost, boostScale * attrsum) - attrs.get(coldattr);
+            return baseEfficiency + Math.min(maxBoost, boostScale * attrsum) - FrostAttribute.cold.env();
         }
 
     }

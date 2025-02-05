@@ -17,6 +17,7 @@ import mindustry.world.blocks.liquid.Conduit.*;
 import mindustry.world.draw.*;
 import mindustry.world.meta.*;
 import frostdustry.world.*;
+import frostdustry.content.*;
 
 import static mindustry.Vars.*;
 
@@ -219,7 +220,7 @@ public class FrostGCrafter extends FrostBlock{
         }
 
         @Override
-        public void updateTile(){    
+        public void updateTile(){
 
             if(efficiency > 0){
 
