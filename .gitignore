@@ -1,4 +1,5 @@
 /.gradle/
+/.vscode/
 /build/
 *.DS_STORE
 /bin/

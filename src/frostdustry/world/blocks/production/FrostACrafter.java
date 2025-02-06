@@ -60,8 +60,7 @@ public class FrostACrafter extends FrostGCrafter{
 
     public class FrostACrafterBuild extends FrostGCrafterBuild{
         public float attrsum;
-
-        @Override
+/*
         public float getProgressIncrease(float base){
             return super.getProgressIncrease(base) * efficiencyMultiplier();
         }
@@ -74,7 +73,7 @@ public class FrostACrafter extends FrostGCrafter{
         public float efficiencyScale(){
             return scaleLiquidConsumption ? efficiencyMultiplier() : super.efficiencyScale();
         }
-
+*/
         @Override
         public void pickedUp(){
             attrsum = 0f;

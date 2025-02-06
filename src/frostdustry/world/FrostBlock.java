@@ -1,6 +1,7 @@
 package frostdustry.world;
 
 import arc.*;
+import arc.math.*;
 import arc.util.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
@@ -13,15 +14,11 @@ import frostdustry.content.*;
 import frostdustry.world.meta.*;
 
 public class FrostBlock extends Block{
-    @Deprecated
-    
-    public final Attribute coldattr = FrostAttribute.cold;
+
+    public Attribute coldattr = FrostAttribute.cold;
     public Attributes attrs = new Attributes();
-
-    private transient float timeScale = 1f, timeScaleDuration;
-
+    public Attribute attribute = Attribute.heat;
     public boolean canBeHeated = true;
-
     public float baseEfficiency = 1f;
     public float boostScale = 1f;
     public float maxBoost = 1f;
@@ -37,29 +34,22 @@ public class FrostBlock extends Block{
     @Override
     public void setStats(){
         super.setStats();
-        stats.add(FrostStat.cold, (coldattr.env() * 10) + "°C");
+        if (canBeHeated) {
+            stats.add(FrostStat.cold, (Mathf.round(coldattr.env()) * 10) + "°C");
+        }
     }
 
     @Override
     public void setBars(){
         super.setBars();
         if(!displayEfficiency) return;
-
-        addBar("Heat", (FrostBuilding entity) ->
-            new Bar(
-            () -> Core.bundle.format("bar.cold", (int)(entity.efficiencyMultiplier() * 10 * displayEfficiencyScale)),
-            () -> Pal.lightOrange,
-            entity::efficiencyMultiplier));
-    }
-
-    public void applyHeat(float intensity, float duration) {
-        // too lazy to fix Heater.java
-        if (intensity >= this.timeScale - 0.001F) {
-            this.timeScaleDuration = Math.max(this.timeScaleDuration, duration);
+        if (canBeHeated) {
+            addBar("Heat", (FrostBuilding entity) ->
+                new Bar(
+                () -> Core.bundle.format("bar.cold", (int)(entity.efficiencyMultiplier() * 10 * displayEfficiencyScale)),
+                () -> Pal.techBlue,
+                entity::efficiencyMultiplier));
         }
-
-        this.timeScale = Math.max(this.timeScale, intensity);
-        Log.info("current value of cold: " + FrostAttribute.cold.env());
     }
 
     public class FrostBuilding extends Building {
@@ -76,7 +66,7 @@ public class FrostBlock extends Block{
         }
 
         public float efficiencyMultiplier(){
-            return baseEfficiency + Math.min(maxBoost, boostScale * attrsum) - FrostAttribute.cold.env();
+            return (baseEfficiency + Math.min(maxBoost, boostScale * attrsum) + attribute.env()) - coldattr.env();
         }
 
     }

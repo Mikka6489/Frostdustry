@@ -19,7 +19,6 @@ public class FrostBlocks{
                 size = 5;
                 health = 5000;
                 itemCapacity = 9000;
-                consumeLiquid(Liquids.oil, 0.1f);
             }};
 
             graphiteClamp = new FrostGCrafter("graphite-clamp"){{
@@ -59,7 +58,6 @@ public class FrostBlocks{
                 requirements(Category.effect, with(Items.lead, 100, Items.titanium, 75, Items.silicon, 75, Items.plastanium, 30));
 //                consumePower(3.50f);
                 size = 2;
-//                consumeItem(Items.phaseFabric).boost();
             }};
         };
     }
