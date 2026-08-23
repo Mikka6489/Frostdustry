@@ -52,7 +52,7 @@ public class FrostGCrafter extends FrostBlock{
         update = true;
         solid = true;
         hasItems = true;
-        ambientSound = Sounds.machine;
+//        ambientSound = Sounds.machine;
         sync = true;
         ambientSoundVolume = 0.03f;
         flags = EnumSet.of(BlockFlag.factory);

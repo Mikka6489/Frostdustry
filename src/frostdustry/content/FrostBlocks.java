@@ -14,10 +14,11 @@ public class FrostBlocks{
     public static Block generator, graphiteClamp, refridgerator, heater, ohno, graphiteClamp2;
 
     public static void load() {
-                generator = new Heater("generator"){{
+                generator = new Generator("generator"){{
                 requirements(Category.effect, with(Items.copper, 60, Items.sand, 15, Items.metaglass, 40));
                 size = 5;
                 health = 5000;
+                hasItems = true;
                 itemCapacity = 9000;
             }};
 
@@ -49,15 +50,11 @@ public class FrostBlocks{
             }};
 */
 
-            ohno = new FrostBlock("ohno"){{
-                requirements(Category.effect, with(Items.lead, 100));
-                size = 2;
-            }};
-
             heater = new Heater("heater"){{
                 requirements(Category.effect, with(Items.lead, 100, Items.titanium, 75, Items.silicon, 75, Items.plastanium, 30));
 //                consumePower(3.50f);
                 size = 2;
+                itemCapacity = 0;
             }};
         };
     }
