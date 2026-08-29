@@ -1,7 +1,9 @@
 package frostdustry.world.blocks.defense;
 
 public class Heater extends Generator{
-    public Heater (String name) {
-        super(name);
+//	public boolean canBurnCoal = false;
+    public Heater (String name){
+	super(name);
+	canBurnCoal = false;
     }
 }

@@ -24,7 +24,7 @@ import static mindustry.Vars.*;
 
 public class Generator extends FrostBlock{
     @Deprecated
-    
+	public boolean canBurnCoal = true;    
     public float heat = 1.5f;
     public float reload = 60f;
     public int heatLevel = 1;
@@ -50,6 +50,7 @@ public class Generator extends FrostBlock{
         canBeHeated = false;
         emitLight = true;
         lightRadius = 50f;
+	canBurnCoal = true;
         envEnabled |= Env.space;
     }
 
@@ -97,7 +98,7 @@ public class Generator extends FrostBlock{
         public boolean nowFueled;
 
         public void updateHeaterStatus(){
-            if (this.block instanceof Generator){
+            if (canBurnCoal){
                 Log.info("is a generator");
                 int coalCost = coalCost();
                 if(items.get(Items.coal) >= coalCost){
@@ -110,6 +111,9 @@ public class Generator extends FrostBlock{
                     return;
                 }
             }
+	    if (!canBurnCoal) {
+	    	Log.info("is a heater");
+	    }
         }
 
         @Override
