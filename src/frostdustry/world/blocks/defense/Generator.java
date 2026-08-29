@@ -19,12 +19,15 @@ import mindustry.world.meta.*;
 
 import frostdustry.world.*;
 import frostdustry.content.*;
+import frostdustry.logic.*;
 
 import static mindustry.Vars.*;
 
 public class Generator extends FrostBlock{
     @Deprecated
-	public boolean canBurnCoal = true;    
+	public boolean generatorActive = FrostVars.generatorActive;
+	public int runningHeaters = FrostVars.runningHeaters;
+    public boolean canBurnCoal = true;    
     public float heat = 1.5f;
     public float reload = 60f;
     public int heatLevel = 1;
@@ -55,7 +58,7 @@ public class Generator extends FrostBlock{
     }
 
     public int coalCost(){
-        return Math.max(1, (int)(5f * FrostAttribute.runningHeaters * heatLevel));
+        return Math.max(1, (int)(5f * runningHeaters * heatLevel));
     }
 
     @Override
@@ -99,33 +102,33 @@ public class Generator extends FrostBlock{
 
         public void updateHeaterStatus(){
             if (canBurnCoal){
-                Log.info("is a generator");
+//                Log.info("is a generator");
                 int coalCost = coalCost();
                 if(items.get(Items.coal) >= coalCost){
-                    Log.info("removing coal: " + coalCost);
+//                    Log.info("removing coal: " + coalCost);
                     items.remove(Items.coal, coalCost);
-                    FrostAttribute.generatorActive = true;
+                    generatorActive = true;
                 } else {
-                    Log.info("no coal detected");
-                    FrostAttribute.generatorActive = false;
+//                    Log.info("no coal detected");
+                    generatorActive = false;
                     return;
                 }
             }
-	    if (!canBurnCoal) {
+/*	    if (!canBurnCoal) {
 	    	Log.info("is a heater");
 	    }
-        }
+*/        }
 
         @Override
         public void created(){
             super.created();
-            FrostAttribute.runningHeaters++;
+            runningHeaters++;
             updateHeaterStatus();
         }
 
         @Override
         public void onRemoved(){
-            FrostAttribute.runningHeaters--;
+            runningHeaters--;
             super.onRemoved();
         }
 
@@ -146,7 +149,7 @@ public class Generator extends FrostBlock{
 
         @Override
         public void updateTile(){
-            if (FrostAttribute.generatorActive) {
+            if (generatorActive) {
                 smoothEfficiency = Mathf.lerpDelta(smoothEfficiency, efficiency, 0.08f);
                 heat = Mathf.lerpDelta(heat, efficiency > 0 ? 1f : 0f, 0.08f);
                 charge += heat * Time.delta;
@@ -172,7 +175,7 @@ public class Generator extends FrostBlock{
 
             if(useProgress >= useTime){
                 updateHeaterStatus();
-                Log.info("total number of heaters: " + FrostAttribute.runningHeaters);
+                Log.info("total number of heaters: " + runningHeaters);
                 useProgress %= useTime;
             }
         }

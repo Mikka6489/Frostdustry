@@ -12,10 +12,11 @@ import mindustry.world.blocks.*;
 
 import frostdustry.content.*;
 import frostdustry.world.meta.*;
+import frostdustry.logic.*;
 
 public class FrostBlock extends Block{
 
-    public Attribute coldattr = FrostAttribute.cold;
+    public float cold = FrostVars.cold;
     public Attributes attrs = new Attributes();
     public Attribute attribute = Attribute.heat;
     public boolean canBeHeated = true;
@@ -35,7 +36,7 @@ public class FrostBlock extends Block{
     public void setStats(){
         super.setStats();
         if (canBeHeated) {
-            stats.add(FrostStat.cold, (Mathf.round(coldattr.env()) * 10) + "°C");
+            stats.add(FrostStat.cold, (Mathf.round(cold) * 10) + "°C");
         }
     }
 
@@ -66,7 +67,7 @@ public class FrostBlock extends Block{
         }
 
         public float efficiencyMultiplier(){
-            return (baseEfficiency + Math.min(maxBoost, boostScale * attrsum) + attribute.env()) - coldattr.env();
+            return (baseEfficiency + Math.min(maxBoost, boostScale * attrsum) + attribute.env()) - cold;
         }
 
     }

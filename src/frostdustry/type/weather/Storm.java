@@ -8,11 +8,15 @@ import mindustry.gen.*;
 import mindustry.type.weather.*;
 import mindustry.world.meta.*;
 
+import frostdustry.logic.*;
+
 public class Storm extends ParticleWeather {
 //    public Effect hitEffect = MindyFx.ionHit;
     public Color blinkColor = Color.white;
     public float blinkDuration = 45f, blinkGap = 300f;
 
+	public int lastWave = -1;
+	public int everyWaves = 5;
     public int waveVal = 0;
 //    public GameState sate = state;
     
@@ -35,13 +39,14 @@ public class Storm extends ParticleWeather {
         duration = 7f * Time.toMinutes;
         attrs.set(Attribute.light, 0.3f);
     }
-
+    @Override
     public void update(WeatherState state) {
+	Log.info("weather is updating");	
         int wave = Vars.state.wave;
-        if (String.valueOf(wave).contains("0")) {
+        if (wave > lastWave && wave % everyWaves == 0) {
             waveVal = wave / 10;
             Log.info("current value of waveVal to: " + waveVal);
         }
-        attrs.set(FrostAttribute.cold, (waveVal * 0.1f)); //might update
+//        attrs.set(FrostAttribute.cold, (waveVal * 0.1f)); //might update
     }
 }
