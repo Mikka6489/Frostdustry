@@ -37,7 +37,7 @@ public class Generator extends FrostBlock{
     public boolean hasBoost = true;
     public Color baseColor = Color.valueOf("feb380");
     public Color phaseColor = Color.valueOf("ffd59e");
-    float heaterBonus = FrostAttribute.globalHeaters * 0.1f;
+//    float heaterBonus = FrostAttribute.globalHeaters * 0.1f;
 
     public Generator(String name){
         super(name);
@@ -54,7 +54,7 @@ public class Generator extends FrostBlock{
     }
 
     public int coalCost(){
-        return Math.max(1, (int)(5f * FrostAttribute.globalHeaters * heatLevel));
+        return Math.max(1, (int)(5f * FrostAttribute.runningHeaters * heatLevel));
     }
 
     @Override
@@ -94,46 +94,34 @@ public class Generator extends FrostBlock{
 
     public class GeneratorBuild extends FrostBuilding implements Ranged{
         public float heat, charge = Mathf.random(reload), phaseHeat, smoothEfficiency, useProgress;
-        public boolean fueled;
+        public boolean nowFueled;
 
         public void updateHeaterStatus(){
-            if(this.block instanceof Heater){
-                boolean generatorRunning = FrostAttribute.activeGenerators > 0;
-                if(generatorRunning && !fueled){
-                    FrostAttribute.globalHeaters++;
-                    fueled = true;
-                } else if(!generatorRunning && fueled){
-                    FrostAttribute.globalHeaters--;
-                    fueled = false;
+            if (this.block instanceof Generator){
+                Log.info("is a generator");
+                int coalCost = coalCost();
+                if(items.get(Items.coal) >= coalCost){
+                    Log.info("removing coal: " + coalCost);
+                    items.remove(Items.coal, coalCost);
+                    FrostAttribute.generatorActive = true;
+                } else {
+                    Log.info("no coal detected");
+                    FrostAttribute.generatorActive = false;
+                    return;
                 }
-                return;
-            }
-
-            if(items == null){
-                return;
-            }
-
-            boolean nowFueled = items.get(Items.coal) > 0 && efficiency > 0;
-            if(nowFueled && !fueled){
-                FrostAttribute.activeGenerators++;
-                fueled = true;
-            } else if(!nowFueled && fueled){
-                FrostAttribute.activeGenerators--;
-                fueled = false;
             }
         }
 
         @Override
         public void created(){
             super.created();
+            FrostAttribute.runningHeaters++;
             updateHeaterStatus();
         }
 
         @Override
         public void onRemoved(){
-            if(fueled){
-                FrostAttribute.globalHeaters--;
-            }
+            FrostAttribute.runningHeaters--;
             super.onRemoved();
         }
 
@@ -154,46 +142,15 @@ public class Generator extends FrostBlock{
 
         @Override
         public void updateTile(){
-            updateHeaterStatus();
-
-            if(this.block instanceof Heater){
-                if(!fueled || FrostAttribute.activeGenerators <= 0){
-                    smoothEfficiency = 0f;
-                    heat = 0f;
-                    return;
-                }
-
+            if (FrostAttribute.generatorActive) {
                 smoothEfficiency = Mathf.lerpDelta(smoothEfficiency, efficiency, 0.08f);
                 heat = Mathf.lerpDelta(heat, efficiency > 0 ? 1f : 0f, 0.08f);
                 charge += heat * Time.delta;
-
-                if(hasBoost){
-                    phaseHeat = Mathf.lerpDelta(phaseHeat, optionalEfficiency, 0.1f);
-                }
-
-                if(charge >= reload){
-                    float realRange = range + phaseHeat * phaseRangeBoost;
-                    charge = 0f;
-                    indexer.eachBlock(this, realRange, other -> other.block instanceof FrostBlock && ((FrostBlock)other.block).canBeHeated, other -> other.applyBoost(realBoost(), reload + 1f));
-                }
-                return;
-            }
-
-            if(items == null){
+            }   else {
                 smoothEfficiency = 0f;
                 heat = 0f;
-                return;
+                //charge = 0f;
             }
-
-            if(!fueled){
-                smoothEfficiency = 0f;
-                heat = 0f;
-                return;
-            }
-
-            smoothEfficiency = Mathf.lerpDelta(smoothEfficiency, efficiency, 0.08f);
-            heat = Mathf.lerpDelta(heat, efficiency > 0 ? 1f : 0f, 0.08f);
-            charge += heat * Time.delta;
 
             if(hasBoost){
                 phaseHeat = Mathf.lerpDelta(phaseHeat, optionalEfficiency, 0.1f);
@@ -210,16 +167,8 @@ public class Generator extends FrostBlock{
             }
 
             if(useProgress >= useTime){
-                int coalCost = coalCost();
-                if(items.get(Items.coal) >= coalCost){
-                    Log.info("removing coal: " + coalCost);
-                    items.remove(Items.coal, coalCost);
-                } else {
-                    smoothEfficiency = 0f;
-                    heat = 0f;
-                    updateHeaterStatus();
-                    return;
-                }
+                updateHeaterStatus();
+                Log.info("total number of heaters: " + FrostAttribute.runningHeaters);
                 useProgress %= useTime;
             }
         }

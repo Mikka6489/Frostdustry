@@ -7,6 +7,6 @@ public class FrostAttribute {
 
     cold = Attribute.add("cold");
 //    numberOfHeaters = Attribute.add("numberOfHeaters");
-    public static int activeGenerators = 0;
-    public static int globalHeaters = 0;
+    public static boolean generatorActive = false;
+    public static int runningHeaters = 0;
 }
