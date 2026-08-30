@@ -1,19 +1,15 @@
 package frostdustry.world.blocks.production;
 
 import arc.*;
-import arc.util.*;
 import mindustry.game.*;
 import mindustry.graphics.*;
 import mindustry.ui.*;
 import mindustry.world.*;
 import mindustry.world.meta.*;
 
-import frostdustry.logic.*;
-
 /** A crafter that gains efficiency from attribute tiles. */
 public class FrostACrafter extends FrostGCrafter{
-	public Attribute coldattr = FrostVars.coldattr;
-    	public Attribute attribute = FrostVars.coldattr;
+    public Attribute attribute = Attribute.heat;
     public float baseEfficiency = 1f;
     public float boostScale = 1f;
     public float maxBoost = 1f;
@@ -24,6 +20,7 @@ public class FrostACrafter extends FrostGCrafter{
 
     public FrostACrafter(String name){
         super(name);
+        canUseAttributes = true;
     }
 
     @Override

@@ -38,8 +38,6 @@ public class FrostGCrafter extends FrostBlock{
     public boolean dumpExtraLiquid = true;
     public boolean ignoreLiquidFullness = false;
 
-	public Attribute frostattr = FrostVars.coldattr;
-
     public float craftTime = 80;
     public Effect craftEffect = Fx.none;
     public Effect updateEffect = Fx.none;
@@ -247,11 +245,8 @@ public class FrostGCrafter extends FrostBlock{
             //TODO may look bad, revert to edelta() if so
             totalProgress += warmup * Time.delta;
 
-            if(progress >= 1f){
-		Log.info("effscale: " + this.block + ": " + efficiencyScale());
-		Log.info("efficiencyMultipler of: " + this.block + ": " + efficiencyMultiplier());
-		Log.info("coldattr from: " + this.block + "'s perspective: " + frostattr.env());    
-		craft();
+            if(progress >= 1f){  
+		        craft();
             }
 
             dumpOutputs();

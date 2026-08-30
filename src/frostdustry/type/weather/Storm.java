@@ -2,13 +2,9 @@ package frostdustry.type.weather;
 
 import arc.graphics.*;
 import arc.util.*;
-import frostdustry.content.*;
-import mindustry.*;
 import mindustry.gen.*;
 import mindustry.type.weather.*;
 import mindustry.world.meta.*;
-
-import frostdustry.logic.*;
 
 public class Storm extends ParticleWeather {
 //    public Effect hitEffect = MindyFx.ionHit;
@@ -39,14 +35,5 @@ public class Storm extends ParticleWeather {
         duration = 7f * Time.toMinutes;
         attrs.set(Attribute.light, 0.3f);
     }
-    @Override
-    public void update(WeatherState state) {
-	Log.info("weather is updating");	
-        int wave = Vars.state.wave;
-        if (wave > lastWave && wave % everyWaves == 0) {
-            waveVal = wave / 10;
-            Log.info("current value of waveVal to: " + waveVal);
-        }
-//        attrs.set(FrostAttribute.cold, (waveVal * 0.1f)); //might update
-    }
 }
+

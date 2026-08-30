@@ -7,7 +7,6 @@ import arc.math.*;
 import arc.math.geom.*;
 import arc.util.*;
 import arc.util.io.*;
-//import mindustry.annotations.Annotations.*;
 import mindustry.graphics.*;
 import mindustry.content.*;
 import mindustry.gen.*;
@@ -18,7 +17,6 @@ import mindustry.world.consumers.*;
 import mindustry.world.meta.*;
 
 import frostdustry.world.*;
-import frostdustry.content.*;
 import frostdustry.logic.*;
 
 import static mindustry.Vars.*;
@@ -53,7 +51,6 @@ public class Generator extends FrostBlock{
         canBeHeated = false;
         emitLight = true;
         lightRadius = 50f;
-	canBurnCoal = true;
         envEnabled |= Env.space;
     }
 
@@ -101,24 +98,17 @@ public class Generator extends FrostBlock{
         public boolean nowFueled;
 
         public void updateHeaterStatus(){
-//		Log.info("temp wave test" + TemperatureHandler.test);
 		if (canBurnCoal){
-//                Log.info("is a generator");
                 int coalCost = coalCost();
                 if(items.get(Items.coal) >= coalCost){
-//                    Log.info("removing coal: " + coalCost);
                     items.remove(Items.coal, coalCost);
                     generatorActive = true;
                 } else {
-//                    Log.info("no coal detected");
                     generatorActive = false;
                     return;
                 }
             }
-/*	    if (!canBurnCoal) {
-	    	Log.info("is a heater");
-	    }
-*/        }
+        }
 
         @Override
         public void created(){
@@ -176,7 +166,6 @@ public class Generator extends FrostBlock{
 
             if(useProgress >= useTime){
                 updateHeaterStatus();
-//                Log.info("total number of heaters: " + runningHeaters);
                 useProgress %= useTime;
             }
         }

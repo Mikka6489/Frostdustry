@@ -4,10 +4,7 @@ import arc.*;
 import arc.util.*;
 import mindustry.game.EventType.*;
 import mindustry.*;
-import mindustry.world.meta.*;
 import mindustry.world.blocks.*;
-
-import frostdustry.logic.*;
 
 public class TemperatureHandler{
 
@@ -19,19 +16,11 @@ public class TemperatureHandler{
 		Events.on(WaveEvent.class, e -> {
 			int wave = Vars.state.wave;
 			if (wave % 1 == 0) {
-				FrostVars.cold++;
-				Log.info("varcold: " + FrostVars.cold + ", attrcold: " + FrostVars.coldattr.env());
-				Vars.state.rules.attributes.set(FrostVars.coldattr, FrostVars.cold);
-				Vars.state.envAttrs.set(FrostVars.coldattr, FrostVars.cold);
-//				attrs.set(FrostVars.coldattr, FrostVars.cold);
-				Log.info("wave change, cold: " + FrostVars.cold);
-				//changeCold();
+				Log.info("cold: " + FrostVars.cold.env());
+				Vars.state.rules.attributes.set(FrostVars.cold, FrostVars.cold.env() + 1);
+				Vars.state.envAttrs.set(FrostVars.cold, FrostVars.cold.env() + 1);
 			}
 		});
-	};
-
-	public void changeCold(){
-		Log.info("uhhhh");
 	};
 }
 
