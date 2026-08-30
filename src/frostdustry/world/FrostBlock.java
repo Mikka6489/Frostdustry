@@ -9,6 +9,8 @@ import mindustry.ui.*;
 import mindustry.world.*;
 import mindustry.world.meta.*;
 import mindustry.world.blocks.*;
+import arc.*;
+import mindustry.game.EventType.*;
 
 import frostdustry.content.*;
 import frostdustry.world.meta.*;
@@ -16,6 +18,7 @@ import frostdustry.logic.*;
 
 public class FrostBlock extends Block{
 
+	public Attribute coldattr = FrostVars.coldattr;
     public float cold = FrostVars.cold;
     public Attributes attrs = new Attributes();
     public Attribute attribute = Attribute.heat;
@@ -25,6 +28,7 @@ public class FrostBlock extends Block{
     public float maxBoost = 1f;
     public float minEfficiency = -1f;
     public float displayEfficiencyScale = 1f;
+    public float useTime = 400f;
     public boolean displayEfficiency = true;
     public boolean scaleLiquidConsumption = false;
 
@@ -36,7 +40,7 @@ public class FrostBlock extends Block{
     public void setStats(){
         super.setStats();
         if (canBeHeated) {
-            stats.add(FrostStat.cold, (Mathf.round(cold) * 10) + "°C");
+            stats.add(FrostStat.cold, (Mathf.round(coldattr.env()) * 10) + "°C");
         }
     }
 
@@ -54,7 +58,7 @@ public class FrostBlock extends Block{
     }
 
     public class FrostBuilding extends Building {
-        public float attrsum;
+        public float attrsum, useProgress;
 
         @Override
         public float getProgressIncrease(float base){
@@ -67,8 +71,8 @@ public class FrostBlock extends Block{
         }
 
         public float efficiencyMultiplier(){
-            return (baseEfficiency + Math.min(maxBoost, boostScale * attrsum) + attribute.env()) - cold;
+//		Log.info("efficiencyMultiplier of: " + (this.block) + ": " + (efficiencyMultiplier()));
+    		return (baseEfficiency + Math.min(maxBoost, boostScale * attrsum) + attribute.env()) - coldattr.env();
         }
-
-    }
+}
 }

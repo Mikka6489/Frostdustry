@@ -245,7 +245,9 @@ public class FrostGCrafter extends FrostBlock{
             totalProgress += warmup * Time.delta;
 
             if(progress >= 1f){
-                craft();
+		Log.info("effscale: " + this.block + ": " + efficiencyScale());
+		Log.info("efficiencyMultipler of: " + this.block + ": " + efficiencyMultiplier());
+	    	craft();
             }
 
             dumpOutputs();

@@ -101,7 +101,8 @@ public class Generator extends FrostBlock{
         public boolean nowFueled;
 
         public void updateHeaterStatus(){
-            if (canBurnCoal){
+//		Log.info("temp wave test" + TemperatureHandler.test);
+		if (canBurnCoal){
 //                Log.info("is a generator");
                 int coalCost = coalCost();
                 if(items.get(Items.coal) >= coalCost){
@@ -175,7 +176,7 @@ public class Generator extends FrostBlock{
 
             if(useProgress >= useTime){
                 updateHeaterStatus();
-                Log.info("total number of heaters: " + runningHeaters);
+//                Log.info("total number of heaters: " + runningHeaters);
                 useProgress %= useTime;
             }
         }
