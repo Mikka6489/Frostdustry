@@ -64,15 +64,17 @@ public class FrostACrafter extends FrostGCrafter{
 
     public class FrostACrafterBuild extends FrostGCrafterBuild{
         public float attrsum;
-
+/*
         public float getProgressIncrease(float base){
     		return super.getProgressIncrease(base) * efficiencyMultiplier();
         }
 
+ *
         public float efficiencyMultiplier(){
 //		Log.info("effmult" + efficiencyMultiplier());
-            return baseEfficiency + Math.min(maxBoost, boostScale * attrsum) + attribute.env() - coldattr.env();
-        }
+//            return baseEfficiency + Math.min(maxBoost, boostScale * attrsum) + attribute.env() - coldattr.env();
+		return super.efficiencyMultiplier();
+	}
 
         @Override
         public float efficiencyScale(){
@@ -91,5 +93,5 @@ public class FrostACrafter extends FrostGCrafter{
 
             attrsum = sumAttribute(attribute, tile.x, tile.y);
         }
-    }
+*/    }
 }

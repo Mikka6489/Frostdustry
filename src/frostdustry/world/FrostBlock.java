@@ -58,7 +58,7 @@ public class FrostBlock extends Block{
     }
 
     public class FrostBuilding extends Building {
-        public float attrsum, useProgress;
+        public float attrsum, warmup;
 
         @Override
         public float getProgressIncrease(float base){
@@ -70,9 +70,25 @@ public class FrostBlock extends Block{
             return scaleLiquidConsumption ? efficiencyMultiplier() : super.efficiencyScale();
         }
 
+
         public float efficiencyMultiplier(){
 //		Log.info("efficiencyMultiplier of: " + (this.block) + ": " + (efficiencyMultiplier()));
     		return (baseEfficiency + Math.min(maxBoost, boostScale * attrsum) + attribute.env()) - coldattr.env();
         }
-}
+	
+	@Override
+	public void pickedUp(){
+		attrsum = 0f;
+		warmup = 0f;	
+	}
+
+	@Override
+	public void onProximityUpdate(){
+		super.onProximityUpdate();
+
+		attrsum = sumAttribute(attribute, tile.x,tile.y); 		
+	} 
+    
+    
+    }
 }

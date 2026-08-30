@@ -17,6 +17,7 @@ import mindustry.world.blocks.liquid.Conduit.*;
 import mindustry.world.draw.*;
 import mindustry.world.meta.*;
 import frostdustry.world.*;
+import frostdustry.logic.*;
 
 import static mindustry.Vars.*;
 
@@ -36,6 +37,8 @@ public class FrostGCrafter extends FrostBlock{
     /** if true, crafters with multiple liquid outputs will dump excess when there's still space for at least one liquid type */
     public boolean dumpExtraLiquid = true;
     public boolean ignoreLiquidFullness = false;
+
+	public Attribute frostattr = FrostVars.coldattr;
 
     public float craftTime = 80;
     public Effect craftEffect = Fx.none;
@@ -247,7 +250,8 @@ public class FrostGCrafter extends FrostBlock{
             if(progress >= 1f){
 		Log.info("effscale: " + this.block + ": " + efficiencyScale());
 		Log.info("efficiencyMultipler of: " + this.block + ": " + efficiencyMultiplier());
-	    	craft();
+		Log.info("coldattr from: " + this.block + "'s perspective: " + frostattr.env());    
+		craft();
             }
 
             dumpOutputs();
