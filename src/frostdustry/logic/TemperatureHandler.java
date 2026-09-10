@@ -17,8 +17,8 @@ public class TemperatureHandler{
 			int wave = Vars.state.wave;
 			if (wave % 1 == 0) {
 				Log.info("cold: " + FrostVars.cold.env());
-				Vars.state.rules.attributes.set(FrostVars.cold, FrostVars.cold.env() + 1);
-				Vars.state.envAttrs.set(FrostVars.cold, FrostVars.cold.env() + 1);
+				Vars.state.rules.attributes.set(FrostVars.cold, FrostVars.cold.env() + 0.1f);
+				Vars.state.envAttrs.set(FrostVars.cold, FrostVars.cold.env() + 0.1f);
 			}
 		});
 	};

@@ -157,7 +157,7 @@ public class Generator extends FrostBlock{
             if(charge >= reload){
                 float realRange = range + phaseHeat * phaseRangeBoost;
                 charge = 0f;
-                indexer.eachBlock(this, realRange, other -> other.block instanceof FrostBlock && ((FrostBlock)other.block).canBeHeated, other -> other.applyBoost(realBoost(), reload + 1f));
+                indexer.eachBlock(this, realRange, other -> other.block instanceof FrostBlock && ((FrostBuilding)other).canBeHeated, other -> ((FrostBuilding)other).recieveHeat( 1f));
             }
 
             if(efficiency > 0){

@@ -2,7 +2,7 @@ package frostdustry.world;
 
 import arc.*;
 import arc.math.*;
-//import arc.util.*;
+import arc.util.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.ui.*;
@@ -27,16 +27,24 @@ public class FrostBlock extends Block{
     public float useTime = 400f;
     public boolean displayEfficiency = true;
     public boolean scaleLiquidConsumption = false;
+    public float calcCold = 0f;
+    public float recievedHeat = 0f;
 
     public FrostBlock(String name){
         super(name);
+    }
+
+    public float calcCold(){
+        calcCold = cold.env() - recievedHeat;
+        if (calcCold < 0f) calcCold = 0f;
+        return calcCold;
     }
 
     @Override
     public void setStats(){
         super.setStats();
         if (canBeHeated) {
-            stats.add(FrostStat.cold, (Mathf.round(cold.env()) * 10) + "°C");
+            stats.add(FrostStat.cold, (Mathf.round(calcCold() * 10) + "°C"));
         }
     }
 
@@ -55,6 +63,7 @@ public class FrostBlock extends Block{
 
     public class FrostBuilding extends Building {
         public float attrsum, warmup;
+        public boolean canBeHeated = true;
 
         @Override
         public float getProgressIncrease(float base){
@@ -68,24 +77,29 @@ public class FrostBlock extends Block{
 
 
         public float efficiencyMultiplier(){
-//		Log.info("efficiencyMultiplier of: " + (this.block) + ": " + (efficiencyMultiplier()));
-    		return (baseEfficiency + Math.min(maxBoost, boostScale * attrsum) + attribute.env()) - cold.env();
+            calcCold = cold.env() - recievedHeat;
+            if (calcCold < 0f) calcCold = 0f;
+    		return (baseEfficiency + Math.min(maxBoost, boostScale * attrsum) + attribute.env()) - calcCold();
         }
 	
-	@Override
-	public void pickedUp(){
-		attrsum = 0f;
-		warmup = 0f;	
-	}
+        @Override
+        public void pickedUp(){
+            attrsum = 0f;
+            warmup = 0f;	
+        }
 
-	@Override
-	public void onProximityUpdate(){
-        if (canUseAttributes){
-            super.onProximityUpdate();
+        @Override
+        public void onProximityUpdate(){
+            if (canUseAttributes){
+                super.onProximityUpdate();
 
-            attrsum = sumAttribute(attribute, tile.x,tile.y); 	
-        }	
-	} 
+                attrsum = sumAttribute(attribute, tile.x,tile.y); 	
+            }	
+        }
+
+        public void recieveHeat(float heat){
+            recievedHeat = heat;
+        }
     
     
     }
