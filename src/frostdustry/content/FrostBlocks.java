@@ -11,15 +11,23 @@ import static mindustry.type.ItemStack.*;
 
 public class FrostBlocks{
     
-    public static Block generator, graphiteClamp, refridgerator, heater, ohno, graphiteClamp2;
+    public static Block generator, frostdrill, graphiteClamp, refridgerator, heater, ohno, graphiteClamp2;
 
     public static void load() {
-                generator = new Generator("generator"){{
+            generator = new Generator("generator"){{
                 requirements(Category.effect, with(Items.copper, 60, Items.sand, 15, Items.metaglass, 40));
                 size = 5;
                 health = 5000;
                 hasItems = true;
                 itemCapacity = 9000;
+            }};
+
+            frostdrill = new FrostDrill("frostdrill"){{
+                requirements(Category.effect, with(Items.copper, 60, Items.sand, 15, Items.metaglass, 40));
+                size = 2;
+                health = 5000;
+//                hasItems = true;
+//                itemCapacity = 9000;
             }};
 
             graphiteClamp = new FrostGCrafter("graphite-clamp"){{
