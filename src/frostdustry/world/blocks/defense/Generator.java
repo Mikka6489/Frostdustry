@@ -13,17 +13,19 @@ import mindustry.gen.*;
 import mindustry.logic.*;
 import mindustry.type.*;
 import mindustry.ui.*;
-import mindustry.world.consumers.*;
 import mindustry.world.meta.*;
+import mindustry.world.*;
+//import mindustry.world.blocks.storage.*;
 
-import frostdustry.world.*;
 import frostdustry.logic.*;
+import frostdustry.type.HeatReciever;
 
 import static mindustry.Vars.*;
 
-public class Generator extends FrostBlock{
+public class Generator extends Block{
     @Deprecated
 	public boolean generatorActive = FrostVars.generatorActive;
+    public boolean canbeHeated = false;
 	public int runningHeaters = FrostVars.runningHeaters;
     public boolean canBurnCoal = true;    
     public float heat = 1.5f;
@@ -48,7 +50,7 @@ public class Generator extends FrostBlock{
         hasPower = true;
         hasItems = true;
         itemCapacity = 30;
-        canBeHeated = false;
+//        canBeHeated = false;
         emitLight = true;
         lightRadius = 50f;
         envEnabled |= Env.space;
@@ -69,7 +71,7 @@ public class Generator extends FrostBlock{
 
         Drawf.dashCircle(x * tilesize + offset, y * tilesize + offset, range, baseColor);
 
-        indexer.eachBlock(player.team(), x * tilesize + offset, y * tilesize + offset, range, other -> other.block instanceof FrostBlock, other -> Drawf.selected(other, Tmp.c1.set(baseColor).a(Mathf.absin(4f, 1f))));
+        indexer.eachBlock(player.team(), x * tilesize + offset, y * tilesize + offset, range, other -> other.block instanceof HeatReciever, other -> Drawf.selected(other, Tmp.c1.set(baseColor).a(Mathf.absin(4f, 1f))));
     }
 
     @Override
@@ -80,12 +82,12 @@ public class Generator extends FrostBlock{
         stats.add(Stat.speedIncrease, "+" + (int)(speedBoost * 100f - 100) + "%");
         stats.add(Stat.range, range / tilesize, StatUnit.blocks);
         stats.add(Stat.productionTime, useTime / 60f, StatUnit.seconds);
-
+/* 
         if(hasBoost && findConsumer(f -> f instanceof ConsumeItems) instanceof ConsumeItems items){
             stats.remove(Stat.booster);
 //            stats.add(Stat.booster, StatValues.itemBoosters("+{0}%", stats.timePeriod, speedBoostPhase * 100f, phaseRangeBoost, items.items, this::consumesItem));
         }
-    }
+    */    }
     
     @Override
     public void setBars(){
@@ -93,7 +95,7 @@ public class Generator extends FrostBlock{
         addBar("boost", (GeneratorBuild entity) -> new Bar(() -> Core.bundle.format("bar.boost", Mathf.round(Math.max((entity.realBoost() * 100 - 100), 0))), () -> Pal.accent, () -> entity.realBoost() / (hasBoost ? speedBoost + speedBoostPhase : speedBoost)));
     }
 
-    public class GeneratorBuild extends FrostBuilding implements Ranged{
+    public class GeneratorBuild extends Building implements Ranged{
         public float heat, charge = Mathf.random(reload), phaseHeat, smoothEfficiency, useProgress;
         public boolean nowFueled;
 
@@ -157,9 +159,8 @@ public class Generator extends FrostBlock{
             if(charge >= reload){
                 float realRange = range + phaseHeat * phaseRangeBoost;
                 charge = 0f;
-                indexer.eachBlock(this, realRange, other -> other.block instanceof FrostBlock && ((FrostBuilding)other).canBeHeated, other -> ((FrostBuilding)other).recieveHeat( 1f));
+                indexer.eachBlock(this, realRange, other -> other instanceof HeatReciever h && h.canBeHeated(), other -> ((HeatReciever)other).recieveHeat( 1f));
             }
-
             if(efficiency > 0){
                 useProgress += delta();
             }
@@ -179,7 +180,7 @@ public class Generator extends FrostBlock{
         public void drawSelect(){
             float realRange = range + phaseHeat * phaseRangeBoost;
 
-            indexer.eachBlock(this, realRange, other -> other.block instanceof FrostBlock, other -> Drawf.selected(other, Tmp.c1.set(baseColor).a(Mathf.absin(4f, 1f))));
+            indexer.eachBlock(this, realRange, other -> other.block instanceof HeatReciever, other -> Drawf.selected(other, Tmp.c1.set(baseColor).a(Mathf.absin(4f, 1f))));
 
             Drawf.dashCircle(x, y, realRange, baseColor);
         }

@@ -9,6 +9,6 @@ public class Frostdustry extends Mod{
     public void loadContent(){
         FrostBlocks.load();
         FrostWeather.load();
-	TemperatureHandler.load();
+	    TemperatureHandler.load();
     }
 }

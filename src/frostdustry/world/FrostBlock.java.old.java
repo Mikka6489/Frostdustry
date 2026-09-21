@@ -40,6 +40,10 @@ public class FrostBlock extends Block{
         return calcCold;
     }
 
+    public void recieveHeat(float heat){
+            recievedHeat = heat;
+    }
+
     @Override
     public void setStats(){
         super.setStats();
@@ -64,6 +68,7 @@ public class FrostBlock extends Block{
     public class FrostBuilding extends Building {
         public float attrsum, warmup;
         public boolean canBeHeated = true;
+        public float recievedHeat = 0.00001f;
 
         @Override
         public float getProgressIncrease(float base){
@@ -77,8 +82,6 @@ public class FrostBlock extends Block{
 
 
         public float efficiencyMultiplier(){
-            calcCold = cold.env() - recievedHeat;
-            if (calcCold < 0f) calcCold = 0f;
     		return (baseEfficiency + Math.min(maxBoost, boostScale * attrsum) + attribute.env()) - calcCold();
         }
 	
@@ -96,11 +99,5 @@ public class FrostBlock extends Block{
                 attrsum = sumAttribute(attribute, tile.x,tile.y); 	
             }	
         }
-
-        public void recieveHeat(float heat){
-            recievedHeat = heat;
-        }
-    
-    
     }
 }
