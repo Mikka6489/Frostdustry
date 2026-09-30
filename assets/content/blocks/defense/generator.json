@@ -1,0 +1,19 @@
+{
+  "type": "frostdustry.world.blocks.defense.Generator",
+  "name": "Generator",
+  "description": "The one thing keeping you alive in the cold. Will freeze if left off for too long.",
+  "health": 5000,
+  "size": 5,
+  "range": 40,
+  "reload": 60,
+  "heat": 1.25,
+  "itemCapacity": 9999,
+  "hasItems": true,
+  "requirements": [
+    { "item": "lead", "amount": 50 },
+    { "item": "silicon", "amount": 20 },
+    { "item": "titanium", "amount": 35 }
+  ],
+  "category": "effect",
+  "research": "mender"
+}

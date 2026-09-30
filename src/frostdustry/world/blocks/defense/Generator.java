@@ -58,6 +58,12 @@ public class Generator extends Block{
         return Math.max(1, (int)(5f * runningHeaters * heatLevel));
     }
 
+    private HeatReciever heatReciever(Building building){
+        if(building instanceof HeatReciever receiver) return receiver;
+        if(building.block instanceof HeatReciever receiver) return receiver;
+        return null;
+    }
+
     @Override
     public boolean outputsItems(){
         return false;
@@ -69,7 +75,10 @@ public class Generator extends Block{
 
         Drawf.dashCircle(x * tilesize + offset, y * tilesize + offset, range, baseColor);
 
-        indexer.eachBlock(player.team(), x * tilesize + offset, y * tilesize + offset, range, other -> other.block instanceof HeatReciever, other -> Drawf.selected(other, Tmp.c1.set(baseColor).a(Mathf.absin(4f, 1f))));
+        indexer.eachBlock(player.team(), x * tilesize + offset, y * tilesize + offset, range, other -> {
+            HeatReciever receiver = heatReciever(other);
+            return receiver != null && receiver.canBeHeated();
+        }, other -> Drawf.selected(other, Tmp.c1.set(baseColor).a(Mathf.absin(4f, 1f))));
     }
 
     @Override
@@ -98,16 +107,13 @@ public class Generator extends Block{
         public boolean nowFueled;
 
         public void updateHeaterStatus(){
-		if (canBurnCoal){
-                int coalCost = coalCost();
-                if(items.get(Items.coal) >= coalCost){
-                    items.remove(Items.coal, coalCost);
-                    generatorActive = true;
-                } else {
-                    generatorActive = false;
-                    return;
+            if (canBurnCoal){
+                    int coalCost = coalCost();
+                    if(items.get(Items.coal) >= coalCost){
+                        items.remove(Items.coal, coalCost);
+                        generatorActive = true;
+                    } else { generatorActive = false; }
                 }
-            }
         }
 
         @Override
@@ -157,7 +163,10 @@ public class Generator extends Block{
             if(charge >= reload){
                 float realRange = range + phaseHeat * phaseRangeBoost;
                 charge = 0f;
-                indexer.eachBlock(this, realRange, other -> other instanceof HeatReciever h && h.canBeHeated(), other -> ((HeatReciever)other).recieveHeat( 1f));
+                indexer.eachBlock(this, realRange, other -> {
+                    HeatReciever receiver = heatReciever(other);
+                    return receiver != null && receiver.canBeHeated();
+                }, other -> heatReciever(other).recieveHeat(heat));
             }
             if(efficiency > 0){
                 useProgress += delta();
@@ -178,7 +187,10 @@ public class Generator extends Block{
         public void drawSelect(){
             float realRange = range + phaseHeat * phaseRangeBoost;
 
-            indexer.eachBlock(this, realRange, other -> other.block instanceof HeatReciever, other -> Drawf.selected(other, Tmp.c1.set(baseColor).a(Mathf.absin(4f, 1f))));
+            indexer.eachBlock(this, realRange, other -> {
+                HeatReciever receiver = heatReciever(other);
+                return receiver != null && receiver.canBeHeated();
+            }, other -> Drawf.selected(other, Tmp.c1.set(baseColor).a(Mathf.absin(4f, 1f))));
 
             Drawf.dashCircle(x, y, realRange, baseColor);
         }

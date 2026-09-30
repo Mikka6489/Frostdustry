@@ -1,0 +1,18 @@
+{
+  "type": "frostdustry.world.blocks.defense.Heater",
+  "name": "Heater",
+  "description": "Used to resist the freezing temperatures of The Storm. Is unaffected by the cold. Contributes to overall coal consumption.",
+  "health": 200,
+  "size": 2,
+  "range": 40,
+  "reload": 60,
+  "heat": 1.25,
+  "hasItems": false,
+  "requirements": [
+    { "item": "lead", "amount": 50 },
+    { "item": "silicon", "amount": 20 },
+    { "item": "titanium", "amount": 35 }
+  ],
+  "category": "effect",
+  "research": "mender"
+}

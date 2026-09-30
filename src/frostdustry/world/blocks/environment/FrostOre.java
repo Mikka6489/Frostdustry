@@ -1,18 +1,17 @@
-package frostdustry.world.blocks.tiles;
+package frostdustry.world.blocks.environment;
 
-import arc.struct.IntMap;
+import arc.struct.*;
 import arc.math.*;
-import mindustry.type.Item;
 import mindustry.world.Tile;
-import mindustry.world.blocks.environment.OreBlock;
+import mindustry.world.blocks.environment.*;
 import mindustry.content.*;
 
 public class FrostOre extends OreBlock{
     private static final int maxOre = 20;
     private final IntMap<Integer> oreCounts = new IntMap<>();
 
-    public FrostOre(String name, Item ore){
-        super(name, ore);
+    public FrostOre(String name){
+        super(name);
     }
 
     public void seedRandom(Tile tile){

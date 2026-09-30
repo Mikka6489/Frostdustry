@@ -1,0 +1,35 @@
+{
+  "type": "frostdustry.world.blocks.production.FrostCrafter",
+  "name": "Hydraulic Clamp",
+  "description": "A heavy duty clamp to compress coal into graphite.",
+  "health": 440,
+  "size": 3,
+  "hasItems": true,
+  "craftTime": 12,
+  "itemCapacity": 10,
+  "drawer": {
+    "type": "drawMulti",
+    "drawers": [
+      {
+        "type": "drawRegion",
+        "suffix": "-bottom"
+      },
+      {
+        "type": "drawDefault"
+      }
+    ]
+  },
+  "consumes": {
+    "items": {
+      "items": [
+        { "item": "coal", "amount": 2 }
+      ]
+    }
+  },
+  "requirements": [
+    { "item": "copper", "amount": 25 },
+    { "item": "lead", "amount": 45 }
+  ],
+  "category": "crafting",
+  "research": "oil-extractor"
+}

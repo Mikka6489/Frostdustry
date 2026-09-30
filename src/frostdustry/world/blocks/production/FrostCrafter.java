@@ -5,14 +5,14 @@ import mindustry.world.blocks.production.*;
 import frostdustry.type.*;
 import frostdustry.logic.*;
 
-public class FrostGCrafter extends GenericCrafter{
+public class FrostCrafter extends GenericCrafter{
     public float recievedHeat = 0f;
 
-    public FrostGCrafter(String name){
+    public FrostCrafter(String name){
         super(name);
     }
 
-    public class FrostGCrafterBuild extends GenericCrafterBuild implements HeatReciever{
+    public class FrostCrafterBuild extends GenericCrafterBuild implements HeatReciever{
         FrostMethods FrostMethods = new FrostMethods();
 
         @Override

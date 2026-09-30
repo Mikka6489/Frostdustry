@@ -1,19 +1,19 @@
-package frostdustry.world.blocks.defense.turrets;
+package frostdustry.world.blocks.turrets;
 
 import mindustry.world.blocks.defense.turrets.*;
 
 import frostdustry.logic.*;
 import frostdustry.type.*;
 
-public class FrostITurret extends ItemTurret{
+public class IceTurret extends ItemTurret{
     public float recievedHeat = 0f;
     FrostMethods FrostMethods = new FrostMethods();
 
-    public FrostITurret(String name){
+    public IceTurret(String name){
         super(name);
     }
 
-    public class FrostITurretBuild extends ItemTurretBuild implements HeatReciever{
+    public class IceTurretBuild extends ItemTurretBuild implements HeatReciever{
         @Override
         public void recieveHeat(float heat) {
             recievedHeat = heat;

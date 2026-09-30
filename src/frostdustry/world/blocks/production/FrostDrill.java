@@ -10,7 +10,7 @@ import mindustry.world.*;
 
 import frostdustry.logic.*;
 import frostdustry.type.*;
-import frostdustry.world.blocks.tiles.*;
+import frostdustry.world.blocks.environment.*;
 
 public class FrostDrill extends Drill implements HeatReciever{
     public float recievedHeat = 0f;
@@ -74,9 +74,10 @@ public class FrostDrill extends Drill implements HeatReciever{
                 return;
             }
 
+            Item drillItem = dominantItem;
             timeDrilled += warmup * delta();
 
-            float delay = getDrillTime(dominantItem);
+            float delay = getDrillTime(drillItem);
 //            Log.info("Drill progress: @, delay: @, dominantItems: @, itemCapacity: @, items.total(): @", progress, delay, dominantItems, itemCapacity, items.total());
 
             if(items.total() < itemCapacity && dominantItems > 0 && efficiency > 0){
@@ -97,28 +98,30 @@ public class FrostDrill extends Drill implements HeatReciever{
             if(dominantItems > 0 && progress >= delay && items.total() < itemCapacity){
                 int amount = (int)(progress / delay);
                 for(int i = 0; i < amount; i++){
-                    offload(dominantItem);
-                }
-
-                //boolean oreDrained = false;
-                for(int dx = 0; dx < size; dx++){
-                    for(int dy = 0; dy < size; dy++){
-                        Tile oreTile = Vars.world.tile(tile.x + dx, tile.y + dy);
-                        if(oreTile == null || !(oreTile.overlay() instanceof FrostOre frostOre)) continue;
-
-                        int remaining = frostOre.getOreCount(oreTile);
-                        if(remaining <= 0) continue;
-
-//                        Log.info("Ore count: @, tile: @", remaining, oreTile.overlay());
-                        frostOre.setOreCount(oreTile, remaining - 1);
-                        //oreDrained = true;
-                    }
+                    if(!consumeOre(drillItem)) break;
+                    offload(drillItem);
                 }
 
                 progress %= delay;
 
-                if(wasVisible && Mathf.chanceDelta(drillEffectChance * warmup)) drillEffect.at(x + Mathf.range(drillEffectRnd), y + Mathf.range(drillEffectRnd), dominantItem.color);
+                if(wasVisible && Mathf.chanceDelta(drillEffectChance * warmup)) drillEffect.at(x + Mathf.range(drillEffectRnd), y + Mathf.range(drillEffectRnd), drillItem.color);
             }
+        }
+
+        private boolean consumeOre(Item item){
+            for(int dx = 0; dx < size; dx++){
+                for(int dy = 0; dy < size; dy++){
+                    Tile oreTile = Vars.world.tile(tile.x + dx, tile.y + dy);
+                    if(oreTile == null || !(oreTile.overlay() instanceof FrostOre frostOre) || frostOre.itemDrop != item) continue;
+
+                    int remaining = frostOre.getOreCount(oreTile);
+                    if(remaining <= 0) continue;
+
+                    frostOre.setOreCount(oreTile, remaining - 1);
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

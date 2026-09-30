@@ -7,7 +7,7 @@ import mindustry.*;
 import mindustry.world.Tile;
 import mindustry.world.blocks.*;
 
-import frostdustry.world.blocks.tiles.*;
+import frostdustry.world.blocks.environment.*;
 
 public class TemperatureHandler{
 	public static Attributes attrs = new Attributes();

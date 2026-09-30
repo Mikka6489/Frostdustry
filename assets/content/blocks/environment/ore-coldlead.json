@@ -1,0 +1,5 @@
+{
+  "type": "frostdustry.world.blocks.environment.FrostOre",
+  "name": "Lead",
+  "itemDrop": "lead"
+}
