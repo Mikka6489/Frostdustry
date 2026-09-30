@@ -1,12 +1,19 @@
 package frostdustry.world.blocks.production;
 
-import mindustry.type.Item;
+import arc.math.*;
+import mindustry.type.*;
+import mindustry.ui.*;
 import mindustry.world.blocks.production.*;
-import frostdustry.logic.FrostMethods;
+import mindustry.*;
+import mindustry.graphics.*;
+import mindustry.world.*;
+
+import frostdustry.logic.*;
 import frostdustry.type.*;
+import frostdustry.world.blocks.tiles.*;
 
 public class FrostDrill extends Drill implements HeatReciever{
-    public float recievedHeat = 0.0001f;
+    public float recievedHeat = 0f;
     FrostMethods FrostMethods = new FrostMethods();
 
     public FrostDrill(String name) {
@@ -17,17 +24,101 @@ public class FrostDrill extends Drill implements HeatReciever{
         recievedHeat = heat;
     }
 
+    @Override
+    public void setBars(){
+        super.setBars();
+        addBar("orecount", entity -> {
+            FrostDrillBuild build = (FrostDrillBuild) entity;
+            return new Bar(
+                () -> "Ore: " + build.totalOreCount(),
+                () -> Pal.techBlue,
+                () -> Mathf.clamp(build.totalOreCount() / (float)(size * size * 20), 0f, 1f)
+            );
+        });
+    }
+
     public boolean canBeHeated() {
         return true;
     }
 
     @Override 
     public float getDrillTime(Item item){
-        if ((drillTime + hardnessDrillMultiplier * item.hardness) / drillMultipliers.get(item, 1f) * (FrostMethods.calcCold(recievedHeat) * 2f + 1f) > 2500f) {
+        if (super.getDrillTime(item) * (FrostMethods.calcCold(recievedHeat) * 2f + 1f) > 2500f) {
             return 99999;
         } else{
-            return (drillTime + hardnessDrillMultiplier * item.hardness) / drillMultipliers.get(item, 1f) * (FrostMethods.calcCold(recievedHeat) * 2f + 1f);
+            return super.getDrillTime(item) * (FrostMethods.calcCold(recievedHeat) * 2f + 1f);
         }
-//        return (drillTime + hardnessDrillMultiplier * item.hardness) / drillMultipliers.get(item, 1f) * (calcCold() * 5f + 0.001f);
+//        return super.getDrillTime(item) * (FrostMethods.calcCold(recievedHeat) * 2f + 1f);
+    }
+
+    public class FrostDrillBuild extends DrillBuild{
+        public int totalOreCount(){
+            int total = 0;
+            for(int dx = 0; dx < size; dx++){
+                for(int dy = 0; dy < size; dy++){
+                    Tile oreTile = Vars.world.tile(tile.x + dx, tile.y + dy);
+                    if(oreTile == null || !(oreTile.overlay() instanceof FrostOre frostOre)) continue;
+                    total += frostOre.getOreCount(oreTile);
+                }
+            }
+            return total;
+        }
+
+        @Override
+        public void updateTile(){
+            if(timer(timerDump, dumpTime / timeScale)){
+                dump(dominantItem != null && items.has(dominantItem) ? dominantItem : null);
+            }
+
+            if(dominantItem == null){
+                return;
+            }
+
+            timeDrilled += warmup * delta();
+
+            float delay = getDrillTime(dominantItem);
+//            Log.info("Drill progress: @, delay: @, dominantItems: @, itemCapacity: @, items.total(): @", progress, delay, dominantItems, itemCapacity, items.total());
+
+            if(items.total() < itemCapacity && dominantItems > 0 && efficiency > 0){
+                float speed = Mathf.lerp(1f, liquidBoostIntensity, optionalEfficiency) * efficiency;
+
+                lastDrillSpeed = (speed * dominantItems * warmup) / delay;
+                warmup = Mathf.approachDelta(warmup, speed, warmupSpeed);
+                progress += delta() * dominantItems * speed * warmup;
+
+                if(Mathf.chanceDelta(updateEffectChance * warmup))
+                    updateEffect.at(x + Mathf.range(size * 2f), y + Mathf.range(size * 2f));
+            }else{
+                lastDrillSpeed = 0f;
+                warmup = Mathf.approachDelta(warmup, 0f, warmupSpeed);
+                return;
+            }
+
+            if(dominantItems > 0 && progress >= delay && items.total() < itemCapacity){
+                int amount = (int)(progress / delay);
+                for(int i = 0; i < amount; i++){
+                    offload(dominantItem);
+                }
+
+                //boolean oreDrained = false;
+                for(int dx = 0; dx < size; dx++){
+                    for(int dy = 0; dy < size; dy++){
+                        Tile oreTile = Vars.world.tile(tile.x + dx, tile.y + dy);
+                        if(oreTile == null || !(oreTile.overlay() instanceof FrostOre frostOre)) continue;
+
+                        int remaining = frostOre.getOreCount(oreTile);
+                        if(remaining <= 0) continue;
+
+//                        Log.info("Ore count: @, tile: @", remaining, oreTile.overlay());
+                        frostOre.setOreCount(oreTile, remaining - 1);
+                        //oreDrained = true;
+                    }
+                }
+
+                progress %= delay;
+
+                if(wasVisible && Mathf.chanceDelta(drillEffectChance * warmup)) drillEffect.at(x + Mathf.range(drillEffectRnd), y + Mathf.range(drillEffectRnd), dominantItem.color);
+            }
+        }
     }
 }

@@ -18,14 +18,13 @@ import mindustry.world.*;
 //import mindustry.world.blocks.storage.*;
 
 import frostdustry.logic.*;
-import frostdustry.type.HeatReciever;
+import frostdustry.type.*;
 
 import static mindustry.Vars.*;
 
 public class Generator extends Block{
     @Deprecated
 	public boolean generatorActive = FrostVars.generatorActive;
-    public boolean canbeHeated = false;
 	public int runningHeaters = FrostVars.runningHeaters;
     public boolean canBurnCoal = true;    
     public float heat = 1.5f;
@@ -50,7 +49,6 @@ public class Generator extends Block{
         hasPower = true;
         hasItems = true;
         itemCapacity = 30;
-//        canBeHeated = false;
         emitLight = true;
         lightRadius = 50f;
         envEnabled |= Env.space;

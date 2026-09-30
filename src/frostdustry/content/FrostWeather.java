@@ -1,7 +1,8 @@
 package frostdustry.content;
 
-import frostdustry.type.weather.*;
 import mindustry.type.*;
+
+import frostdustry.type.weather.*;
 
 public class FrostWeather{
     public static Weather Storm;
