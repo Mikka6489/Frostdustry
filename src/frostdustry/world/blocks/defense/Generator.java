@@ -1,8 +1,9 @@
 package frostdustry.world.blocks.defense;
 
-import arc.*;
 import arc.graphics.*;
 import arc.math.*;
+import arc.scene.ui.*;
+import arc.scene.ui.layout.*;
 import arc.util.*;
 import arc.util.io.*;
 import mindustry.graphics.*;
@@ -10,7 +11,6 @@ import mindustry.content.*;
 import mindustry.gen.*;
 import mindustry.logic.*;
 import mindustry.type.*;
-import mindustry.ui.*;
 import mindustry.world.meta.*;
 import mindustry.world.*;
 import mindustry.world.draw.*;
@@ -20,22 +20,21 @@ import frostdustry.type.*;
 import static mindustry.Vars.*;
 
 public class Generator extends Block{
-    @Deprecated
-	public boolean generatorActive = FrostMethods.generatorActive;
-	public int runningHeaters = FrostMethods.runningHeaters;
     public boolean canBurnCoal = true;    
     public DrawBlock drawer = new DrawDefault();
-    public int heatLevel = 1;
+    public static final int minHeatLevel = 0;
+    public static final int maxHeatLevel = 5;
 
     public float heat = 1.5f;
     public float reload = 60f;
     public float range = 80f;
     public float useTime = 400f;
     public Color baseColor = Color.valueOf("feb380");
-//    float heaterBonus = FrostAttribute.globalHeaters * 0.1f;
 
     public Generator(String name){
         super(name);
+        configurable = true;
+        saveConfig = true;
         solid = true;
         update = true;
         group = BlockGroup.projectors;
@@ -46,6 +45,8 @@ public class Generator extends Block{
         lightRadius = 50f;
         drawer = new DrawMulti(new DrawRegion("-bottom"), new DrawPlasma(), new DrawDefault());
         envEnabled |= Env.space;
+
+        config(Integer.class, (GeneratorBuild tile, Integer level) -> tile.setHeatLevel(level));
     }
 
     @Override
@@ -54,8 +55,8 @@ public class Generator extends Block{
         drawer.load(this);
     }
 
-    public int coalCost(){
-        return Math.max(1, (int)(5f * runningHeaters * heatLevel));
+    public int coalCost(Integer heatLevel){
+        return Math.max(1, (int)(5f * FrostMethods.runningHeaters));
     }
 
     private HeatReciever heatReciever(Building building){
@@ -63,12 +64,7 @@ public class Generator extends Block{
         if(building.block instanceof HeatReciever receiver) return receiver;
         return null;
     }
-/*
-    @Override
-    public boolean outputsItems(){
-        return false;
-    }
-*/
+
     @Override
     public void drawPlace(int x, int y, int rotation, boolean valid){
         super.drawPlace(x, y, rotation, valid);
@@ -98,29 +94,36 @@ public class Generator extends Block{
     }
 
     public class GeneratorBuild extends Building implements Ranged{
-        public float heat, charge = Mathf.random(reload), phaseHeat, smoothEfficiency, useProgress, plasmaProgress;
+        public float boost, heat, charge = Mathf.random(reload), phaseHeat, smoothEfficiency, useProgress, plasmaProgress;
         public boolean nowFueled;
+        public int heatLevel = minHeatLevel;
+
+        public void setHeatLevel(int level){
+            int newLevel = Mathf.clamp(level, minHeatLevel, maxHeatLevel);
+            FrostMethods.runningHeaters += newLevel - heatLevel;
+            heatLevel = newLevel;
+        }
 
         public void updateHeaterStatus(){
             if (canBurnCoal){
-                    int coalCost = coalCost();
+                    int coalCost = coalCost(heatLevel);
                     if(items.get(Items.coal) >= coalCost){
                         items.remove(Items.coal, coalCost);
-                        generatorActive = true;
-                    } else { generatorActive = false; }
+                        FrostMethods.generatorActive = true;
+                    } else { FrostMethods.generatorActive = false; }
                 }
         }
 
         @Override
         public void created(){
             super.created();
-            runningHeaters++;
+            FrostMethods.runningHeaters += heatLevel;
             updateHeaterStatus();
         }
 
         @Override
         public void onRemoved(){
-            runningHeaters--;
+            FrostMethods.runningHeaters -= heatLevel;
             super.onRemoved();
         }
 
@@ -146,7 +149,8 @@ public class Generator extends Block{
 
         @Override
         public void updateTile(){
-            if (generatorActive) {
+            if (FrostMethods.generatorActive && heatLevel > 0) {
+                boost = heat + heatLevel;
                 smoothEfficiency = Mathf.lerpDelta(smoothEfficiency, efficiency, 0.08f);
                 heat = Mathf.lerpDelta(heat, efficiency > 0 ? 1f : 0f, 0.08f);
                 charge += heat * Time.delta;
@@ -164,7 +168,7 @@ public class Generator extends Block{
                 indexer.eachBlock(this, realRange, other -> {
                     HeatReciever receiver = heatReciever(other);
                     return receiver != null && receiver.canBeHeated();
-                }, other -> heatReciever(other).recieveHeat(heat));
+                }, other -> heatReciever(other).recieveHeat(boost));
             }
             if(efficiency > 0){
                 useProgress += delta();
@@ -176,11 +180,21 @@ public class Generator extends Block{
             }
         }
 
-/*
-        public float realBoost(){
-            return (speedBoost + phaseHeat * speedBoostPhase) * efficiency;
+        @Override
+        public void buildConfiguration(Table table){
+            Slider slider = new Slider(minHeatLevel, maxHeatLevel, 1f, false);
+            slider.setValue(heatLevel);
+            slider.changed(() -> configure(Math.round(slider.getValue())));
+
+            table.add("Heat").colspan(maxHeatLevel - minHeatLevel + 1).center().row();
+
+            for(int level = minHeatLevel; level <= maxHeatLevel; level++){
+                table.add(level == 0 ? "Off" : Integer.toString(level)).width(40f).center();
+            }
+
+            table.row();
+            table.add(slider).colspan(maxHeatLevel - minHeatLevel + 1).width(240f).height(40f);
         }
-*/
         @Override
         public float warmup(){
             return heat;
@@ -189,6 +203,11 @@ public class Generator extends Block{
         @Override
         public float totalProgress(){
             return plasmaProgress;
+        }
+
+        @Override
+        public byte version(){
+            return 1;
         }
 
         @Override
@@ -208,6 +227,7 @@ public class Generator extends Block{
             super.write(write);
             write.f(heat);
             write.f(phaseHeat);
+            write.i(heatLevel);
         }
 
         @Override
@@ -215,6 +235,9 @@ public class Generator extends Block{
             super.read(read, revision);
             heat = read.f();
             phaseHeat = read.f();
+            if(revision >= 1){
+                setHeatLevel(read.i());
+            }
         }
     }
 }
