@@ -1,0 +1,10 @@
+diesel-punk theme
+oil refinery to make different oils and refine further into fuel
+cylinder engines can take different fuels and get higher efficiencys
+change the blast mixer to make high tier fuel
+
+NOT WORTH ADDING:
+spore press
+cryofluid - self explanatory
+phase weave - dont know what high tier shit could be used for
+surge alloy - same as phase

@@ -1,5 +1,5 @@
 {
-  "type": "frostdustry.world.blocks.environment.FrostOre",
+  "type": "frostdustry.world.blocks.environment.LimitedOre",
   "name": "Lead",
   "itemDrop": "lead"
 }

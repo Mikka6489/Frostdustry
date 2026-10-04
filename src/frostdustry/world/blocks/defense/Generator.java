@@ -2,9 +2,7 @@ package frostdustry.world.blocks.defense;
 
 import arc.*;
 import arc.graphics.*;
-import arc.graphics.g2d.*;
 import arc.math.*;
-import arc.math.geom.*;
 import arc.util.*;
 import arc.util.io.*;
 import mindustry.graphics.*;
@@ -15,8 +13,7 @@ import mindustry.type.*;
 import mindustry.ui.*;
 import mindustry.world.meta.*;
 import mindustry.world.*;
-//import mindustry.world.blocks.storage.*;
-
+import mindustry.world.draw.*;
 import frostdustry.logic.*;
 import frostdustry.type.*;
 
@@ -24,21 +21,17 @@ import static mindustry.Vars.*;
 
 public class Generator extends Block{
     @Deprecated
-	public boolean generatorActive = FrostVars.generatorActive;
-	public int runningHeaters = FrostVars.runningHeaters;
+	public boolean generatorActive = FrostMethods.generatorActive;
+	public int runningHeaters = FrostMethods.runningHeaters;
     public boolean canBurnCoal = true;    
+    public DrawBlock drawer = new DrawDefault();
+    public int heatLevel = 1;
+
     public float heat = 1.5f;
     public float reload = 60f;
-    public int heatLevel = 1;
-//    public @Load("@-top") TextureRegion topRegion;
     public float range = 80f;
-    public float speedBoost = 1.5f;
-    public float speedBoostPhase = 0.75f;
     public float useTime = 400f;
-    public float phaseRangeBoost = 20f;
-    public boolean hasBoost = true;
     public Color baseColor = Color.valueOf("feb380");
-    public Color phaseColor = Color.valueOf("ffd59e");
 //    float heaterBonus = FrostAttribute.globalHeaters * 0.1f;
 
     public Generator(String name){
@@ -51,7 +44,14 @@ public class Generator extends Block{
         itemCapacity = 30;
         emitLight = true;
         lightRadius = 50f;
+        drawer = new DrawMulti(new DrawRegion("-bottom"), new DrawPlasma(), new DrawDefault());
         envEnabled |= Env.space;
+    }
+
+    @Override
+    public void load(){
+        super.load();
+        drawer.load(this);
     }
 
     public int coalCost(){
@@ -63,12 +63,12 @@ public class Generator extends Block{
         if(building.block instanceof HeatReciever receiver) return receiver;
         return null;
     }
-
+/*
     @Override
     public boolean outputsItems(){
         return false;
     }
-
+*/
     @Override
     public void drawPlace(int x, int y, int rotation, boolean valid){
         super.drawPlace(x, y, rotation, valid);
@@ -86,24 +86,19 @@ public class Generator extends Block{
         stats.timePeriod = useTime;
         super.setStats();
 
-        stats.add(Stat.speedIncrease, "+" + (int)(speedBoost * 100f - 100) + "%");
+//        stats.add(Stat.speedIncrease, "+" + (int)(speedBoost * 100f - 100) + "%");
         stats.add(Stat.range, range / tilesize, StatUnit.blocks);
         stats.add(Stat.productionTime, useTime / 60f, StatUnit.seconds);
-/* 
-        if(hasBoost && findConsumer(f -> f instanceof ConsumeItems) instanceof ConsumeItems items){
-            stats.remove(Stat.booster);
-//            stats.add(Stat.booster, StatValues.itemBoosters("+{0}%", stats.timePeriod, speedBoostPhase * 100f, phaseRangeBoost, items.items, this::consumesItem));
-        }
-    */    }
+  }
     
     @Override
     public void setBars(){
         super.setBars();
-        addBar("boost", (GeneratorBuild entity) -> new Bar(() -> Core.bundle.format("bar.boost", Mathf.round(Math.max((entity.realBoost() * 100 - 100), 0))), () -> Pal.accent, () -> entity.realBoost() / (hasBoost ? speedBoost + speedBoostPhase : speedBoost)));
+//        addBar("boost", (GeneratorBuild entity) -> new Bar(() -> Core.bundle.format("bar.boost", Mathf.round(Math.max((entity.realBoost() * 100 - 100), 0))), () -> Pal.accent, () -> entity.realBoost() / speedBoost));
     }
 
     public class GeneratorBuild extends Building implements Ranged{
-        public float heat, charge = Mathf.random(reload), phaseHeat, smoothEfficiency, useProgress;
+        public float heat, charge = Mathf.random(reload), phaseHeat, smoothEfficiency, useProgress, plasmaProgress;
         public boolean nowFueled;
 
         public void updateHeaterStatus(){
@@ -140,6 +135,11 @@ public class Generator extends Block{
         }
 
         @Override
+        public void draw(){
+            drawer.draw(this);
+        }
+
+        @Override
         public void drawLight(){
             Drawf.light(x, y, lightRadius * smoothEfficiency, baseColor, 0.7f * smoothEfficiency);
         }
@@ -150,18 +150,16 @@ public class Generator extends Block{
                 smoothEfficiency = Mathf.lerpDelta(smoothEfficiency, efficiency, 0.08f);
                 heat = Mathf.lerpDelta(heat, efficiency > 0 ? 1f : 0f, 0.08f);
                 charge += heat * Time.delta;
-            }   else {
+            } else {
                 smoothEfficiency = 0f;
                 heat = 0f;
                 //charge = 0f;
             }
 
-            if(hasBoost){
-                phaseHeat = Mathf.lerpDelta(phaseHeat, optionalEfficiency, 0.1f);
-            }
+            plasmaProgress += heat * Time.delta;
 
             if(charge >= reload){
-                float realRange = range + phaseHeat * phaseRangeBoost;
+                float realRange = range + phaseHeat;
                 charge = 0f;
                 indexer.eachBlock(this, realRange, other -> {
                     HeatReciever receiver = heatReciever(other);
@@ -178,14 +176,24 @@ public class Generator extends Block{
             }
         }
 
-
+/*
         public float realBoost(){
             return (speedBoost + phaseHeat * speedBoostPhase) * efficiency;
+        }
+*/
+        @Override
+        public float warmup(){
+            return heat;
+        }
+
+        @Override
+        public float totalProgress(){
+            return plasmaProgress;
         }
 
         @Override
         public void drawSelect(){
-            float realRange = range + phaseHeat * phaseRangeBoost;
+            float realRange = range + phaseHeat;
 
             indexer.eachBlock(this, realRange, other -> {
                 HeatReciever receiver = heatReciever(other);
@@ -193,29 +201,6 @@ public class Generator extends Block{
             }, other -> Drawf.selected(other, Tmp.c1.set(baseColor).a(Mathf.absin(4f, 1f))));
 
             Drawf.dashCircle(x, y, realRange, baseColor);
-        }
-
-        @Override
-        public void draw(){
-            super.draw();
-
-            float f = 1f - (Time.time / 100f) % 1f;
-
-            Draw.color(baseColor, phaseColor, phaseHeat);
-            Draw.alpha(heat * Mathf.absin(Time.time, 50f / Mathf.PI2, 1f) * 0.5f);
-//            Draw.rect(topRegion, x, y);
-            Draw.alpha(1f);
-            Lines.stroke((2f * f + 0.1f) * heat);
-
-            float r = Math.max(0f, Mathf.clamp(2f - f * 2f) * size * tilesize / 2f - f - 0.2f), w = Mathf.clamp(0.5f - f) * size * tilesize;
-            Lines.beginLine();
-            for(int i = 0; i < 4; i++){
-                Lines.linePoint(x + Geometry.d4(i).x * r + Geometry.d4(i).y * w, y + Geometry.d4(i).y * r - Geometry.d4(i).x * w);
-                if(f < 0.5f) Lines.linePoint(x + Geometry.d4(i).x * r - Geometry.d4(i).y * w, y + Geometry.d4(i).y * r + Geometry.d4(i).x * w);
-            }
-            Lines.endLine(true);
-
-            Draw.reset();
         }
 
         @Override

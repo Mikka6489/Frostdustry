@@ -1,0 +1,24 @@
+{
+	"type": "frostdustry.world.blocks.power.FuelGenerator",
+	"name": "One-Cylinder Engine",
+	"description": "Consumes oil to generate power. Must be connected to the Generator.",
+	"health": 480,
+	"size": 1,
+	"buildCostMultiplier": 0.7,
+	"liquidCapacity": 40,
+	"itemDuration": 60,
+
+	"powerProduction": 12,
+	"hasPower": true,
+	"hasLiquids": true,
+	"consumes": {
+		"liquid": {"liquid": "oil", "amount": 0.375}
+	},
+    "requirements": [
+		{"item": "graphite", "amount": 220 },
+		{"item": "titanium", "amount": 120 },
+		{"item": "metaglass", "amount": 180}
+	],
+	"category": "power",
+	"research": "engineer-creator"
+}

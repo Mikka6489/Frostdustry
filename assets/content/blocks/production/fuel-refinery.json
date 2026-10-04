@@ -1,7 +1,7 @@
 {
   "type": "frostdustry.world.blocks.production.FrostCrafter",
-  "name": "Hydraulic Clamp",
-  "description": "A heavy duty clamp to compress coal into graphite.",
+  "name": "Fuel Refinery",
+  "description": "some bullshit name it makes better fuel.",
   "health": 440,
   "size": 2,
   "hasItems": true,
@@ -10,12 +10,17 @@
   "consumes": {
     "items": {
       "items": [
-        { "item": "coal", "amount": 2 }
+        {"item": "pyratite", "amount": 1}
+      ]
+    },
+    "liquids": {
+      "liquids": [
+        {"liquid": "oil", "amount": 1}
       ]
     }
   },
-  "outputItem": {
-    "item": "graphite", "amount": 1
+  "outputLiquid": {
+    "liquid": "oil", "amount": 1
   },
   "requirements": [
     { "item": "copper", "amount": 25 },

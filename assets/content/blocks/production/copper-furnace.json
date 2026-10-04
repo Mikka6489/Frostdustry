@@ -1,7 +1,7 @@
 {
   "type": "frostdustry.world.blocks.production.FrostCrafter",
-  "name": "Hydraulic Clamp",
-  "description": "A heavy duty clamp to compress coal into graphite.",
+  "name": "Copper Furnace",
+  "description": "A fuckin thing with some copper to smelt shit.",
   "health": 440,
   "size": 2,
   "hasItems": true,
@@ -10,12 +10,13 @@
   "consumes": {
     "items": {
       "items": [
-        { "item": "coal", "amount": 2 }
+        {"item": "coal", "amount": 1},
+        {"item": "sand", "amount": 2}
       ]
     }
   },
   "outputItem": {
-    "item": "graphite", "amount": 1
+    "item": "silicon", "amount": 1
   },
   "requirements": [
     { "item": "copper", "amount": 25 },

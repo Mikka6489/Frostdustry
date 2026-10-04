@@ -1,7 +1,7 @@
 {
   "type": "frostdustry.world.blocks.production.FrostCrafter",
-  "name": "Hydraulic Clamp",
-  "description": "A heavy duty clamp to compress coal into graphite.",
+  "name": "Compound Oven",
+  "description": "some bullshit name it makes pyratite.",
   "health": 440,
   "size": 2,
   "hasItems": true,
@@ -10,12 +10,14 @@
   "consumes": {
     "items": {
       "items": [
-        { "item": "coal", "amount": 2 }
+        {"item": "coal", "amount": 1},
+        {"item": "lead", "amount": 2},
+        {"item": "sand", "amount": 2}
       ]
     }
   },
   "outputItem": {
-    "item": "graphite", "amount": 1
+    "item": "pyratite", "amount": 1
   },
   "requirements": [
     { "item": "copper", "amount": 25 },

@@ -8,6 +8,6 @@ public class Frostdustry extends Mod{
 	@Override
     public void loadContent(){
         FrostWeather.load();
-	    TemperatureHandler.load();
+	    LogicHandler.load();
     }
 }

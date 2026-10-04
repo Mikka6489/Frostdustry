@@ -6,11 +6,11 @@ import mindustry.world.Tile;
 import mindustry.world.blocks.environment.*;
 import mindustry.content.*;
 
-public class FrostOre extends OreBlock{
+public class LimitedOre extends OreBlock{
     private static final int maxOre = 20;
     private final IntMap<Integer> oreCounts = new IntMap<>();
 
-    public FrostOre(String name){
+    public LimitedOre(String name){
         super(name);
     }
 

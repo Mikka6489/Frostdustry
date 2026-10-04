@@ -3,9 +3,15 @@ package frostdustry.logic;
 import mindustry.world.meta.*;
 
 public class FrostMethods {
+    public static final Attribute
+	cold = Attribute.add("cold");	
+
     public float calcCold;
     public float recievedHeat;
-    public Attribute cold = FrostVars.cold;
+    public static boolean generatorActive;
+    public static boolean fuelGenPlaced;
+    public static int runningGenerators;
+    public static int runningHeaters;
 
     public float calcCold(float recievedHeat){
         calcCold = cold.env() - recievedHeat;
