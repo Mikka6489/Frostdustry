@@ -7,7 +7,6 @@ public class FrostMethods {
 	cold = Attribute.add("cold");	
 
     public float calcCold;
-    public float recievedHeat;
     public static boolean generatorActive;
     public static boolean fuelGenPlaced;
     public static int runningGenerators;

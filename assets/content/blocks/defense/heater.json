@@ -10,11 +10,12 @@
   "itemCapacity": 0,
   "hasItems": false,
   "canBurnCoal": false,
+  "alwaysUnlocked": true,
   "requirements": [
     { "item": "lead", "amount": 50 },
     { "item": "silicon", "amount": 20 },
     { "item": "titanium", "amount": 35 }
   ],
   "category": "effect",
-  "research": "mender"
+  "research": "generator"
 }

@@ -23,7 +23,7 @@ public class Generator extends Block{
     public boolean canBurnCoal = true;    
     public DrawBlock drawer = new DrawDefault();
     public static final int minHeatLevel = 0;
-    public static final int maxHeatLevel = 5;
+    public static final int maxHeatLevel = 3;
 
     public float heat = 1.5f;
     public float reload = 60f;
@@ -43,7 +43,7 @@ public class Generator extends Block{
         itemCapacity = 30;
         emitLight = true;
         lightRadius = 50f;
-        drawer = new DrawMulti(new DrawRegion("-bottom"), new DrawPlasma(), new DrawDefault());
+        drawer = new DrawMulti(new DrawRegion("-bottom"), new DrawDefault(), new DrawPlasma());
         envEnabled |= Env.space;
 
         config(Integer.class, (GeneratorBuild tile, Integer level) -> tile.setHeatLevel(level));
@@ -96,7 +96,7 @@ public class Generator extends Block{
     public class GeneratorBuild extends Building implements Ranged{
         public float boost, heat, charge = Mathf.random(reload), phaseHeat, smoothEfficiency, useProgress, plasmaProgress;
         public boolean nowFueled;
-        public int heatLevel = minHeatLevel;
+        public int heatLevel = 1;
 
         public void setHeatLevel(int level){
             int newLevel = Mathf.clamp(level, minHeatLevel, maxHeatLevel);
@@ -228,6 +228,7 @@ public class Generator extends Block{
             write.f(heat);
             write.f(phaseHeat);
             write.i(heatLevel);
+            write.b(FrostMethods.generatorActive ? 1 : 0);
         }
 
         @Override
@@ -238,6 +239,7 @@ public class Generator extends Block{
             if(revision >= 1){
                 setHeatLevel(read.i());
             }
+            FrostMethods.generatorActive = read.b() == 1;
         }
     }
 }

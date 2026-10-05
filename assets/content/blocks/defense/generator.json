@@ -8,6 +8,7 @@
   "reload": 60,
   "heat": 1.25,
   "itemCapacity": 500,
+  "alwaysUnlocked": true,
   "hasItems": true,
   "requirements": [
     { "item": "lead", "amount": 50 },
@@ -15,5 +16,9 @@
     { "item": "titanium", "amount": 35 }
   ],
   "category": "effect",
-  "research": "mender"
+  "research": {
+    "root": true,
+    "name": "frostLand",
+    "planet": "frostLand"
+  }
 }
