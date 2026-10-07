@@ -6,9 +6,25 @@ import mindustry.world.blocks.production.*;
 import mindustry.type.*;
 import frostdustry.type.*;
 
-public class HeatSwapCrafter extends HeatCrafter{
-    public HeatSwapCrafter(String name){
+public class LiquidSwapCrafter extends HeatCrafter{
+    public LiquidSwapCrafter(String name){
         super(name);
+    }
+
+    @Override
+    public void setBars(){
+        super.setBars();
+
+        if(outputLiquids != null){
+            for(LiquidStack output : outputLiquids){
+                removeBar("liquid-" + output.liquid.name);
+            }
+        }
+
+        addLiquidBar((HeatSwapBuild build) -> {
+            LiquidStack output = build.selectedOutput();
+            return output == null ? null : output.liquid;
+        });
     }
 
     public class HeatSwapBuild extends HeatCrafterBuild{
@@ -50,7 +66,7 @@ public class HeatSwapCrafter extends HeatCrafter{
         }
 
         private LiquidStack selectedOutput(){
-            for(LiquidStack output : HeatSwapCrafter.this.outputLiquids){
+            for(LiquidStack output : LiquidSwapCrafter.this.outputLiquids){
                 FrostLiquid liquid = (FrostLiquid)output.liquid;
                 if(heat >= liquid.minHeatingRequired && heat <= liquid.maxHeatingRequired){
                     return output;

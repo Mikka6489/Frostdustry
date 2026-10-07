@@ -1,5 +1,5 @@
 {
-  "type": "frostdustry.world.blocks.production.HeatSwapCrafter",
+  "type": "frostdustry.world.blocks.production.LiquidSwapCrafter",
   "name": "Oil Refinery",
   "description": "some bullshit name it makes petrol.",
   "health": 440,
@@ -7,6 +7,7 @@
   "hasLiquids": true,
   "craftTime": 12,
   "liquidCapacity": 10,
+  "maxEfficiency": 1.0,
   "consumes": {
     "liquids": [
       {"liquid": "oil", "amount": 1}
