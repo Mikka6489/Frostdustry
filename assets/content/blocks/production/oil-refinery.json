@@ -22,6 +22,28 @@
     {"item": "copper", "amount": 25},
     {"item": "lead", "amount": 45}
   ],
+  "drawer": {
+    "type": "drawMulti",
+    "drawers": [
+      {
+        "type": "drawRegion",
+        "suffix": "-bottom"
+      },
+      {
+        "type": "drawLiquidTile",
+        "drawLiquid": "oil"
+      },
+      {
+        "type": "drawRegion",
+        "suffix": "-spinner",
+        "spinSprite": true,
+        "rotateSpeed": 5
+      },
+      {
+        "type": "drawDefault"
+      }
+    ]
+  },
   "category": "crafting",
   "research": "oil-extractor"
 }
