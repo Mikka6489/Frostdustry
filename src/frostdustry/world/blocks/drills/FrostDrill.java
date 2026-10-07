@@ -1,4 +1,4 @@
-package frostdustry.world.blocks.production;
+package frostdustry.world.blocks.drills;
 
 import arc.math.*;
 import mindustry.type.*;

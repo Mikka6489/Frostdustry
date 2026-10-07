@@ -1,5 +1,5 @@
 {
-  "type": "frostdustry.world.blocks.production.FrostDrill",
+  "type": "frostdustry.world.blocks.drills.FrostDrill",
   "name": "Rickety Drill",
   "description": "An old drill left behind by the last survivor.",
   "health": 200,
@@ -15,5 +15,5 @@
     { "item": "lead", "amount": 70 }
   ],
   "category": "production",
-  "research": "laser-drill"
+  "research": "generator"
 }

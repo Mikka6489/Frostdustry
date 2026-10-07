@@ -1,0 +1,18 @@
+{
+  "type": "frostdustry.type.FrostLiquid",
+  "name": "Diesel",
+  "description": "first tier of processed oil",
+  "temperature": 0.3,
+  "viscosity": 0.8,
+  "flammability": 0.4,
+  "minHeatingRequired": 70,
+  "maxHeatingRequired": 90,
+  "effect": "tarred",
+  "color": "ffe483",
+  "gasColor": "c1e8f5",
+  "barColor": "ffe483",
+  "research": {
+    "parent": "oil",
+    "planet": "frostLand"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "frostdustry.type.FrostLiquid",
+  "name": "Naptha",
+  "description": "third tier of processed oil",
+  "temperature": 0.3,
+  "viscosity": 0,
+  "flammability": 2,
+  "minHeatingRequired": 20,
+  "maxHeatingRequired": 60,
+  "effect": "tarred",
+  "color": "ffe483",
+  "gasColor": "c1e8f5",
+  "barColor": "ffe483",
+  "research": {
+    "parent": "petrol",
+    "planet": "frostLand"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "frostdustry.type.FrostLiquid",
+  "name": "Petroleum",
+  "description": "second tier of processed oil",
+  "temperature": 0.3,
+  "viscosity": 0.5,
+  "flammability": 1,
+  "minHeatingRequired": 40,
+  "maxHeatingRequired": 69,
+  "effect": "tarred",
+  "color": "ffe483",
+  "gasColor": "c1e8f5",
+  "barColor": "ffe483",
+  "research": {
+    "parent": "diesel",
+    "planet": "frostLand"
+  }
+}

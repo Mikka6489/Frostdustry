@@ -2,6 +2,7 @@ diesel-punk theme
 oil refinery to make different oils and refine further into fuel
 cylinder engines can take different fuels and get higher efficiencys
 change the blast mixer to make high tier fuel
+the essential ores have an early game version: shitty derelict versions that run out and permanant versions, mimics frostpunks resource depots
 
 NOT WORTH ADDING:
 spore press

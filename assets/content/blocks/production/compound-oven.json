@@ -20,9 +20,9 @@
     "item": "pyratite", "amount": 1
   },
   "requirements": [
-    { "item": "copper", "amount": 25 },
-    { "item": "lead", "amount": 45 }
+    {"item": "copper", "amount": 25},
+    {"item": "lead", "amount": 45}
   ],
   "category": "crafting",
-  "research": "oil-extractor"
+  "research": "copper-furnace"
 }

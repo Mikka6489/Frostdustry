@@ -52,5 +52,5 @@
     { "item": "silicon", "amount": 75 }
   ],
   "category": "turret",
-  "research": "engineer-creator"
+  "research": "generator"
 }

@@ -1,6 +1,6 @@
 {
   "type": "frostdustry.world.blocks.production.FrostCrafter",
-  "name": "Fuel Refinery",
+  "name": "Blast Refinery",
   "description": "some bullshit name it makes better fuel.",
   "health": 440,
   "size": 2,
@@ -15,17 +15,17 @@
     },
     "liquids": {
       "liquids": [
-        {"liquid": "oil", "amount": 1}
+        {"liquid": "naptha", "amount": 1}
       ]
     }
   },
-  "outputLiquid": {
-    "liquid": "oil", "amount": 1
+  "outputItem": {
+    "item": "blast-compound", "amount": 1
   },
   "requirements": [
-    { "item": "copper", "amount": 25 },
-    { "item": "lead", "amount": 45 }
+    {"item": "copper", "amount": 25},
+    {"item": "lead", "amount": 45}
   ],
   "category": "crafting",
-  "research": "oil-extractor"
+  "research": "compound-oven"
 }
