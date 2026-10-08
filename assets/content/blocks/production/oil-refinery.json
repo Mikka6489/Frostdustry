@@ -5,18 +5,18 @@
   "health": 440,
   "size": 3,
   "hasLiquids": true,
-  "craftTime": 12,
-  "liquidCapacity": 10,
+  "craftTime": 45,
+  "liquidCapacity": 40,
   "maxEfficiency": 1.0,
   "consumes": {
     "liquids": [
-      {"liquid": "oil", "amount": 1}
+      {"liquid": "oil", "amount": 0.6}
     ]
   },
   "outputLiquids": [
-    {"liquid": "petrol", "amount": 1},
-    {"liquid": "diesel", "amount": 0.5},
-    {"liquid": "naptha", "amount": 0.5}
+    {"liquid": "petrol", "amount": 0.6},
+    {"liquid": "diesel", "amount": 0.3},
+    {"liquid": "naptha", "amount": 0.9}
   ],
   "requirements": [
     {"item": "copper", "amount": 25},

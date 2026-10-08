@@ -1,0 +1,59 @@
+{
+  "type": "frostdustry.world.blocks.production.FrostCrafter",
+  "name": "Silicon Furnace",
+  "description": "A fuckin thing with some copper to smelt shit.",
+  "health": 440,
+  "size": 3,
+  "drawer": {
+    "type": "drawMulti",
+    "drawers": [
+      {
+        "type": "drawDefault"
+      },
+      {
+        "type": "drawFlame"
+      }
+    ]
+  },
+  "squareSprite": false,
+  "hasItems": true,
+  "craftTime": 60,
+  "itemCapacity": 10,
+  "liquidCapacity": 40,
+  "consumes": {
+    "liquids": [
+      {
+        "liquid": "petrol",
+        "amount": 0.25
+      }
+    ],
+    "items": {
+      "items": [
+        {
+          "item": "coal",
+          "amount": 1
+        },
+        {
+          "item": "sand",
+          "amount": 2
+        }
+      ]
+    }
+  },
+  "outputItem": {
+    "item": "silicon",
+    "amount": 1
+  },
+  "requirements": [
+    {
+      "item": "copper",
+      "amount": 25
+    },
+    {
+      "item": "lead",
+      "amount": 45
+    }
+  ],
+  "category": "crafting",
+  "research": "hydraulic-clamp"
+}

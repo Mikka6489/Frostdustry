@@ -5,9 +5,10 @@
   "health": 440,
   "size": 2,
   "hasItems": true,
-  "craftTime": 12,
+  "craftTime": 60,
   "itemCapacity": 10,
   "consumes": {
+    "power": 3,
     "items": {
       "items": [
         {"item": "coal", "amount": 1},
@@ -24,5 +25,5 @@
     {"item": "lead", "amount": 45}
   ],
   "category": "crafting",
-  "research": "copper-furnace"
+  "research": "silicon-furnace"
 }
