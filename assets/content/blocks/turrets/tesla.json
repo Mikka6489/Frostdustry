@@ -1,0 +1,63 @@
+{
+  "type": "powerTurret",
+  "name": "Inductor",
+  "description": "A Single barrel machine gun of texan invention, deals heavy knockback.",
+  "size": 4,
+  "health": 3330,
+  "reload": 300,
+  "range": 300,
+  "cooldownTime": 60,
+  "minWarmup": 60,
+  "shootWarmupSpeed": 1,
+  "warmupMaintainTime": 1,
+  "linearWarmup": true,
+  "shake": 3,
+  "recoil": 5,
+  "shootX": 0,
+  "shootY": 9,
+  "shootSound": "shootLaser",
+  "chargeSound": "massiveExplosion",
+  "outlineColor": "2d2f39",
+  "rotateSpeed": 16,
+  "shootType": {
+    "type": "laserBulletType",
+    "status": "shocked",
+    "damage": 36,
+    "pierce": true,
+    "laserBullet": true,
+    "makeFire": true,
+    "lightning": 8,
+    "lightningLength": 25,
+    "lightningLengthRand": 10,
+    "lightningCone": 90,
+    "hitEffect": "plasticExplosionFlak",
+    "hitColor": "ffe483",
+    "hitSound": "explosionObviate",
+    "shootEffect": "instShoot",
+    "despawnEffect": "plasticExplosionFlak",
+    "smokeEffect": "colorSparkBig"
+  },
+  "consumes": {
+    "power": 12,
+    "coolant": {
+      "amount": 0.2,
+      "optional": true
+    }
+  },
+  "requirements": [
+    {
+      "item": "copper",
+      "amount": 130
+    },
+    {
+      "item": "titanium",
+      "amount": 100
+    },
+    {
+      "item": "silicon",
+      "amount": 75
+    }
+  ],
+  "category": "turret",
+  "research": "generator"
+}

@@ -41,7 +41,11 @@
       },
       {
         "type": "drawDefault"
-      }
+      },
+      {
+        "type": "drawHeatInput",
+        "suffix": "-heat"
+      },
     ]
   },
   "category": "crafting",

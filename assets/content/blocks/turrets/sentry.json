@@ -10,7 +10,8 @@
   "recoil": 1,
   "shootX": -1.75,
   "shootY": 9,
-  "shootSound": "pew",
+  "shootSound": "shootElude",
+  "outlineColor": "2d2f39",
   "rotateSpeed": 16,
   "ammoTypes": {
     "titanium": {
@@ -47,9 +48,18 @@
     }
   },
   "requirements": [
-    { "item": "copper", "amount": 130 },
-    { "item": "titanium", "amount": 100 },
-    { "item": "silicon", "amount": 75 }
+    {
+      "item": "copper",
+      "amount": 130
+    },
+    {
+      "item": "titanium",
+      "amount": 100
+    },
+    {
+      "item": "silicon",
+      "amount": 75
+    }
   ],
   "category": "turret",
   "research": "generator"
