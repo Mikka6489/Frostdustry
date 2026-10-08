@@ -17,24 +17,14 @@ public class FuelGenerator extends ConsumeGenerator{
     public FuelGenerator(String name){
         super(name);
     }
-
-    @Override
-    public void setBars(){
-        super.setBars();
-        addLiquidBar((FuelGeneratorBuild build) ->
-            filterLiquid == null ? null : filterLiquid.getConsumed(build)
-        );
-    }
-
+    
     @Override
     public void init(){
         consume(new ConsumeLiquidFilter(liquid -> liquid == Liquids.oil || liquid instanceof FrostLiquid, 0.357f) {
             {
                 multiplier = build -> {
                     Liquid fuel = getConsumed(build);
-                    return fuel instanceof FrostLiquid
-                        ? ((FrostLiquid)fuel).usageMultiplier
-                        : 1f;
+                    return fuel instanceof FrostLiquid ? ((FrostLiquid)fuel).usageMultiplier : 1f;
                 };
             }
 
@@ -51,8 +41,22 @@ public class FuelGenerator extends ConsumeGenerator{
     @Override
     public boolean canPlaceOn(Tile tile, Team team, int rotation){
         if(tile == null) return false;
-        if (cylinderTier == 1 && FrostMethods.runningGenerators < 4) return true;
-        return tile.block() instanceof FuelGenerator && FrostMethods.fuelGenPlaced;
+        boolean allowedByExistingRules = cylinderTier == 1 && FrostMethods.runningGenerators < 4
+            || tile.block() instanceof FuelGenerator && FrostMethods.fuelGenPlaced;
+        return allowedByExistingRules && isAdjacentToGeneratorOrFuelGenerator(tile);
+    }
+
+    public boolean isAdjacentToGeneratorOrFuelGenerator(Tile tile){
+        return tile != null && (isGeneratorOrFuelGeneratorAt(tile.x + 1, tile.y)
+            || isGeneratorOrFuelGeneratorAt(tile.x - 1, tile.y)
+            || isGeneratorOrFuelGeneratorAt(tile.x, tile.y + 1)
+            || isGeneratorOrFuelGeneratorAt(tile.x, tile.y - 1));
+    }
+
+    private boolean isGeneratorOrFuelGeneratorAt(int x, int y){
+        Tile nearby = Vars.world.tile(x, y);
+        return nearby != null && (nearby.block() instanceof frostdustry.world.blocks.defense.Generator
+            || nearby.block() instanceof FuelGenerator);
     }
 
     public class FuelGeneratorBuild extends ConsumeGeneratorBuild{
