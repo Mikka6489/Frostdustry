@@ -7,15 +7,10 @@
 	"buildCostMultiplier": 0.7,
 	"liquidCapacity": 40,
 	"itemDuration": 60,
-
-	"cylinderTier": 3,
-
 	"powerProduction": 36,
 	"hasPower": true,
 	"hasLiquids": true,
-	"consumes": {
-		"liquid": {"liquid": "oil", "amount": 0.375}
-	},
+	"cylinderTier": 3,
     "requirements": [
 		{"item": "graphite", "amount": 220 },
 		{"item": "titanium", "amount": 120 },

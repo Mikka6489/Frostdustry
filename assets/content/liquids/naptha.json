@@ -10,6 +10,8 @@
   "explosiveness": 0.8,
   "minHeatingRequired": 20,
   "maxHeatingRequired": 50,
+  "powerMultiplier": 1.1,
+  "usageMultiplier": 1.2,
   "effect": "tarred",
   "color": "9eabf799",
   "gasColor": "c1e8f5",

@@ -1,16 +1,51 @@
 package frostdustry.world.blocks.power;
 
 import mindustry.game.Team;
+import mindustry.Vars;
+import mindustry.content.Liquids;
+import mindustry.gen.Building;
+import mindustry.type.*;
 import mindustry.world.Tile;
 import mindustry.world.blocks.power.*;
-
+import mindustry.world.consumers.ConsumeLiquidFilter;
 import frostdustry.logic.*;
+import frostdustry.type.FrostLiquid;
 
 public class FuelGenerator extends ConsumeGenerator{
     public int cylinderTier = 1;
 
     public FuelGenerator(String name){
         super(name);
+    }
+
+    @Override
+    public void setBars(){
+        super.setBars();
+        addLiquidBar((FuelGeneratorBuild build) ->
+            filterLiquid == null ? null : filterLiquid.getConsumed(build)
+        );
+    }
+
+    @Override
+    public void init(){
+        consume(new ConsumeLiquidFilter(liquid -> liquid == Liquids.oil || liquid instanceof FrostLiquid, 0.357f) {
+            {
+                multiplier = build -> {
+                    Liquid fuel = getConsumed(build);
+                    return fuel instanceof FrostLiquid
+                        ? ((FrostLiquid)fuel).usageMultiplier
+                        : 1f;
+                };
+            }
+
+            @Override
+            public float liquidEfficiencyMultiplier(Liquid liquid){
+                return liquid instanceof FrostLiquid
+                    ? ((FrostLiquid)liquid).powerMultiplier
+                    : 1f;
+            }
+        });
+        super.init();
     }
 
     @Override
@@ -35,6 +70,20 @@ public class FuelGenerator extends ConsumeGenerator{
             if (cylinderTier == 1) FrostMethods.runningGenerators--;
             if (cylinderTier > 1) FrostMethods.runningGenerators = 0;
             if (FrostMethods.runningGenerators == 0) FrostMethods.fuelGenPlaced = false;
+        }
+
+        @Override
+        public boolean acceptLiquid(Building source, Liquid liquid){
+            if((liquid != Liquids.oil && !(liquid instanceof FrostLiquid)) || !super.acceptLiquid(source, liquid)){
+                return false;
+            }
+
+            for(Liquid stored : Vars.content.liquids()){
+                if(stored != liquid && liquids.get(stored) > 0.001f){
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }
