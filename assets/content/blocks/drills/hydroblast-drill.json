@@ -15,5 +15,5 @@
     { "item": "lead", "amount": 70 }
   ],
   "category": "production",
-  "research": "generator"
+  "research": "power-drill"
 }

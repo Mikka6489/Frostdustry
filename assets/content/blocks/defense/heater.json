@@ -1,6 +1,6 @@
 {
   "type": "frostdustry.world.blocks.defense.Generator",
-  "name": "Heater",
+  "name": "Steam Hub",
   "description": "Used to resist the freezing temperatures of The Storm. Is unaffected by the cold. Contributes to overall coal consumption.",
   "health": 200,
   "size": 2,
