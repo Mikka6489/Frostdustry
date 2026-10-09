@@ -1,23 +1,13 @@
 {
-  "type": "frostdustry.world.blocks.production.LiquidSwapCrafter",
-  "name": "Oil Refinery",
-  "description": "some bullshit name it makes petrol.",
+  "type": "frostdustry.world.blocks.heat.LiquidHeatProducer",
+  "name": "Oil Heater",
+  "description": "some bullshit name it heats.",
   "health": 440,
-  "size": 3,
+  "size": 2,
   "hasLiquids": true,
   "craftTime": 45,
   "liquidCapacity": 40,
-  "maxEfficiency": 1.0,
-  "consumes": {
-    "liquids": [
-      {"liquid": "oil", "amount": 0.6}
-    ]
-  },
-  "outputLiquids": [
-    {"liquid": "petrol", "amount": 0.6},
-    {"liquid": "diesel", "amount": 0.3},
-    {"liquid": "naptha", "amount": 0.9}
-  ],
+  "heatOutput": 10.0,
   "requirements": [
     {"item": "copper", "amount": 25},
     {"item": "lead", "amount": 45}
@@ -43,11 +33,11 @@
         "type": "drawDefault"
       },
       {
-        "type": "drawHeatInput",
+        "type": "drawHeatOutput",
         "suffix": "-heat"
       }
     ]
   },
-  "category": "crafting",
-  "research": "oil-extractor"
+  "category": "effect",
+  "research": "oil-refinery"
 }

@@ -1,0 +1,5 @@
+{
+  "type": "frostdustry.world.blocks.environment.LimitedOre",
+  "name": "Soft Coal",
+  "itemDrop": "coal"
+}

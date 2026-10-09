@@ -21,13 +21,13 @@ public class LiquidSwapCrafter extends HeatCrafter{
             }
         }
 
-        addLiquidBar((HeatSwapBuild build) -> {
+        addLiquidBar((LiquidSwapBuild build) -> {
             LiquidStack output = build.selectedOutput();
             return output == null ? null : output.liquid;
         });
     }
 
-    public class HeatSwapBuild extends HeatCrafterBuild{
+    public class LiquidSwapBuild extends HeatCrafterBuild{
         @Override
         public void updateTile(){
             heat = calculateHeat(sideHeat);

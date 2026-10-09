@@ -1,7 +1,7 @@
 {
-  "type": "frostdustry.world.blocks.drills.LimitedDrill",
-  "name": "Rickety Drill",
-  "description": "An old drill left behind by the last survivor.",
+  "type": "frostdustry.world.blocks.drills.FrostDrill",
+  "name": "Power Drill",
+  "description": "A professionally made drill, it's strong enough to mine harder ores.",
   "health": 200,
   "size": 2,
   "tier": 2,

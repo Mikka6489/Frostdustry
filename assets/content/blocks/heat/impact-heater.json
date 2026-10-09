@@ -1,0 +1,64 @@
+{
+	"type": "HeatProducer",
+	"name": "Impact Heater",
+	"description": "definitely not the heat generator tower from engineer gaming",
+	"health": 1880,
+	"size": 4,
+	"squareSprite": false,
+	"buildCostMultiplier": 0.7,
+	"liquidCapacity": 100,
+	"warmupSpeed": 0.002,
+	"heatOutput": 40.0,
+	"hasPower": true,
+	"consumes": {
+		"power": 4,
+		"items": {
+			"items": [
+				{
+				"item": "blast-compound",
+				"amount": 1
+				}
+			]
+		}
+	},
+  "drawer": {
+    "type": "drawMulti",
+    "drawers": [
+      {
+        "type": "drawRegion",
+        "suffix": "-bottom"
+      },
+      {
+        "type": "drawPlasma",
+        "plasmas": 4
+      },
+      {
+        "type": "drawDefault"
+      },
+      {
+        "type": "drawGlowRegion",
+        "blending": "additive"
+      }
+    ]
+  },
+    "requirements": [
+		{
+		"item": "graphite",
+		"amount": 350
+		},
+		{
+		"item": "lead",
+		"amount": 450
+		},
+		{
+		"item": "silicon",
+		"amount": 125
+		},
+		{
+		"item": "plastanium",
+		"amount": 180
+		}
+	],
+	"category": "effect",
+	"research": "liquid-heater"
+}

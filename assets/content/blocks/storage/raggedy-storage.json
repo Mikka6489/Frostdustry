@@ -1,0 +1,23 @@
+{
+  "type": "CoreBlock",
+  "name": "Raggedy Storage",
+  "description": "pending name, A raggedy tent meant to thinly veil your precious resources from the harsh cold.",
+  "health": 440,
+  "size": 3,
+  "hasItems": true,
+  "craftTime": 30,
+  "itemCapacity": 4000,
+  "unitType": "alpha",
+  "requirements": [
+    {
+      "item": "copper",
+      "amount": 25
+    },
+    {
+      "item": "lead",
+      "amount": 45
+    }
+  ],
+  "category": "effect",
+  "research": "generator"
+}
