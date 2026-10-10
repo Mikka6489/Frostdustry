@@ -10,7 +10,8 @@ public class FrostMethods {
     public static boolean generatorActive;
     public static boolean fuelGenPlaced;
     public static int runningGenerators;
-    public static int runningHeaters;
+    public static int globalHeatLevel;
+    public static int globalCoalCost;
 
     public float calcCold(float recievedHeat){
         calcCold = cold.env() - recievedHeat;

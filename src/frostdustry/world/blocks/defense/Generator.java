@@ -23,12 +23,12 @@ public class Generator extends Block{
     public boolean canBurnCoal = true;    
     public DrawBlock drawer = new DrawDefault();
     public static final int minHeatLevel = 0;
-    public static final int maxHeatLevel = 3;
+    public static final int maxHeatLevel = 4;
 
     public float heat = 1.5f;
     public float reload = 60f;
     public float range = 80f;
-    public float useTime = 400f;
+    public float useTime = 300f;
     public Color baseColor = Color.valueOf("feb380");
 
     public Generator(String name){
@@ -56,7 +56,7 @@ public class Generator extends Block{
     }
 
     public int coalCost(Integer heatLevel){
-        return Math.max(1, (int)(5f * FrostMethods.runningHeaters));
+        return Math.max(1, (int)(6f * heatLevel / (canBurnCoal ? 1 : 2)));
     }
 
     private HeatReciever heatReciever(Building building){
@@ -97,17 +97,23 @@ public class Generator extends Block{
         public float boost, heat, charge = Mathf.random(reload), phaseHeat, smoothEfficiency, useProgress, plasmaProgress;
         public boolean nowFueled;
         public int heatLevel = 1;
+        public int personalCoalCost;
 
         public void setHeatLevel(int level){
             int newLevel = Mathf.clamp(level, minHeatLevel, maxHeatLevel);
-            FrostMethods.runningHeaters += newLevel - heatLevel;
+            int newCoalCost = coalCost(FrostMethods.globalHeatLevel);
+            FrostMethods.globalCoalCost += newCoalCost - personalCoalCost;
+            personalCoalCost = newCoalCost;
+            FrostMethods.globalHeatLevel = newLevel;
             heatLevel = newLevel;
         }
 
         public void updateHeaterStatus(){
             if (canBurnCoal){
-                    int coalCost = coalCost(heatLevel);
+                    int coalCost = FrostMethods.globalCoalCost;
                     if(items.get(Items.coal) >= coalCost){
+                        if (FrostMethods.globalHeatLevel == 0) coalCost = 0;
+                        Log.info("removing @, globalheatlevel @", coalCost, FrostMethods.globalHeatLevel);
                         items.remove(Items.coal, coalCost);
                         FrostMethods.generatorActive = true;
                     } else { FrostMethods.generatorActive = false; }
@@ -117,13 +123,15 @@ public class Generator extends Block{
         @Override
         public void created(){
             super.created();
-            FrostMethods.runningHeaters += heatLevel;
+            if (canBurnCoal) FrostMethods.globalHeatLevel = 1;
+            personalCoalCost = coalCost(FrostMethods.globalHeatLevel);
+            FrostMethods.globalCoalCost += personalCoalCost;
             updateHeaterStatus();
         }
 
         @Override
         public void onRemoved(){
-            FrostMethods.runningHeaters -= heatLevel;
+            FrostMethods.globalCoalCost -= personalCoalCost;
             super.onRemoved();
         }
 
@@ -149,8 +157,8 @@ public class Generator extends Block{
 
         @Override
         public void updateTile(){
-            if (FrostMethods.generatorActive && heatLevel > 0) {
-                boost = heat + heatLevel;
+            if (FrostMethods.generatorActive && FrostMethods.globalHeatLevel > 0) {
+                boost = heat + FrostMethods.globalHeatLevel;
                 smoothEfficiency = Mathf.lerpDelta(smoothEfficiency, efficiency, 0.08f);
                 heat = Mathf.lerpDelta(heat, efficiency > 0 ? 1f : 0f, 0.08f);
                 charge += heat * Time.delta;
@@ -168,13 +176,14 @@ public class Generator extends Block{
                 indexer.eachBlock(this, realRange, other -> {
                     HeatReciever receiver = heatReciever(other);
                     return receiver != null && receiver.canBeHeated();
-                }, other -> heatReciever(other).recieveHeat(boost));
+                }, other -> heatReciever(other).recieveHeat(heatLevel));
             }
             if(efficiency > 0){
                 useProgress += delta();
             }
 
             if(useProgress >= useTime){
+                setHeatLevel(FrostMethods.globalHeatLevel);
                 updateHeaterStatus();
                 useProgress %= useTime;
             }
@@ -182,18 +191,20 @@ public class Generator extends Block{
 
         @Override
         public void buildConfiguration(Table table){
-            Slider slider = new Slider(minHeatLevel, maxHeatLevel, 1f, false);
-            slider.setValue(heatLevel);
-            slider.changed(() -> configure(Math.round(slider.getValue())));
+            if (canBurnCoal) {
+                Slider slider = new Slider(minHeatLevel, maxHeatLevel, 1f, false);
+                slider.setValue(heatLevel);
+                slider.changed(() -> configure(Math.round(slider.getValue())));
 
-            table.add("Heat").colspan(maxHeatLevel - minHeatLevel + 1).center().row();
+                table.add("Heat").colspan(maxHeatLevel - minHeatLevel + 1).center().row();
 
-            for(int level = minHeatLevel; level <= maxHeatLevel; level++){
-                table.add(level == 0 ? "Off" : Integer.toString(level)).width(40f).center();
+                for(int level = minHeatLevel; level <= maxHeatLevel; level++){
+                    table.add(level == 0 ? "Off" : Integer.toString(level)).width(40f).center();
+                }
+
+                table.row();
+                table.add(slider).colspan(maxHeatLevel - minHeatLevel + 1).width(240f).height(40f);
             }
-
-            table.row();
-            table.add(slider).colspan(maxHeatLevel - minHeatLevel + 1).width(240f).height(40f);
         }
         @Override
         public float warmup(){
