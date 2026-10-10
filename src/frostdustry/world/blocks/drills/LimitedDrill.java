@@ -1,5 +1,6 @@
 package frostdustry.world.blocks.drills;
 
+import arc.util.*;
 import arc.math.*;
 import mindustry.type.*;
 import mindustry.ui.*;
@@ -131,8 +132,7 @@ public class LimitedDrill extends Drill implements HeatReciever{
             for(int dx = 0; dx < size; dx++){
                 for(int dy = 0; dy < size; dy++){
                     Tile oreTile = Vars.world.tile(tile.x + dx, tile.y + dy);
-                    if(oreTile == null || !(oreTile.overlay() instanceof LimitedOre frostOre) || frostOre.itemDrop != item) continue;
-
+                    if(oreTile == null || !(oreTile.overlay() instanceof LimitedOre frostOre) || frostOre.itemDrop != item) continue;                    
                     int remaining = frostOre.getOreCount(oreTile);
                     if(remaining <= 0) continue;
 

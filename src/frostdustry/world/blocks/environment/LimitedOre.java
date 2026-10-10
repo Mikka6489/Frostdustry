@@ -7,7 +7,7 @@ import mindustry.world.blocks.environment.*;
 import mindustry.content.*;
 
 public class LimitedOre extends OreBlock{
-    private static final int maxOre = 20;
+    private static final int maxOre = 1000;
     private final IntMap<Integer> oreCounts = new IntMap<>();
 
     public LimitedOre(String name){
@@ -16,7 +16,7 @@ public class LimitedOre extends OreBlock{
 
     public void seedRandom(Tile tile){
         if(tile == null) return;
-        int count = Mathf.random(3, maxOre);
+        int count = Mathf.random(300, maxOre);
         oreCounts.put(tile.pos(), count);
     }
 

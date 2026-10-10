@@ -14,21 +14,6 @@
 	"shootSound": "shootElude",
 	"rotateSpeed": 16,
 	"ammoTypes": {
-		"engineer": {
-			"type": "BasicBulletType",
-			"damage": 62,
-			"backColor": "ef806c",
-			"height": 8,
-			"width": 6,
-			"speed": 5,
-			"lifetime": 50,
-			"knockback": 4,
-			"homingPower": 0.3,
-			"ammoMultiplier": 4,
-			"impact": "true",
-			"sprite": "missile",
-			"smokeEffect": "shootSmallSmoke"
-		},
 		"titanium": {
 			"type": "BasicBulletType",
 			"damage": 45,
@@ -73,12 +58,8 @@
 		{
 			"item": "silicon",
 			"amount": 75
-		},
-		{
-			"item": "engineer",
-			"amount": 85
 		}
 	],
 	"category": "turret",
-	"research": "engineer-creator"
+	"research": "tesla"
 }
