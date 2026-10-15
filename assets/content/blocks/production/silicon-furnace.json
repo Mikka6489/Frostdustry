@@ -23,7 +23,7 @@
   "consumes": {
     "liquids": [
       {
-        "liquid": "petrol",
+        "liquid": "gasoline",
         "amount": 0.25
       }
     ],

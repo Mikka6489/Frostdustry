@@ -10,7 +10,6 @@
 	"powerProduction": 36,
 	"hasPower": true,
 	"hasLiquids": true,
-	"cylinderTier": 3,
     "requirements": [
 		{"item": "graphite", "amount": 220 },
 		{"item": "titanium", "amount": 120 },

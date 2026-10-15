@@ -1,21 +1,31 @@
 {
-	"type": "frostdustry.world.blocks.power.FuelGenerator",
-	"name": "Four-Cylinder Engine",
+	"type": "HeaterGenerator",
+	"name": "Gasoline Generator",
 	"description": "Consumes oil to generate power. Must be connected to the Generator.",
 	"health": 480,
 	"size": 2,
 	"buildCostMultiplier": 0.7,
 	"liquidCapacity": 40,
 	"itemDuration": 60,
-	"powerProduction": 24,
+	"powerProduction": 8,
+	"heatOutput": 5,
 	"hasPower": true,
 	"hasLiquids": true,
-	"cylinderTier": 2,
+	"consumes": {
+		"liquids": {
+			"liquids": [
+				{
+				"liquid": "gasoline",
+				"amount": 1
+				}
+			]
+		}
+	},
     "requirements": [
 		{"item": "graphite", "amount": 220 },
 		{"item": "titanium", "amount": 120 },
 		{"item": "metaglass", "amount": 180}
 	],
 	"category": "power",
-	"research": "1-cylinder"
+	"research": "generator"
 }

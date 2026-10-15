@@ -14,7 +14,7 @@
     ]
   },
   "outputLiquids": [
-    {"liquid": "petrol", "amount": 0.6},
+    {"liquid": "gasoline", "amount": 0.6},
     {"liquid": "diesel", "amount": 0.3},
     {"liquid": "naptha", "amount": 0.9}
   ],

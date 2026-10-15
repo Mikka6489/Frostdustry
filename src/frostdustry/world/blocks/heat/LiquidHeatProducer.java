@@ -1,6 +1,7 @@
 package frostdustry.world.blocks.heat;
 
-import mindustry.content.*;
+import mindustry.*;
+import mindustry.ctype.*;
 import mindustry.type.*;
 import mindustry.world.blocks.heat.*;
 import mindustry.world.consumers.*;
@@ -11,9 +12,10 @@ public class LiquidHeatProducer extends HeatProducer {
     public LiquidHeatProducer(String name){
         super(name);
     }
-        @Override
+    @Override
     public void init(){
-        consume(new ConsumeLiquidFilter(liquid -> liquid == Liquids.oil || liquid instanceof FrostLiquid, 0.357f) {
+        Liquid diesel = Vars.content.getByName(ContentType.liquid, "frostdustry-diesel");
+        consume(new ConsumeLiquidFilter(liquid -> liquid instanceof FrostLiquid && liquid != diesel, 0.357f) {
             {
                 multiplier = build -> {
                     Liquid fuel = getConsumed(build);

@@ -1,13 +1,13 @@
 {
 	"type": "frostdustry.world.blocks.power.FuelGenerator",
-	"name": "One-Cylinder Engine",
+	"name": "Diesel Generator",
 	"description": "Consumes oil to generate power. Must be connected to the Generator.",
 	"health": 480,
-	"size": 1,
+	"size": 2,
 	"buildCostMultiplier": 0.7,
 	"liquidCapacity": 40,
 	"itemDuration": 60,
-	"powerProduction": 12,
+	"powerProduction": 24,
 	"hasPower": true,
 	"hasLiquids": true,
     "requirements": [
@@ -16,5 +16,5 @@
 		{"item": "metaglass", "amount": 180}
 	],
 	"category": "power",
-	"research": "generator"
+	"research": "1-cylinder"
 }

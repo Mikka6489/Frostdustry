@@ -1,27 +1,25 @@
 package frostdustry.world.blocks.power;
 
-import mindustry.game.*;
 import mindustry.*;
 import mindustry.content.*;
+import mindustry.ctype.*;
 import mindustry.gen.*;
 import mindustry.type.*;
-import mindustry.world.*;
 import mindustry.world.blocks.power.*;
 import mindustry.world.consumers.*;
 
 import frostdustry.logic.*;
-import frostdustry.type.FrostLiquid;
+import frostdustry.type.*;
 
 public class FuelGenerator extends ConsumeGenerator{
-    public int cylinderTier = 1;
-
     public FuelGenerator(String name){
         super(name);
     }
     
     @Override
     public void init(){
-        consume(new ConsumeLiquidFilter(liquid -> liquid == Liquids.oil || liquid instanceof FrostLiquid, 0.357f) {
+        Liquid diesel = Vars.content.getByName(ContentType.liquid, "frostdustry-diesel");
+        consume(new ConsumeLiquidFilter(liquid -> liquid == diesel, 0.357f) {
             {
                 multiplier = build -> {
                     Liquid fuel = getConsumed(build);
@@ -39,42 +37,23 @@ public class FuelGenerator extends ConsumeGenerator{
         super.init();
     }
 
-    @Override
-    public boolean canPlaceOn(Tile tile, Team team, int rotation){
-        if(tile == null) return false;
-        boolean allowedByExistingRules = cylinderTier == 1 && FrostMethods.runningGenerators < 4
-            || tile.block() instanceof FuelGenerator && FrostMethods.fuelGenPlaced;
-        return allowedByExistingRules && isAdjacentToGeneratorOrFuelGenerator(tile);
-    }
+    public class FuelGeneratorBuild extends ConsumeGeneratorBuild implements HeatReciever{
+        FrostMethods FrostMethods = new FrostMethods();
+        public float recievedHeat = 0;
 
-    public boolean isAdjacentToGeneratorOrFuelGenerator(Tile tile){
-        return tile != null && (isGeneratorOrFuelGeneratorAt(tile.x + 1, tile.y)
-            || isGeneratorOrFuelGeneratorAt(tile.x - 1, tile.y)
-            || isGeneratorOrFuelGeneratorAt(tile.x, tile.y + 1)
-            || isGeneratorOrFuelGeneratorAt(tile.x, tile.y - 1));
-    }
-
-    private boolean isGeneratorOrFuelGeneratorAt(int x, int y){
-        Tile nearby = Vars.world.tile(x, y);
-        return nearby != null && (nearby.block() instanceof frostdustry.world.blocks.defense.Generator
-            || nearby.block() instanceof FuelGenerator);
-    }
-
-    public class FuelGeneratorBuild extends ConsumeGeneratorBuild{
         @Override
-        public void created(){
-            super.created();
-            if (cylinderTier == 1) FrostMethods.runningGenerators++;
-            if (cylinderTier > 1) FrostMethods.runningGenerators += 99;
-            FrostMethods.fuelGenPlaced = true;
+        public void recieveHeat(float heat) {
+            recievedHeat = heat;
         }
 
         @Override
-        public void onRemoved(){
-            super.onRemoved();
-            if (cylinderTier == 1) FrostMethods.runningGenerators--;
-            if (cylinderTier > 1) FrostMethods.runningGenerators = 0;
-            if (FrostMethods.runningGenerators == 0) FrostMethods.fuelGenPlaced = false;
+        public boolean canBeHeated() {
+            return true;
+        }
+
+        @Override
+        public float getProgressIncrease(float base){
+            return super.getProgressIncrease(base) / (FrostMethods.calcCold(recievedHeat) + 1f);
         }
 
         @Override
