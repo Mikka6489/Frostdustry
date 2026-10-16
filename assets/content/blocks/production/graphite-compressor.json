@@ -1,11 +1,11 @@
 {
   "type": "frostdustry.world.blocks.production.FrostCrafter",
-  "name": "Hydraulic Clamp",
+  "name": "Graphite Compressor",
   "description": "A heavy duty clamp to compress coal into graphite.",
   "health": 440,
   "size": 2,
   "hasItems": true,
-  "craftTime": 12,
+  "craftTime": 40,
   "itemCapacity": 10,
   "consumes": {
     "items": {

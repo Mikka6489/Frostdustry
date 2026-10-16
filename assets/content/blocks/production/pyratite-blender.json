@@ -1,6 +1,6 @@
 {
   "type": "frostdustry.world.blocks.production.FrostCrafter",
-  "name": "Compound Oven",
+  "name": "Pyratite Blender",
   "description": "some bullshit name it makes pyratite.",
   "health": 440,
   "size": 2,
@@ -24,6 +24,24 @@
     {"item": "copper", "amount": 25},
     {"item": "lead", "amount": 45}
   ],
+  "drawer": {
+    "type": "drawMulti",
+    "drawers": [
+      {
+        "type": "drawRegion",
+        "suffix": "-bottom"
+      },
+      {
+        "type": "drawRegion",
+        "suffix": "-spinner",
+        "spinSprite": true,
+        "rotateSpeed": 3
+      },
+      {
+        "type": "drawDefault"
+      }
+    ]
+  },
   "category": "crafting",
   "research": "silicon-furnace"
 }
