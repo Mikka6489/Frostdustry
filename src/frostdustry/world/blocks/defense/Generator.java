@@ -14,8 +14,11 @@ import mindustry.type.*;
 import mindustry.world.meta.*;
 import mindustry.world.*;
 import mindustry.world.draw.*;
+import arc.graphics.g2d.*;
+
 import frostdustry.logic.*;
 import frostdustry.type.*;
+
 
 import static mindustry.Vars.*;
 
@@ -25,6 +28,8 @@ public class Generator extends Block{
     public static final int minHeatLevel = 0;
     public static final int maxHeatLevel = 4;
 
+    public int sides = 16;
+    public float shieldRotation = 0f;
     public float heat = 1.5f;
     public float reload = 60f;
     public float range = 80f;
@@ -94,6 +99,33 @@ public class Generator extends Block{
     }
 
     public class GeneratorBuild extends Building implements Ranged{
+        public float realRadius(){
+            return (range + phaseHeat);
+        }
+        public void drawShield(){
+            float radius = realRadius();
+                if(radius > 0.001f){
+                    Draw.color(team.color, Color.orange, 99f);
+
+                    if(renderer.animateShields){
+                        Draw.z(Layer.shields + 0.1f);
+                        Fill.poly(x, y, sides, radius, shieldRotation);
+                    }/*else{
+                        Draw.z(Layer.shields);
+                        Lines.stroke(1.5f);
+                        Draw.alpha(0.09f + Mathf.clamp(0.08f));
+                        Fill.poly(x, y, sides, range, shieldRotation);
+                        Draw.alpha(1f);
+                        Lines.poly(x, y, sides, range, shieldRotation);
+                        Draw.reset();
+                    }*/
+                }
+            
+
+            Draw.reset();
+        }
+
+
         public float boost, heat, charge = Mathf.random(reload), phaseHeat, smoothEfficiency, useProgress, plasmaProgress;
         public boolean nowFueled;
         public int heatLevel = 1;
@@ -113,6 +145,7 @@ public class Generator extends Block{
                     int coalCost = FrostMethods.globalCoalCost;
                     if(items.get(Items.coal) >= coalCost){
                         if (FrostMethods.globalHeatLevel == 0) coalCost = 0;
+                        Log.info("smoothefficieny: @", smoothEfficiency);
                         Log.info("removing @, globalheatlevel @", coalCost, FrostMethods.globalHeatLevel);
                         items.remove(Items.coal, coalCost);
                         FrostMethods.generatorActive = true;
@@ -148,6 +181,7 @@ public class Generator extends Block{
         @Override
         public void draw(){
             drawer.draw(this);
+            drawShield();
         }
 
         @Override

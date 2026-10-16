@@ -16,5 +16,5 @@
 		{"item": "metaglass", "amount": 180}
 	],
 	"category": "power",
-	"research": "1-cylinder"
+	"research": "gasoline-generator"
 }

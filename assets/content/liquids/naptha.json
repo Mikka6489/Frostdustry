@@ -17,7 +17,7 @@
   "gasColor": "c1e8f5",
   "barColor": "9eabf799",
   "research": {
-    "parent": "petrol",
+    "parent": "gasoline",
     "planet": "frostLand"
   }
 }
