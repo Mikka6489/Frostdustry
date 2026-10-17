@@ -28,8 +28,6 @@ public class Generator extends Block{
     public static final int minHeatLevel = 0;
     public static final int maxHeatLevel = 4;
 
-    public int sides = 16;
-    public float shieldRotation = 0f;
     public float heat = 1.5f;
     public float reload = 60f;
     public float range = 80f;
@@ -100,16 +98,16 @@ public class Generator extends Block{
 
     public class GeneratorBuild extends Building implements Ranged{
         public float realRadius(){
-            return (range + phaseHeat);
+            return smoothRadius;
         }
         public void drawShield(){
             float radius = realRadius();
                 if(radius > 0.001f){
                     Draw.color(team.color, Color.orange, 99f);
+                    Draw.z(Layer.shields);
 
                     if(renderer.animateShields){
-                        Draw.z(Layer.shields + 0.1f);
-                        Fill.poly(x, y, sides, radius, shieldRotation);
+                        Fill.poly(x, y, 16, radius);
                     }/*else{
                         Draw.z(Layer.shields);
                         Lines.stroke(1.5f);
@@ -126,8 +124,7 @@ public class Generator extends Block{
         }
 
 
-        public float boost, heat, charge = Mathf.random(reload), phaseHeat, smoothEfficiency, useProgress, plasmaProgress;
-        public boolean nowFueled;
+        public float boost, heat, charge = Mathf.random(reload), phaseHeat, smoothEfficiency, useProgress, plasmaProgress, smoothRadius;
         public int heatLevel = 1;
         public int personalCoalCost;
 
@@ -143,10 +140,8 @@ public class Generator extends Block{
         public void updateHeaterStatus(){
             if (canBurnCoal){
                     int coalCost = FrostMethods.globalCoalCost;
-                    if(items.get(Items.coal) >= coalCost){
+                    if(items.get(Items.coal) >= coalCost && FrostMethods.globalHeatLevel > 0){
                         if (FrostMethods.globalHeatLevel == 0) coalCost = 0;
-                        Log.info("smoothefficieny: @", smoothEfficiency);
-                        Log.info("removing @, globalheatlevel @", coalCost, FrostMethods.globalHeatLevel);
                         items.remove(Items.coal, coalCost);
                         FrostMethods.generatorActive = true;
                     } else { FrostMethods.generatorActive = false; }
@@ -180,6 +175,7 @@ public class Generator extends Block{
 
         @Override
         public void draw(){
+            super.draw();
             drawer.draw(this);
             drawShield();
         }
@@ -191,16 +187,15 @@ public class Generator extends Block{
 
         @Override
         public void updateTile(){
-            if (FrostMethods.generatorActive && FrostMethods.globalHeatLevel > 0) {
-                boost = heat + FrostMethods.globalHeatLevel;
-                smoothEfficiency = Mathf.lerpDelta(smoothEfficiency, efficiency, 0.08f);
-                heat = Mathf.lerpDelta(heat, efficiency > 0 ? 1f : 0f, 0.08f);
-                charge += heat * Time.delta;
-            } else {
-                smoothEfficiency = 0f;
-                heat = 0f;
-                //charge = 0f;
+            if (FrostMethods.generatorActive == false && FrostMethods.globalHeatLevel < 1){
+                efficiency = 0;
             }
+            
+            boost = heat + FrostMethods.globalHeatLevel;
+            smoothEfficiency = Mathf.lerpDelta(smoothEfficiency, efficiency, 0.08f);
+            heat = Mathf.lerpDelta(heat, efficiency > 0 ? 1f : 0f, 0.08f);
+            charge += heat * Time.delta;
+            smoothRadius = Mathf.lerpDelta(smoothRadius, range * efficiency, 0.05f);
 
             plasmaProgress += heat * Time.delta;
 
@@ -219,6 +214,7 @@ public class Generator extends Block{
             if(useProgress >= useTime){
                 setHeatLevel(FrostMethods.globalHeatLevel);
                 updateHeaterStatus();
+                Log.info("dead, generatoractive: @, heatlevel: @", FrostMethods.generatorActive, FrostMethods.globalHeatLevel);
                 useProgress %= useTime;
             }
         }
