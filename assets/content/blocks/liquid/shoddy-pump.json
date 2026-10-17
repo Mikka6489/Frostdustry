@@ -1,0 +1,15 @@
+{
+  "type": "frostdustry.world.blocks.production.FrostPump",
+  "name": "Shoddy Pump",
+  "description": "Moves items at such an incredible speed it may as-well have been teleported. Moves around 72 items/second.",
+  "size": 1,
+  "health": 150,
+  "pumpAmount": 0.11,
+  "liquidCapacity": 20,
+  "requirements": [
+      {"item": "copper", "amount": 1},
+      {"item": "lead", "amount": 1}
+  ],
+  "category": "liquid",
+  "research": "generator"
+}

@@ -58,6 +58,12 @@ public class Generator extends Block{
         drawer.load(this);
     }
 
+    @Override
+    public void init(){
+        updateClipRadius(range + 3f);
+        super.init();
+    }
+
     public int coalCost(Integer heatLevel){
         return Math.max(1, (int)(6f * heatLevel / (canBurnCoal ? 1 : 2)));
     }
@@ -97,33 +103,6 @@ public class Generator extends Block{
     }
 
     public class GeneratorBuild extends Building implements Ranged{
-        public float realRadius(){
-            return smoothRadius;
-        }
-        public void drawShield(){
-            float radius = realRadius();
-                if(radius > 0.001f){
-                    Draw.color(team.color, Color.orange, 99f);
-                    Draw.z(Layer.shields);
-
-                    if(renderer.animateShields){
-                        Fill.poly(x, y, 16, radius);
-                    }/*else{
-                        Draw.z(Layer.shields);
-                        Lines.stroke(1.5f);
-                        Draw.alpha(0.09f + Mathf.clamp(0.08f));
-                        Fill.poly(x, y, sides, range, shieldRotation);
-                        Draw.alpha(1f);
-                        Lines.poly(x, y, sides, range, shieldRotation);
-                        Draw.reset();
-                    }*/
-                }
-            
-
-            Draw.reset();
-        }
-
-
         public float boost, heat, charge = Mathf.random(reload), phaseHeat, smoothEfficiency, useProgress, plasmaProgress, smoothRadius;
         public int heatLevel = 1;
         public int personalCoalCost;
@@ -141,7 +120,6 @@ public class Generator extends Block{
             if (canBurnCoal){
                     int coalCost = FrostMethods.globalCoalCost;
                     if(items.get(Items.coal) >= coalCost && FrostMethods.globalHeatLevel > 0){
-                        if (FrostMethods.globalHeatLevel == 0) coalCost = 0;
                         items.remove(Items.coal, coalCost);
                         FrostMethods.generatorActive = true;
                     } else { FrostMethods.generatorActive = false; }
@@ -171,6 +149,26 @@ public class Generator extends Block{
         @Override
         public float range(){
             return range;
+        }
+
+        public void drawShield(){
+            if(smoothRadius > 0.001f){
+                Draw.color(team.color, Color.orange, 99f);
+                Draw.z(Layer.shields);
+
+                if(renderer.animateShields){
+                    Draw.alpha(0.6f);
+                    Fill.poly(x, y, 16, smoothRadius);
+                }else{
+                    Lines.stroke(1.5f);
+                    Draw.alpha(0.09f + Mathf.clamp(0.08f));
+                    Fill.poly(x, y, 16, smoothRadius);
+                    Draw.alpha(1f);
+                    Lines.poly(x, y, 16, smoothRadius);
+                    Draw.reset();
+                }
+            }
+            Draw.reset();
         }
 
         @Override

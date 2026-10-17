@@ -11,12 +11,14 @@ import mindustry.*;
 import mindustry.content.*;
 import mindustry.ctype.*;
 
+import frostdustry.maps.planet.*;
+
 public class FrostPlanet {
     public static Planet frostLand;
     public static void load() {
         Block raggedyStorage = Vars.content.getByName(ContentType.block, "frostdustry-raggedy-storage");
         frostLand = new Planet("frostLand", Planets.sun, 1f, 1){{
-            generator = new TantrosPlanetGenerator();
+            generator = new FrostlandPlanetGenerator();
             meshLoader = () -> new HexMesh(this, 5);
             cloudMeshLoader = () -> new MultiMesh(
                 new HexSkyMesh(this, 2, 0.15f, 0.14f, 5, Color.valueOf("eba768").a(0.75f), 2, 0.42f, 1f, 0.43f),
