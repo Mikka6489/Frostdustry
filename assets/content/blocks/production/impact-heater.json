@@ -59,6 +59,6 @@
 		"amount": 180
 		}
 	],
-	"category": "effect",
+  "category": "crafting",
 	"research": "liquid-heater"
 }

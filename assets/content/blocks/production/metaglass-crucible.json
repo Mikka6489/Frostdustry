@@ -1,17 +1,19 @@
 {
-  "type": "frostdustry.world.blocks.production.FrostCrafter",
+  "type": "HeatCrafter",
   "name": "Metaglass Crucible",
   "description": "it makes metaglass.",
-  "health": 440,
+  "health": 160,
   "size": 2,
   "hasItems": true,
-  "craftTime": 30,
+  "craftTime": 45,
   "itemCapacity": 10,
+  "heatRequirement": 5,
+  "maxEfficiency": 1.0,
   "consumes": {
     "items": {
       "items": [
-        {"item": "sand", "amount": 1},
-        {"item": "lead", "amount": 2}
+        {"item": "sand", "amount": 2},
+        {"item": "lead", "amount": 1}
       ]
     }
   },
@@ -19,8 +21,9 @@
     "item": "metaglass", "amount": 1
   },
   "requirements": [
-    { "item": "copper", "amount": 25 },
-    { "item": "lead", "amount": 45 }
+    { "item": "copper", "amount": 60 },
+    { "item": "lead", "amount": 30 },
+    { "item": "graphite", "amount": 30 }
   ],
   "drawer": {
     "type": "drawMulti",

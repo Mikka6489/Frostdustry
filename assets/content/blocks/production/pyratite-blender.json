@@ -2,13 +2,12 @@
   "type": "frostdustry.world.blocks.production.FrostCrafter",
   "name": "Pyratite Blender",
   "description": "some bullshit name it makes pyratite.",
-  "health": 440,
+  "health": 160,
   "size": 2,
   "hasItems": true,
-  "craftTime": 60,
+  "craftTime": 75,
   "itemCapacity": 10,
   "consumes": {
-    "power": 3,
     "items": {
       "items": [
         {"item": "coal", "amount": 1},
@@ -21,8 +20,8 @@
     "item": "pyratite", "amount": 1
   },
   "requirements": [
-    {"item": "copper", "amount": 25},
-    {"item": "lead", "amount": 45}
+    {"item": "copper", "amount": 50},
+    {"item": "lead", "amount": 35}
   ],
   "drawer": {
     "type": "drawMulti",

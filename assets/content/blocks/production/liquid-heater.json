@@ -33,11 +33,10 @@
         "type": "drawDefault"
       },
       {
-        "type": "drawHeatOutput",
-        "suffix": "-heat"
+        "type": "drawHeatOutput"
       }
     ]
   },
-  "category": "effect",
+  "category": "crafting",
   "research": "oil-refinery"
 }

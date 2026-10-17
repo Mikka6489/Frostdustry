@@ -2,7 +2,7 @@
   "type": "frostdustry.world.blocks.production.FrostCrafter",
   "name": "Carbide Arc Furnace",
   "description": "some bullshit makes carbide.",
-  "health": 440,
+  "health": 575,
   "size": 3,
   "drawer": {
     "type": "drawMulti",
@@ -31,7 +31,7 @@
         },
         {
           "item": "graphite",
-          "amount": 1
+          "amount": 3
         }
       ]
     },
@@ -49,14 +49,10 @@
     "amount": 1
   },
   "requirements": [
-    {
-      "item": "copper",
-      "amount": 25
-    },
-    {
-      "item": "lead",
-      "amount": 45
-    }
+    {"item": "lead", "amount": 100},
+    {"item": "graphite", "amount": 60},
+    {"item": "titanium", "amount": 120},
+    {"item": "tungsten", "amount": 80}
   ],
   "category": "crafting",
   "research": "pyratite-blender"

@@ -19,8 +19,10 @@
     {"liquid": "naptha", "amount": 0.9}
   ],
   "requirements": [
-    {"item": "copper", "amount": 25},
-    {"item": "lead", "amount": 45}
+    {"item": "lead", "amount": 100},
+    {"item": "graphite", "amount": 60},
+    {"item": "titanium", "amount": 120},
+    {"item": "metaglass", "amount": 80}
   ],
   "drawer": {
     "type": "drawMulti",

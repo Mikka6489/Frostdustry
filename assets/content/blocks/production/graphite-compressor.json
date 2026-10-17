@@ -2,7 +2,7 @@
   "type": "frostdustry.world.blocks.production.FrostCrafter",
   "name": "Graphite Compressor",
   "description": "A heavy duty clamp to compress coal into graphite.",
-  "health": 440,
+  "health": 160,
   "size": 2,
   "hasItems": true,
   "craftTime": 40,
@@ -18,7 +18,7 @@
     "item": "graphite", "amount": 1
   },
   "requirements": [
-    { "item": "copper", "amount": 25 },
+    { "item": "copper", "amount": 80 },
     { "item": "lead", "amount": 45 }
   ],
   "category": "crafting",

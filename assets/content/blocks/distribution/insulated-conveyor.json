@@ -1,0 +1,14 @@
+{
+  "type": "Conveyor",
+  "name": "Insulated Conveyor",
+  "description": "Moves items at such an incredible speed it may as-well have been teleported. Moves around 72 items/second.",
+  "health": 150,
+  "speed": 0.06,
+  "displayedSpeed": 8.5,
+  "requirements": [
+      {"item": "copper", "amount": 1},
+      {"item": "lead", "amount": 1}
+  ],
+  "category": "distribution",
+  "research": "generator"
+}

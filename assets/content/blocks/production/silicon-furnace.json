@@ -17,14 +17,14 @@
   },
   "squareSprite": false,
   "hasItems": true,
-  "craftTime": 60,
+  "craftTime": 70,
   "itemCapacity": 10,
   "liquidCapacity": 40,
   "consumes": {
     "liquids": [
       {
         "liquid": "gasoline",
-        "amount": 0.25
+        "amount": 0.3
       }
     ],
     "items": {
@@ -35,22 +35,26 @@
         },
         {
           "item": "sand",
-          "amount": 2
+          "amount": 3
         }
       ]
     }
   },
   "outputItem": {
     "item": "silicon",
-    "amount": 1
+    "amount": 3
   },
   "requirements": [
     {
-      "item": "copper",
-      "amount": 25
+      "item": "lead",
+      "amount": 120
     },
     {
-      "item": "lead",
+      "item": "graphite",
+      "amount": 80
+    },
+    {
+      "item": "titanium",
       "amount": 45
     }
   ],

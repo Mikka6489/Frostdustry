@@ -1,0 +1,14 @@
+{
+  "type": "Junction",
+  "name": "Insulated Junction",
+  "description": "An extremely fast junction capable of handling the speed of Teleporter Conveyors.",
+  "health": 350,
+  "speed": 0.15,
+  "displayedSpeed": 20,
+  "requirements": [
+      {"item": "copper", "amount": 1},
+      {"item": "lead", "amount": 1}
+  ],
+  "category": "distribution",
+  "research": "insulated-conveyor"
+}

@@ -1,0 +1,43 @@
+{
+  "type": "HeatProducer",
+  "name": "Coal Heater",
+  "description": "burns coal to generate heat.",
+  "health": 160,
+  "size": 2,
+  "hasItems": true,
+  "craftTime": 60,
+  "itemCapacity": 10,
+  "heatOutput": 3,
+  "consumes": {
+    "items": {
+      "items": [
+        {"item": "coal", "amount": 1}
+      ]
+    }
+  },
+  "requirements": [
+    { "item": "copper", "amount": 60 },
+    { "item": "lead", "amount": 30 },
+    { "item": "graphite", "amount": 30 }
+  ],
+  "drawer": {
+    "type": "drawMulti",
+    "drawers": [
+      {
+        "type": "drawDefault"
+      },
+      {
+        "type": "drawHeatOutput"
+      },
+      {
+        "type": "drawHeatRegion",
+        "suffix": "-heat"
+      },
+      {
+        "type": "drawFlame"
+      }
+    ]
+  },
+  "category": "crafting",
+  "research": "graphite-compressor"
+}
