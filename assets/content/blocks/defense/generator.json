@@ -15,6 +15,26 @@
     { "item": "silicon", "amount": 20 },
     { "item": "titanium", "amount": 35 }
   ],
+  "drawer": {
+    "type": "drawMulti",
+    "drawers": [
+      {
+        "type": "drawRegion",
+        "suffix": "-bottom"
+      },
+      {
+        "type": "drawPlasma",
+        "plasmas": 4
+      },
+      {
+        "type": "drawDefault"
+      },
+      {
+        "type": "drawGlowRegion",
+        "blending": "additive"
+      }
+    ]
+  },
   "category": "effect",
   "research": {
     "root": true,

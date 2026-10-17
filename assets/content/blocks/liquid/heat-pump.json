@@ -1,0 +1,33 @@
+{
+  "type": "frostdustry.world.blocks.production.FrostPump",
+  "health": 860,
+  "size": 2,
+  "name": "Combustion Pump",
+  "description": "Pumps and outputs liquids. Requires diesel.",
+  "squareSprite": false,
+  "pumpAmount": 0.4444444444444444,
+  "liquidCapacity": 360,
+  "buildCostMultiplier": 1,
+  "consumes": {
+      "liquid": {
+          "liquid": "diesel",
+          "amount": 0.075
+      }
+  },
+  "requirements": [
+    {
+      "item": "silicon", "amount": 80
+    },
+    {
+      "item": "copper", "amount": 120
+    },
+    {
+      "item": "tungsten", "amount": 100
+    },
+    {
+      "item": "lead", "amount": 20
+    }
+  ]
+  "category": "liquid",
+  "research": "graphite-compressor"
+}
