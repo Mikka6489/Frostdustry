@@ -1,0 +1,66 @@
+{
+	"type": "ItemTurret",
+	"name": "Spike",
+	"description": "A Single barrel machine gun of texan invention, deals heavy knockback.",
+	"size": 1,
+	"health": 250,
+	"reload": 9,
+	"range": 110,
+        "inaccuracy": 2,
+        "outlineColor": "2d2f39",
+        "recoil": 1,
+        "maxAmmo": 10,
+	"shootSound": "shootElude",
+	"rotateSpeed": 16,
+	"ammoTypes": {
+		"copper": {
+			"type": "BasicBulletType",
+			"damage": 16,
+			"height": 8,
+			"width": 6,
+			"speed": 7,
+			"lifetime": 25,
+			"ammoMultiplier": 2,
+			"impact": "true",
+			"smokeEffect": "shootSmallSmoke"
+		},
+		"lead": {
+			"type": "BasicBulletType",
+			"damage": 34,
+			"height": 8,
+			"width": 6,
+			"speed": 7,
+			"lifetime": 25,
+			"ammoMultiplier": 1,
+                        "reloadMultiplier": 0.7,
+			"impact": "true",
+			"smokeEffect": "shootSmallSmoke"
+		},
+		"coal": {
+			"type": "BasicBulletType",
+			"splashDamage": 26,
+			"splashDamageRadius": 8,
+			"damage": 12,
+			"height": 8,
+			"width": 6,
+			"speed": 7,
+			"lifetime": 25,
+			"ammoMultiplier": 2,
+			"impact": "true",
+			"smokeEffect": "shootSmallSmoke"
+		}
+	},
+	"consumes": {
+		"coolant": {
+			"amount": 0.1,
+			"optional": true
+		}
+	},
+	"requirements": [{
+			"item": "copper",
+			"amount": 45
+		}
+	],
+	"category": "turret",
+	"research": "generator"
+}

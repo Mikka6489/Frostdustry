@@ -1,0 +1,134 @@
+{
+	"type": "ItemTurret",
+	"name": "Split",
+	"description": "An automatic 40mm cannon turret firing APHET rounds. Targets highest health and has slow retargeting speeds with no movement prediction.",
+	"unitSort": "strongest",
+	"size": 3,
+	"health": 1450,
+	"reload": 40,
+	"range": 330,
+        "cooldownTime": 60,
+        "coolantMultiplier": 2.5,
+	"ammoPerShot": 5,
+	"ammoUseEffect": "casing4",
+	"ammoEjectBack": -2,
+	"shootSound": "shootConquer",
+	"shootCone": 1,
+	"rotateSpeed": 2.5,
+	"shake": 2,
+        "recoil": 0,
+	"predictTarget": false,
+	"minWarmup": 0.9,
+	"targetInterval": 20,
+  "drawer": {
+    "type": "DrawTurret",
+    "parts": [
+      {
+        "type": "regionPart",
+        "progress": "recoil",
+        "suffix": "-barrel",
+        "under": "true",
+        "moveY": -4
+      },
+      {
+        "type": "regionPart",
+        "progress": "recoil",
+        "suffix": "-mid",
+        "under": "true",
+        "moveY": -2
+      },
+      {
+        "type": "regionPart",
+        "suffix": "-body",
+        "under": "true"
+      }
+    ]
+  },
+	"ammoTypes": {
+		"tungsten": {
+			"type": "BasicBulletType",
+			"damage": 650,
+			"splashDamage": 200,
+			"splashDamageRadius": 10,
+			"height": 12,
+			"width": 8,
+			"speed": 20,
+			"lifetime": 20,
+			"ammoMultiplier": 1,
+			"shootEffect": "shootBig",
+			"smokeEffect": "shootBigSmoke",
+			"hitEffect": "explosion",
+			"knockback": 10,
+			"impact": true,
+			"pierceArmor": true,
+			"incendChance": 0.2,
+			"trailChance": 1,
+			"trailLength": 5
+		},
+		"plastanium": {
+			"type": "BasicBulletType",
+			"damage": 800,
+			"splashDamage": 150,
+			"splashDamageRadius": 20,
+			"height": 12,
+			"width": 8,
+			"speed": 20,
+			"lifetime": 20,
+			"ammoMultiplier": 1,
+			"shootEffect": "shootBig",
+			"smokeEffect": "shootBigSmoke",
+			"hitEffect": "explosion",
+			"knockback": 10,
+			"impact": true,
+			"pierceArmor": true,
+			"incendChance": 0.2,
+			"trailChance": 1,
+			"trailLength": 5
+		},
+		"carbide": {
+			"type": "BasicBulletType",
+			"damage": 1100,
+			"splashDamage": 250,
+			"splashDamageRadius": 10,
+			"height": 12,
+			"width": 8,
+			"speed": 20,
+			"lifetime": 20,
+			"ammoMultiplier": 1,
+			"shootEffect": "shootBig",
+			"smokeEffect": "shootBigSmoke",
+			"hitEffect": "explosion",
+			"knockback": 10,
+			"impact": true,
+			"pierceArmor": true,
+			"incendChance": 0.2,
+			"trailChance": 1,
+			"trailLength": 5
+		}
+	},
+  "consumes": {
+    "coolant": {
+      "amount": 0.4,
+      "optional": true
+    }
+  },
+	"requirements": [{
+			"item": "graphite",
+			"amount": 130
+		},
+		{
+			"item": "titanium",
+			"amount": 100
+		},
+		{
+			"item": "silicon",
+			"amount": 45
+		},
+		{
+			"item": "tungsten",
+			"amount": 85
+		}
+	],
+	"category": "turret",
+	"research": "generator"
+}

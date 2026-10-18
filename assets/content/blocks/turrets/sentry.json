@@ -14,6 +14,21 @@
   "outlineColor": "2d2f39",
   "rotateSpeed": 16,
   "ammoTypes": {
+		"pyratite": {
+			"type": "BasicBulletType",
+			"damage": 62,
+			"backColor": "ef806c",
+			"height": 8,
+			"width": 6,
+			"speed": 5,
+			"lifetime": 50,
+			"knockback": 4,
+			"homingPower": 0.3,
+			"ammoMultiplier": 4,
+			"impact": "true",
+			"sprite": "missile",
+			"smokeEffect": "shootSmallSmoke"
+		},
     "titanium": {
       "type": "BasicBulletType",
       "damage": 45,
@@ -28,7 +43,7 @@
       "impact": "true",
       "smokeEffect": "shootSmallSmoke"
     },
-    "scrap": {
+    "lead": {
       "type": "BasicBulletType",
       "damage": 28,
       "height": 8,
