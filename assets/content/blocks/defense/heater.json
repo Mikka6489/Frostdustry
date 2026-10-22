@@ -4,7 +4,7 @@
   "description": "Used to resist the freezing temperatures of The Storm. Is unaffected by the cold. Contributes to overall coal consumption.",
   "health": 200,
   "size": 2,
-  "range": 40,
+  "range": 100,
   "reload": 60,
   "heat": 1.25,
   "itemCapacity": 0,

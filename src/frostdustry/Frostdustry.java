@@ -1,8 +1,9 @@
 package frostdustry;
 
+import mindustry.mod.*;
+
 import frostdustry.logic.*;
 import frostdustry.content.*;
-import mindustry.mod.*;
 
 public class Frostdustry extends Mod{
 	@Override
@@ -10,6 +11,7 @@ public class Frostdustry extends Mod{
         FrostPlanet.load();
         FrostWeather.load();
 	    LogicHandler.load();
+        UIHandler.load();
     }
 
     @Override
