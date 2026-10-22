@@ -11,6 +11,13 @@
   "drawRim": true,
   "hasItems": true,
   "itemCapacity": 20,
+  "consumes": {
+    "liquids": {
+      "liquids": [
+	{"liquid": "gasoline", "amount": 0.1}
+      ]
+    }
+  },
   "requirements": [
     { "item": "lead", "amount": 70 }
   ],

@@ -111,6 +111,15 @@ public class Generator extends Block{
         public float heat, charge = Mathf.random(reload), phaseHeat, smoothEfficiency, useProgress, plasmaProgress, smoothRadius;
         public int personalCoalCost;
 
+        public void wake(){
+            if (canBurnCoal){
+                    int coalCost = FrostMethods.globalCoalCost;
+                    if(items.get(Items.coal) >= coalCost && FrostMethods.globalHeatLevel > 0){
+			FrostMethods.generatorActive = true;
+                    } else { FrostMethods.generatorActive = false; }
+                }
+        }
+
         public void setHeatLevel(int level){
             int newLevel = Mathf.clamp(level, minHeatLevel, maxHeatLevel);
             int newCoalCost = coalCost(FrostMethods.globalHeatLevel);
@@ -123,6 +132,7 @@ public class Generator extends Block{
             if (canBurnCoal){
                     int coalCost = FrostMethods.globalCoalCost;
                     if(items.get(Items.coal) >= coalCost && FrostMethods.globalHeatLevel > 0){
+			Log.info("burning coal");
                         items.remove(Items.coal, coalCost);
                         FrostMethods.generatorActive = true;
                     } else { FrostMethods.generatorActive = false; }
@@ -188,7 +198,8 @@ public class Generator extends Block{
 
         @Override
         public void updateTile(){
-            if (FrostMethods.generatorActive == false && FrostMethods.globalHeatLevel < 1){
+		wake();
+            if (FrostMethods.generatorActive == false || FrostMethods.globalHeatLevel < 1){
                 efficiency = 0;
             }
             
@@ -213,7 +224,7 @@ public class Generator extends Block{
             if(useProgress >= useTime){
                 setHeatLevel(FrostMethods.globalHeatLevel);
                 updateHeaterStatus();
-                Log.info("generatoractive: @, heatlevel: @", FrostMethods.generatorActive, FrostMethods.globalHeatLevel);
+                Log.info("generatoractive: @, heatlevel: @, efficiency; @", FrostMethods.generatorActive, FrostMethods.globalHeatLevel, efficiency);
                 useProgress %= useTime;
             }
         }
