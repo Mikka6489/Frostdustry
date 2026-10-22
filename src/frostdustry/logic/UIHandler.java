@@ -2,7 +2,9 @@ package frostdustry.logic;
 
 import arc.*;
 import arc.scene.*;
+import arc.scene.ui.*;
 import arc.scene.ui.layout.*;
+import arc.util.*;
 import mindustry.*;
 import mindustry.game.EventType.*;
 import mindustry.ui.*;
@@ -19,10 +21,20 @@ public class UIHandler {
             table.row();
             table.table(countdown -> {
                 countdown.defaults().pad(0f);
-                countdown.image(Core.atlas.find("frostdustry-thermometer")).size(64f).pad(10f);
+                Label overlay = new Label("", Styles.outlineLabel);
+                overlay.setText(() -> Integer.toString(calcTemperature()));
+                overlay.setAlignment(Align.center);
+                countdown.stack(
+                    new Image(Core.atlas.find("frostdustry-thermometer")),
+                    overlay
+                ).size(64f).pad(10f);
                 countdown.label(() -> Integer.toString(wavesUntilTemperatureDrop())).style(Styles.outlineLabel);
             }).left().colspan(2).pad(0f);
         });
+    }
+
+    private static int calcTemperature(){
+        return Math.round(((FrostMethods.cold.env() * -1) + 1f) * 10);
     }
 
     private static int wavesUntilTemperatureDrop(){
