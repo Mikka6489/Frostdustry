@@ -36,8 +36,11 @@
         "type": "drawDefault"
       },
       {
-        "type": "drawGlowRegion",
-        "blending": "additive"
+        "type": "drawHeatOutput"
+      },
+      {
+        "type": "drawHeatRegion",
+        "suffix": "-heat"
       }
     ]
   },

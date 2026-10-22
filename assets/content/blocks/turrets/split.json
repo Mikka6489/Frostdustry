@@ -62,7 +62,7 @@
 			"impact": true,
 			"pierceArmor": true,
 			"incendChance": 0.2,
-			"trailChance": 1,
+			"trailInterval": 0.5,
 			"trailLength": 5
 		},
 		"plastanium": {
@@ -82,7 +82,7 @@
 			"impact": true,
 			"pierceArmor": true,
 			"incendChance": 0.2,
-			"trailChance": 1,
+			"trailInterval": 0.5,
 			"trailLength": 5
 		},
 		"carbide": {
@@ -102,7 +102,7 @@
 			"impact": true,
 			"pierceArmor": true,
 			"incendChance": 0.2,
-			"trailChance": 1,
+			"trailInterval": 0.5,
 			"trailLength": 5
 		}
 	},

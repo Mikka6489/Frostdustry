@@ -8,7 +8,7 @@
   "flammability": 0.8,
   "heatCapacity": 0.4,
   "explosiveness": 0.8,
-  "minHeatingRequired": 20,
+  "minHeatingRequired": 30,
   "maxHeatingRequired": 50,
   "powerMultiplier": 1.1,
   "usageMultiplier": 1.2,

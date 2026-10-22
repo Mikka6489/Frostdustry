@@ -2,10 +2,10 @@
   "type": "HeatProducer",
   "name": "Pyratite Heater",
   "description": "burns pyratite to generate heat.",
-  "health": 160,
-  "size": 2,
+  "health": 480,
+  "size": 3,
   "hasItems": true,
-  "craftTime": 60,
+  "craftTime": 90,
   "itemCapacity": 10,
   "heatOutput": 8,
   "consumes": {
@@ -16,9 +16,9 @@
     }
   },
   "requirements": [
-    { "item": "copper", "amount": 60 },
-    { "item": "lead", "amount": 30 },
-    { "item": "graphite", "amount": 30 }
+    { "item": "copper", "amount": 100 },
+    { "item": "lead", "amount": 50 },
+    { "item": "graphite", "amount": 80 }
   ],
   "drawer": {
     "type": "drawMulti",
