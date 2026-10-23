@@ -13,7 +13,11 @@ public class LogicHandler{
 	public static Attributes attrs = new Attributes();
 
 	public static void load() {
-		Events.on(WorldLoadEvent.class, e -> {
+		Events.on(ResetEvent.class, e -> {
+			FrostMethods.globalCoalCost = 0;	
+		});
+
+		Events.on(WorldLoadEvent.class, e -> {	
 			for(Tile tile : Vars.world.tiles){
 				if(tile.overlay() instanceof LimitedOre ore){
 					if (ore.getOreCount(tile) != 0) continue;

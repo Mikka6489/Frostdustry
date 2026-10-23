@@ -1,5 +1,6 @@
 package frostdustry.logic;
 
+import arc.util.*;
 import mindustry.world.meta.*;
 
 public class FrostMethods {
@@ -16,6 +17,7 @@ public class FrostMethods {
     public float calcCold(float recievedHeat){
         calcCold = cold.env() - recievedHeat;
         if (calcCold < 0f) calcCold = 0f;
+	Log.info("recievedHeat: @, calcCold: @", recievedHeat, calcCold);
         return calcCold;
     }
 }

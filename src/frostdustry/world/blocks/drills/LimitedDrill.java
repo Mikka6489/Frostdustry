@@ -1,5 +1,7 @@
 package frostdustry.world.blocks.drills;
 
+import java.util.*;
+import arc.util.*;
 import arc.math.*;
 import mindustry.type.*;
 import mindustry.ui.*;
@@ -8,6 +10,9 @@ import mindustry.*;
 import mindustry.graphics.*;
 import mindustry.world.*;
 import mindustry.world.meta.*;
+import mindustry.ctype.*;
+import mindustry.content.*;
+import mindustry.world.blocks.environment.*;
 
 import frostdustry.logic.*;
 import frostdustry.type.*;
@@ -18,22 +23,40 @@ import static mindustry.Vars.*;
 public class LimitedDrill extends Drill implements HeatReciever{
     public float recievedHeat = 0f;
     FrostMethods FrostMethods = new FrostMethods();
+    List<Block> allowedMineables = new ArrayList<>();
 
     public LimitedDrill(String name) {
         super(name);
     }
 
+    public void setMineables(){
+	for (Block block : Vars.content.blocks()){
+		if (block instanceof LimitedOre){
+			allowedMineables.add(block);
+		}
+	}
+	allowedMineables.add(Blocks.darksand);
+    }
+
+
+	@Override
+	public void init(){
+		super.init();
+		setMineables();
+	}
+
     @Override
-    public boolean canMine(Tile tile){
-        return tile != null && tile.overlay() instanceof LimitedOre && super.canMine(tile);
+    public boolean canMine(Tile tile){	    
+        return tile != null && allowedMineables.contains(tile.overlay()) || (allowedMineables.contains(tile.floor()) && tile.overlay() == Blocks.air) && super.canMine(tile);
     }
 
     @Override
     public void setStats(){
+	    setMineables();
         super.setStats();
 
         stats.replace(Stat.drillTier, StatValues.drillables(drillTime, hardnessDrillMultiplier, size * size, drillMultipliers, block ->
-            block instanceof LimitedOre ore && !ore.wallOre && ore.itemDrop != null &&
+            block instanceof Floor ore && allowedMineables.contains(ore) && !ore.wallOre && ore.itemDrop != null &&
             ore.itemDrop.hardness <= tier && (blockedItems == null || !blockedItems.contains(ore.itemDrop)) &&
             (indexer.isBlockPresent(ore) || state.isMenu())
         ));
@@ -67,7 +90,6 @@ public class LimitedDrill extends Drill implements HeatReciever{
         } else{
             return super.getDrillTime(item) * (FrostMethods.calcCold(recievedHeat) * 2f + 1f);
         }
-//        return super.getDrillTime(item) * (FrostMethods.calcCold(recievedHeat) * 2f + 1f);
     }
 
     public class LimitedDrillBuild extends DrillBuild{
@@ -93,11 +115,9 @@ public class LimitedDrill extends Drill implements HeatReciever{
                 return;
             }
 
-            Item drillItem = dominantItem;
             timeDrilled += warmup * delta();
 
-            float delay = getDrillTime(drillItem);
-//            Log.info("Drill progress: @, delay: @, dominantItems: @, itemCapacity: @, items.total(): @", progress, delay, dominantItems, itemCapacity, items.total());
+            float delay = getDrillTime(dominantItem); 
 
             if(items.total() < itemCapacity && dominantItems > 0 && efficiency > 0){
                 float speed = Mathf.lerp(1f, liquidBoostIntensity, optionalEfficiency) * efficiency;
@@ -117,13 +137,16 @@ public class LimitedDrill extends Drill implements HeatReciever{
             if(dominantItems > 0 && progress >= delay && items.total() < itemCapacity){
                 int amount = (int)(progress / delay);
                 for(int i = 0; i < amount; i++){
-                    if(!consumeOre(drillItem)) break;
-                    offload(drillItem);
+			if (allowedMineables.contains(tile.overlay())){
+                    		if(!consumeOre(dominantItem)) break;
+			}
+                    offload(dominantItem);
                 }
+		Log.info("Drill progress: @, delay: @, dominantItems: @, itemCapacity: @, items.total(): @", progress, delay, dominantItems, itemCapacity, items.total());
 
                 progress %= delay;
 
-                if(wasVisible && Mathf.chanceDelta(drillEffectChance * warmup)) drillEffect.at(x + Mathf.range(drillEffectRnd), y + Mathf.range(drillEffectRnd), drillItem.color);
+                if(wasVisible && Mathf.chanceDelta(drillEffectChance * warmup)) drillEffect.at(x + Mathf.range(drillEffectRnd), y + Mathf.range(drillEffectRnd), dominantItem.color);
             }
         }
 
@@ -131,7 +154,7 @@ public class LimitedDrill extends Drill implements HeatReciever{
             for(int dx = 0; dx < size; dx++){
                 for(int dy = 0; dy < size; dy++){
                     Tile oreTile = Vars.world.tile(tile.x + dx, tile.y + dy);
-                    if(oreTile == null || !(oreTile.overlay() instanceof LimitedOre frostOre) || frostOre.itemDrop != item) continue;                    
+                    if(oreTile == null || !(oreTile.overlay() instanceof LimitedOre frostOre) || frostOre.itemDrop != item) continue;
                     int remaining = frostOre.getOreCount(oreTile);
                     if(remaining <= 0) continue;
 

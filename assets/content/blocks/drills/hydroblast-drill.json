@@ -3,9 +3,9 @@
   "name": "Hydroblast Drill",
   "description": "can change idgaf, A high pressure drill that blasts at any ore in its path, requires both any kind of oil and water.",
   "health": 200,
-  "size": 2,
-  "tier": 4,
-  "drillTime": 600,
+  "size": 4,
+  "tier": 5,
+  "drillTime": 200,
   "warmupSpeed": 0.05,
   "rotateSpeed": 1,
   "drawRim": true,
@@ -20,7 +20,10 @@
     }
   },
   "requirements": [
-    { "item": "lead", "amount": 70 }
+    { "item": "copper", "amount": 65 },
+	{ "item": "silicon", "amount": 60 },
+	{ "item": "titanium", "amount": 50 },
+	{ "item": "tungsten", "amount": 75 }
   ],
   "category": "production",
   "research": "power-drill"

@@ -42,7 +42,7 @@ public class Generator extends Block{
         solid = true;
         update = true;
         group = BlockGroup.projectors;
-        hasPower = true;
+        hasPower = false;
         hasItems = true;
         itemCapacity = 30;
         emitLight = true;
@@ -112,6 +112,7 @@ public class Generator extends Block{
         public int personalCoalCost;
 
         public void wake(){
+		setHeatLevel(FrostMethods.globalHeatLevel);
             if (canBurnCoal){
                     int coalCost = FrostMethods.globalCoalCost;
                     if(items.get(Items.coal) >= coalCost && FrostMethods.globalHeatLevel > 0){
