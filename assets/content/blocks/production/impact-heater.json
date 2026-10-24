@@ -46,20 +46,24 @@
   },
     "requirements": [
 		{
-		"item": "graphite",
-		"amount": 350
+		"item": "lead",
+		"amount": 500
 		},
 		{
-		"item": "lead",
-		"amount": 450
+		"item": "metaglass",
+		"amount": 250
+		},
+		{
+		"item": "graphite",
+		"amount": 300
 		},
 		{
 		"item": "silicon",
-		"amount": 125
+		"amount": 100
 		},
 		{
-		"item": "plastanium",
-		"amount": 180
+		"item": "carbide",
+		"amount": 150
 		}
 	],
   "category": "crafting",

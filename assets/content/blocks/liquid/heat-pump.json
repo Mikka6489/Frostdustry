@@ -5,12 +5,12 @@
   "name": "Combustion Pump",
   "description": "Pumps and outputs liquids. Requires diesel.",
   "squareSprite": false,
-  "pumpAmount": 0.4444444444444444,
+  "pumpAmount": 0.2,
   "liquidCapacity": 360,
   "buildCostMultiplier": 1,
   "consumes": {
       "liquid": {
-          "liquid": "diesel",
+          "liquid": "gasoline",
           "amount": 0.075
       }
   },

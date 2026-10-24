@@ -12,18 +12,19 @@
   "hasItems": true,
   "itemCapacity": 20,
   "consumes": {
+    "power": 3,
     "liquids": {
       "liquids": [
-	{"liquid": "gasoline", "amount": 0.245},
+	{"liquid": "gasoline", "amount": 0.3},
 	{"liquid": "water", "amount": 0.1245}
       ]
     }
   },
   "requirements": [
-    { "item": "copper", "amount": 65 },
+    { "item": "graphite", "amount": 75 },
 	{ "item": "silicon", "amount": 60 },
 	{ "item": "titanium", "amount": 50 },
-	{ "item": "tungsten", "amount": 75 }
+	{ "item": "metaglass", "amount": 75 }
   ],
   "category": "production",
   "research": "power-drill"

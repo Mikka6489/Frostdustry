@@ -23,8 +23,8 @@
   "consumes": {
     "liquids": [
       {
-        "liquid": "gasoline",
-        "amount": 0.3
+        "liquid": "diesel",
+        "amount": 0.15
       }
     ],
     "items": {
