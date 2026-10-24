@@ -28,7 +28,7 @@ public class LogicHandler{
 
 		Events.on(WaveEvent.class, e -> {
 			int wave = Vars.state.wave;
-			if (wave % 10 == 0) {
+			if (wave % 1 == 0) {
 				Log.info("cold: " + FrostMethods.cold.env());
 				Vars.state.rules.attributes.set(FrostMethods.cold, FrostMethods.cold.env() + 0.5f);
 				Vars.state.envAttrs.set(FrostMethods.cold, FrostMethods.cold.env() + 0.5f);

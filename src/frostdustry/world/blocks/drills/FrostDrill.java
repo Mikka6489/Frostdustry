@@ -1,5 +1,7 @@
 package frostdustry.world.blocks.drills;
 
+import arc.util.*;
+import arc.math.*;
 import mindustry.type.*;
 import mindustry.world.blocks.environment.Floor;
 import mindustry.world.blocks.production.*;
@@ -46,11 +48,52 @@ public class FrostDrill extends Drill implements HeatReciever{
 
     @Override 
     public float getDrillTime(Item item){
-        if (super.getDrillTime(item) * (FrostMethods.calcCold(recievedHeat) * 2f + 1f) > 2500f) {
-            return 99999;
-        } else{
-            return super.getDrillTime(item) * (FrostMethods.calcCold(recievedHeat) * 2f + 1f);
+        return super.getDrillTime(item) * (FrostMethods.calcCold(recievedHeat) * 2f + 1f);
+    }
+
+    public class FrostDrillBuild extends DrillBuild {
+	@Override
+        public void updateTile(){
+            if(timer(timerDump, dumpTime / timeScale)){
+                dump(dominantItem != null && items.has(dominantItem) ? dominantItem : null);
+            }
+
+            if(dominantItem == null){
+                return;
+            }
+
+            timeDrilled += warmup * delta();
+
+            float delay = getDrillTime(dominantItem); 
+
+	    if (delay > 2500f) efficiency = 0;
+
+            if(items.total() < itemCapacity && dominantItems > 0 && efficiency > 0){
+                float speed = Mathf.lerp(1f, liquidBoostIntensity, optionalEfficiency) * efficiency;
+
+                lastDrillSpeed = (speed * dominantItems * warmup) / delay;
+                warmup = Mathf.approachDelta(warmup, speed, warmupSpeed);
+                progress += delta() * dominantItems * speed * warmup;
+
+                if(Mathf.chanceDelta(updateEffectChance * warmup))
+                    updateEffect.at(x + Mathf.range(size * 2f), y + Mathf.range(size * 2f));
+            }else{
+                lastDrillSpeed = 0f;
+                warmup = Mathf.approachDelta(warmup, 0f, warmupSpeed);
+                return;
+            }
+
+            if(dominantItems > 0 && progress >= delay && items.total() < itemCapacity){
+                int amount = (int)(progress / delay);
+                for(int i = 0; i < amount; i++){
+                    offload(dominantItem);
+                }
+		Log.info("Drill progress: @, delay: @, dominantItems: @, itemCapacity: @, items.total(): @", progress, delay, dominantItems, itemCapacity, items.total());
+
+                progress %= delay;
+
+                if(wasVisible && Mathf.chanceDelta(drillEffectChance * warmup)) drillEffect.at(x + Mathf.range(drillEffectRnd), y + Mathf.range(drillEffectRnd), dominantItem.color);
+            }
         }
-//        return super.getDrillTime(item) * (FrostMethods.calcCold(recievedHeat) * 2f + 1f);
     }
 }

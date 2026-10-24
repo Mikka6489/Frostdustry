@@ -15,9 +15,6 @@ public class FrostMethods {
     public static int globalCoalCost;
 
     public float calcCold(float recievedHeat){
-        calcCold = cold.env() - recievedHeat;
-        if (calcCold < 0f) calcCold = 0f;
-	Log.info("recievedHeat: @, calcCold: @", recievedHeat, calcCold);
-        return calcCold;
+	return cold.env() - recievedHeat < 0f ? 0f : cold.env() - recievedHeat;
     }
 }

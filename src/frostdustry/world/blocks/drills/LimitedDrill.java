@@ -85,11 +85,7 @@ public class LimitedDrill extends Drill implements HeatReciever{
 
     @Override 
     public float getDrillTime(Item item){
-        if (super.getDrillTime(item) * (FrostMethods.calcCold(recievedHeat) * 2f + 1f) > 2500f) {
-            return 99999;
-        } else{
-            return super.getDrillTime(item) * (FrostMethods.calcCold(recievedHeat) * 2f + 1f);
-        }
+        return super.getDrillTime(item) * (FrostMethods.calcCold(recievedHeat) * 2f + 1f);
     }
 
     public class LimitedDrillBuild extends DrillBuild{
@@ -118,6 +114,8 @@ public class LimitedDrill extends Drill implements HeatReciever{
             timeDrilled += warmup * delta();
 
             float delay = getDrillTime(dominantItem); 
+
+	    if (delay > 2500f) efficiency = 0;
 
             if(items.total() < itemCapacity && dominantItems > 0 && efficiency > 0){
                 float speed = Mathf.lerp(1f, liquidBoostIntensity, optionalEfficiency) * efficiency;
