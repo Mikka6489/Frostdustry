@@ -24,7 +24,7 @@
     { "item": "graphite", "amount": 75 },
 	{ "item": "silicon", "amount": 60 },
 	{ "item": "titanium", "amount": 50 },
-	{ "item": "metaglass", "amount": 75 }
+	{ "item": "carbide", "amount": 75 }
   ],
   "category": "production",
   "research": "power-drill"

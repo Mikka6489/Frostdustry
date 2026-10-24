@@ -13,7 +13,7 @@
   "shootCone": 3,
   "recoil": 1,
   "rotateSpeed": 3,
-  "shootSound": "sap",
+  "shootSound": "shootRipple",
   "smokeEffect" : "shootBigSmoke2",
   "loopSound": "none",
   "hasLiquids": true,

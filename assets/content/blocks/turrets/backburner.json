@@ -13,7 +13,7 @@
   "shootCone": 3,
   "recoil": 1,
   "rotateSpeed": 3,
-  "shootSound": "sap",
+  "shootSound": "shootFlame",
   "smokeEffect" : "shootBigSmoke2",
   "loopSound": "none",
   "hasLiquids": true,
@@ -28,10 +28,7 @@
       "damage": 88,
       "speed": 4,
       "lifetime": 40,
-      "ammoMultiplier": 1,
-      "height": 35,
-      "width": 15,
-      "layer": 99.8
+      "ammoMultiplier": 1
     },
     "diesel": {
       "type": "FireBulletType",
@@ -42,9 +39,7 @@
       "damage": 120,
       "speed": 4,
       "lifetime": 40,
-      "ammoMultiplier": 1,
-      "height": 35,
-      "width": 15
+      "ammoMultiplier": 1
     },
     "naptha": {
       "type": "FireBulletType",
@@ -55,9 +50,7 @@
       "damage": 225,
       "speed": 4,
       "lifetime": 40,
-      "ammoMultiplier": 1,
-      "height": 35,
-      "width": 15
+      "ammoMultiplier": 1
     },
     "gasoline": {
       "type": "FireBulletType",
@@ -68,9 +61,7 @@
       "damage": 186,
       "speed": 4,
       "lifetime": 40,
-      "ammoMultiplier": 1,
-      "height": 35,
-      "width": 15
+      "ammoMultiplier": 1
     }
   },
   "requirements": [
