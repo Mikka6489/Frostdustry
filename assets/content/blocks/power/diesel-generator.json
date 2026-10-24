@@ -11,9 +11,10 @@
 	"hasPower": true,
 	"hasLiquids": true,
     "requirements": [
-		{"item": "graphite", "amount": 220 },
-		{"item": "titanium", "amount": 120 },
-		{"item": "metaglass", "amount": 180}
+		{"item": "lead", "amount": 120 },
+		{"item": "graphite", "amount": 70 },
+		{"item": "titanium", "amount": 70 },
+		{"item": "metaglass", "amount": 120}
 	],
 	"category": "power",
 	"research": "gasoline-generator"

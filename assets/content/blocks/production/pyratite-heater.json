@@ -5,7 +5,7 @@
   "health": 480,
   "size": 3,
   "hasItems": true,
-  "craftTime": 90,
+  "craftTime": 120,
   "itemCapacity": 10,
   "heatOutput": 8,
   "consumes": {
@@ -16,7 +16,7 @@
     }
   },
   "requirements": [
-    { "item": "copper", "amount": 100 },
+    { "item": "copper", "amount": 75 },
     { "item": "lead", "amount": 50 },
     { "item": "graphite", "amount": 80 }
   ],

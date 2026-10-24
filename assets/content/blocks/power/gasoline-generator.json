@@ -7,8 +7,8 @@
 	"buildCostMultiplier": 0.7,
 	"liquidCapacity": 40,
 	"itemDuration": 60,
-	"powerProduction": 8,
-	"heatOutput": 5,
+	"powerProduction": 10,
+	"heatOutput": 10,
 	"hasPower": true,
 	"hasLiquids": true,
 	"consumes": {
@@ -16,15 +16,16 @@
 			"liquids": [
 				{
 				"liquid": "gasoline",
-				"amount": 0.3
+				"amount": 0.4
 				}
 			]
 		}
 	},
     "requirements": [
-		{"item": "graphite", "amount": 220 },
+		{"item": "graphite", "amount": 70 },
 		{"item": "titanium", "amount": 120 },
-		{"item": "metaglass", "amount": 180}
+		{"item": "metaglass", "amount": 120 },
+		{"item": "carbide", "amount": 50}
 	],
 	"category": "power",
 	"research": "generator"

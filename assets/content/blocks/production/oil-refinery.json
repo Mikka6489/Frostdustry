@@ -16,7 +16,7 @@
   "outputLiquids": [
     {"liquid": "gasoline", "amount": 0.6},
     {"liquid": "diesel", "amount": 0.3},
-    {"liquid": "naptha", "amount": 0.9}
+    {"liquid": "naptha", "amount": 1.2}
   ],
   "requirements": [
     {"item": "lead", "amount": 100},

@@ -1,7 +1,7 @@
 {
   "type": "frostdustry.world.blocks.turrets.ConductiveTurret",
   "name": "Tesla",
-  "description": "A Single barrel machine gun of texan invention, deals heavy knockback.",
+  "description": "the eden spark esque.",
   "size": 4,
   "health": 3330,
   "reload": 300,
@@ -26,9 +26,9 @@
     "pierce": true,
     "laserBullet": true,
     "makeFire": true,
-			"lifetime": 25,
-    "lightning": 8,
-    "lightningLength": 25,
+		"lifetime": 25,
+    "lightning": 16,
+    "lightningLength": 70,
     "lightningLengthRand": 10,
     "lightningCone": 90,
     "hitEffect": "plasticExplosionFlak",
@@ -48,14 +48,22 @@
   "requirements": [
     {
       "item": "copper",
-      "amount": 130
+      "amount": 400
     },
     {
       "item": "titanium",
+      "amount": 250
+    },
+    {
+      "item": "tungsten",
+      "amount": 150
+    },
+    {
+      "item": "carbide",
       "amount": 100
     },
     {
-      "item": "silicon",
+      "item": "plastanium",
       "amount": 75
     }
   ],

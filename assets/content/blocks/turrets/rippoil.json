@@ -15,26 +15,9 @@
   "rotateSpeed": 3,
   "shootSound": "sap",
   "smokeEffect" : "shootBigSmoke2",
-  "drawer": {
-    "type": "DrawTurret",
-    "parts": [
-      {
-        "type": "regionPart",
-        "progress": "recoil",
-        "suffix": "-barrel",
-        "under": "true",
-        "moveY": -3
-      },
-      {
-        "type": "regionPart",
-        "suffix": "-body",
-        "under": "true"
-      }
-    ]
-  },
   "loopSound": "none",
   "hasLiquids": true,
-  "liquidCapacity": 40,
+  "liquidCapacity": 50,
   "ammoPerShot": 10,
   "ammoTypes": {
     "water": {
@@ -125,10 +108,10 @@
     }
   },
   "requirements": [
-    {"item": "metaglass" , "amount": 175},
+    {"item": "copper" , "amount": 175},
     {"item": "graphite", "amount": 150},
     {"item": "metaglass"  , "amount": 250},
-    {"item": "carbide" , "amount": 75}
+    {"item": "titanium" , "amount": 75}
   ],
   "category": "turret",
   "research": "split"

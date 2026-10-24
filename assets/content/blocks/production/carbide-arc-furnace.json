@@ -1,5 +1,5 @@
 {
-  "type": "frostdustry.world.blocks.production.FrostCrafter",
+  "type": "HeatCrafter",
   "name": "Carbide Arc Furnace",
   "description": "some bullshit makes carbide.",
   "health": 575,
@@ -20,26 +20,19 @@
   "hasItems": true,
   "craftTime": 90,
   "itemCapacity": 10,
-  "liquidCapacity": 40,
+  "heatRequirement": 24,
+  "maxEfficiency": 1.0,
   "consumes": {
     "power": 3,
     "items": {
       "items": [
         {
-          "item": "tungsten",
+          "item": "titanium",
           "amount": 2
         },
         {
           "item": "graphite",
           "amount": 3
-        }
-      ]
-    },
-    "liquids": {
-      "liquids": [
-        {
-          "liquid": "naptha",
-          "amount": 0.5
         }
       ]
     }

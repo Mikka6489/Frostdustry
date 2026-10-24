@@ -22,7 +22,7 @@
       "liquids": [
         {
           "liquid": "gasoline",
-          "amount": 1
+          "amount": 0.4
         }
       ]
     }
@@ -34,11 +34,15 @@
   "requirements": [
     {
       "item": "copper",
-      "amount": 25
+      "amount": 50
     },
     {
-      "item": "lead",
-      "amount": 45
+      "item": "metaglass",
+      "amount": 75
+    },
+    {
+      "item": "silicon",
+      "amount": 20
     }
   ],
   "category": "crafting",

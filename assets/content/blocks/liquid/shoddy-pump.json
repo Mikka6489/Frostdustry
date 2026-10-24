@@ -4,11 +4,11 @@
   "description": "Pumps and outputs liquids.",
   "size": 1,
   "health": 150,
-  "pumpAmount": 0.11,
+  "pumpAmount": 0.1,
   "liquidCapacity": 20,
   "requirements": [
-      {"item": "copper", "amount": 1},
-      {"item": "lead", "amount": 1}
+      {"item": "copper", "amount": 15},
+      {"item": "metaglass", "amount": 10}
   ],
   "category": "liquid",
   "research": "generator"
