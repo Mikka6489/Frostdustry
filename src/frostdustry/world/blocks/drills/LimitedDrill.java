@@ -31,7 +31,7 @@ public class LimitedDrill extends Drill implements HeatReciever{
 
     public void setMineables(){
 	for (Block block : Vars.content.blocks()){
-		if (block instanceof LimitedOre){
+		if (block instanceof LimitedOre ore && ore.itemDrop.hardness <= tier){
 			allowedMineables.add(block);
 		}
 	}

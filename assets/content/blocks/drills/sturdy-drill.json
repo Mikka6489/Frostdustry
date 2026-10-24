@@ -9,6 +9,14 @@
   "drawRim": true,
   "hasItems": true,
   "itemCapacity": 20,
+  "consumes": {
+	"liquid": {
+		"liquid": "water", 
+		"amount": 0.058333,
+		"optional": true,
+		"booster": true
+  	}
+  },
   "requirements": [
     { "item": "copper", "amount": 18 },
     { "item": "graphite", "amount": 10 }
