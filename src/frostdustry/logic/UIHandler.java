@@ -38,6 +38,6 @@ public class UIHandler {
     }
 
     private static int wavesUntilTemperatureDrop(){
-        return 10 - Vars.state.wave % 10;
+        return FrostMethods.coalDropPerWave - Vars.state.wave % FrostMethods.coalDropPerWave;
     }
 }
