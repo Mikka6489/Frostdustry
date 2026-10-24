@@ -1,0 +1,13 @@
+{
+  "type": "frostdustry.world.blocks.heat.HeatPipe",
+  "name": "Heat Pipe",
+  "description": "Moves items at such an incredible speed it may as-well have been teleported. Moves around 72 items/second.",
+  "health": 150,
+  "size": 1,
+  "requirements": [
+      {"item": "copper", "amount": 1},
+      {"item": "lead", "amount": 1}
+  ],
+  "category": "distribution",
+  "research": "generator"
+}
