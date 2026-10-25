@@ -22,4 +22,7 @@ public class FrostMethods {
     public void logUsefulShit(float recievedHeat) {
 	    //Log.info("cold: @, recievedHeat: @, calcCold: @, calcCold < 0: @", cold.env(), recievedHeat, cold.env() - recievedHeat, cold.env() - recievedHeat < 0f);
     }
+    public void logTurret(float reloadSpeed) {
+	Log.info("reloadspeed: @", reloadSpeed);
+    }
 }

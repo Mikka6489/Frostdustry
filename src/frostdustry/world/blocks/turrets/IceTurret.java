@@ -16,6 +16,7 @@ public class IceTurret extends ItemTurret{
     public class IceTurretBuild extends ItemTurretBuild implements HeatReciever{
         @Override
         public void recieveHeat(float heat) {
+		FrostMethods.logTurret(baseReloadSpeed());
             recievedHeat = heat;
         }
 

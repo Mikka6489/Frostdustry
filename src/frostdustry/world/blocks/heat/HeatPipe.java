@@ -30,7 +30,7 @@ public class HeatPipe extends HeatConductor {
                                 int contactPoints = Math.min((int)(block.size / 2.0F + build.block.size / 2.0F - diff), Math.min(build.block.size, block.size));
                                 float add = heater.heat() / build.block.size * contactPoints;
                                 if (split) {
-                                    add /= 1.01F;
+                                    add -= 0.1F;
                                 }
                                 sideHeat[Mathf.mod(relativeTo(build), 4)] += add;
                                 heat += add;

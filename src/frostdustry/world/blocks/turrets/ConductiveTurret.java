@@ -16,6 +16,7 @@ public class ConductiveTurret extends PowerTurret{
     public class ConductiveTurretBuild extends PowerTurretBuild implements HeatReciever{
         @Override
         public void recieveHeat(float heat) {
+		FrostMethods.logTurret(baseReloadSpeed());
             recievedHeat = heat;
         }
 

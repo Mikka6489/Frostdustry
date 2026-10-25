@@ -29,6 +29,7 @@ public class Generator extends Block{
     public static final int minHeatLevel = 0;
     public static final int maxHeatLevel = 4;
 
+    public boolean canRemove = true;
     public float heat = 1.5f;
     public float reload = 60f;
     public float range = 80f;
@@ -109,7 +110,7 @@ public class Generator extends Block{
 
 	@Override
 	public boolean canBreak(Tile tile) {
-		return false;
+		return canRemove ? true : false;
 	}
 
     public class GeneratorBuild extends Building implements Ranged{

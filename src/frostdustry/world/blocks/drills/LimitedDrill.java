@@ -137,7 +137,7 @@ public class LimitedDrill extends Drill implements HeatReciever{
 		FrostMethods.logUsefulShit(recievedHeat);
                 int amount = (int)(progress / delay);
                 for(int i = 0; i < amount; i++){
-			        if (allowedMineables.contains(tile.overlay())){
+		if (allowedMineables.contains(tile.overlay()) && dominantItem != null){
                         if(!consumeOre(dominantItem)) break;
 			        }
                     offload(dominantItem);

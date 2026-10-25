@@ -16,6 +16,7 @@ public class WaterTurret extends LiquidTurret{
     public class WaterTurretBuild extends LiquidTurretBuild implements HeatReciever{
         @Override
         public void recieveHeat(float heat) {
+		FrostMethods.logTurret(baseReloadSpeed());
             recievedHeat = heat;
         }
 

@@ -10,6 +10,7 @@
   "itemCapacity": 500,
   "alwaysUnlocked": true,
   "hasItems": true,
+  "canRemove": false,
   "requirements": [
     { "item": "lead", "amount": 50 },
     { "item": "silicon", "amount": 20 },
