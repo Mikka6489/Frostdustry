@@ -10,7 +10,6 @@ import mindustry.*;
 import mindustry.graphics.*;
 import mindustry.world.*;
 import mindustry.world.meta.*;
-import mindustry.ctype.*;
 import mindustry.content.*;
 import mindustry.world.blocks.environment.*;
 
@@ -115,7 +114,7 @@ public class LimitedDrill extends Drill implements HeatReciever{
 
             float delay = getDrillTime(dominantItem); 
 
-	    if (delay > 2500f) efficiency = 0;
+	        if (delay > 2500f) efficiency = 0;
 
             if(items.total() < itemCapacity && dominantItems > 0 && efficiency > 0){
                 float speed = Mathf.lerp(1f, liquidBoostIntensity, optionalEfficiency) * efficiency;
@@ -135,12 +134,12 @@ public class LimitedDrill extends Drill implements HeatReciever{
             if(dominantItems > 0 && progress >= delay && items.total() < itemCapacity){
                 int amount = (int)(progress / delay);
                 for(int i = 0; i < amount; i++){
-			if (allowedMineables.contains(tile.overlay())){
-                    		if(!consumeOre(dominantItem)) break;
-			}
+			        if (allowedMineables.contains(tile.overlay())){
+                        if(!consumeOre(dominantItem)) break;
+			        }
                     offload(dominantItem);
                 }
-		Log.info("Drill progress: @, delay: @, dominantItems: @, itemCapacity: @, items.total(): @", progress, delay, dominantItems, itemCapacity, items.total());
+		        Log.info("Drill progress: @, delay: @, dominantItems: @, itemCapacity: @, items.total(): @", progress, delay, dominantItems, itemCapacity, items.total());
 
                 progress %= delay;
 

@@ -66,7 +66,7 @@ public class FrostDrill extends Drill implements HeatReciever{
 
             float delay = getDrillTime(dominantItem); 
 
-	    if (delay > 2500f) efficiency = 0;
+	        if (delay > 2500f) efficiency = 0;
 
             if(items.total() < itemCapacity && dominantItems > 0 && efficiency > 0){
                 float speed = Mathf.lerp(1f, liquidBoostIntensity, optionalEfficiency) * efficiency;
@@ -88,7 +88,7 @@ public class FrostDrill extends Drill implements HeatReciever{
                 for(int i = 0; i < amount; i++){
                     offload(dominantItem);
                 }
-		Log.info("Drill progress: @, delay: @, dominantItems: @, itemCapacity: @, items.total(): @", progress, delay, dominantItems, itemCapacity, items.total());
+		        Log.info("Drill progress: @, delay: @, dominantItems: @, itemCapacity: @, items.total(): @", progress, delay, dominantItems, itemCapacity, items.total());
 
                 progress %= delay;
 
