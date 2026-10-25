@@ -157,7 +157,7 @@ public class Generator extends Block{
 
         @Override
         public boolean acceptItem(Building source, Item item){
-            return item == Items.coal && items.get(item) < itemCapacity;
+		return hasItems ? item == Items.coal && items.get(item) < itemCapacity : false;
         }
 
         @Override

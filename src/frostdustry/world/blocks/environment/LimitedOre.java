@@ -7,7 +7,7 @@ import mindustry.world.blocks.environment.*;
 import mindustry.content.*;
 
 public class LimitedOre extends OreBlock{
-    private static final int maxOre = 500;
+    private static final int maxOre = 1000;
     private final IntMap<Integer> oreCounts = new IntMap<>();
 
     public LimitedOre(String name){
