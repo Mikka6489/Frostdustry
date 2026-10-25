@@ -6,7 +6,7 @@
   "size": 2,
   "tier": 3,
   "drillTime": 400,
-  "drawRim": true,
+  "drawRim": false,
   "hasItems": true,
   "itemCapacity": 20,
   "consumes": {
