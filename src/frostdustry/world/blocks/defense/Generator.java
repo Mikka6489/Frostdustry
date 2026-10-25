@@ -107,6 +107,11 @@ public class Generator extends Block{
         }
     }
 
+	@Override
+	public boolean canBreak(Tile tile) {
+		return false;
+	}
+
     public class GeneratorBuild extends Building implements Ranged{
         public float heat, charge = Mathf.random(reload), phaseHeat, smoothEfficiency, useProgress, plasmaProgress, smoothRadius;
         public int personalCoalCost;
@@ -157,7 +162,7 @@ public class Generator extends Block{
 
         @Override
         public boolean acceptItem(Building source, Item item){
-		return hasItems ? item == Items.coal && items.get(item) < itemCapacity : false;
+		return hasItems ? item == Items.coal && items.get(item) < itemCapacity : null;
         }
 
         @Override

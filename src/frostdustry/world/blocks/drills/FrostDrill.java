@@ -52,6 +52,7 @@ public class FrostDrill extends Drill implements HeatReciever{
     }
 
     public class FrostDrillBuild extends DrillBuild {
+	//float delay = 10; 
 	@Override
         public void updateTile(){
             if(timer(timerDump, dumpTime / timeScale)){
@@ -84,11 +85,12 @@ public class FrostDrill extends Drill implements HeatReciever{
             }
 
             if(dominantItems > 0 && progress >= delay && items.total() < itemCapacity){
+		//delay = getDrillTime(dominantItem); 
                 int amount = (int)(progress / delay);
                 for(int i = 0; i < amount; i++){
                     offload(dominantItem);
                 }
-		        Log.info("Drill progress: @, delay: @, dominantItems: @, itemCapacity: @, items.total(): @", progress, delay, dominantItems, itemCapacity, items.total());
+		        //Log.info("Drill progress: @, delay: @, dominantItems: @, itemCapacity: @, items.total(): @", progress, delay, dominantItems, itemCapacity, items.total());
 
                 progress %= delay;
 

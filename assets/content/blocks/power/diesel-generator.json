@@ -10,6 +10,17 @@
 	"powerProduction": 24,
 	"hasPower": true,
 	"hasLiquids": true,
+	"consumes": {
+		"liquids": {
+			"liquids": [
+				{
+				"liquid": "diesel",
+				"amount": 0.3
+				}
+			]
+		}
+	},
+
     "requirements": [
 		{"item": "lead", "amount": 120 },
 		{"item": "graphite", "amount": 70 },

@@ -87,7 +87,8 @@ public class LimitedDrill extends Drill implements HeatReciever{
         return super.getDrillTime(item) * (FrostMethods.calcCold(recievedHeat) * 2f + 1f);
     }
 
-    public class LimitedDrillBuild extends DrillBuild{
+    public class LimitedDrillBuild extends DrillBuild{	
+	//float delay = 10; 
         public int totalOreCount(){
             int total = 0;
             for(int dx = 0; dx < size; dx++){
@@ -132,6 +133,7 @@ public class LimitedDrill extends Drill implements HeatReciever{
             }
 
             if(dominantItems > 0 && progress >= delay && items.total() < itemCapacity){
+		//delay = getDrillTime(dominantItem); 
                 int amount = (int)(progress / delay);
                 for(int i = 0; i < amount; i++){
 			        if (allowedMineables.contains(tile.overlay())){
@@ -139,7 +141,7 @@ public class LimitedDrill extends Drill implements HeatReciever{
 			        }
                     offload(dominantItem);
                 }
-		        Log.info("Drill progress: @, delay: @, dominantItems: @, itemCapacity: @, items.total(): @", progress, delay, dominantItems, itemCapacity, items.total());
+		        //Log.info("Drill progress: @, delay: @, dominantItems: @, itemCapacity: @, items.total(): @", progress, delay, dominantItems, itemCapacity, items.total());
 
                 progress %= delay;
 

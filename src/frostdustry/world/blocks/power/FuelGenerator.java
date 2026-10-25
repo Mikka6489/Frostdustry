@@ -15,7 +15,7 @@ public class FuelGenerator extends ConsumeGenerator{
     public FuelGenerator(String name){
         super(name);
     }
-    
+/*
     @Override
     public void init(){
         Liquid diesel = Vars.content.getByName(ContentType.liquid, "frostdustry-diesel");
@@ -36,7 +36,7 @@ public class FuelGenerator extends ConsumeGenerator{
         });
         super.init();
     }
-
+*/
     public class FuelGeneratorBuild extends ConsumeGeneratorBuild implements HeatReciever{
         FrostMethods FrostMethods = new FrostMethods();
         public float recievedHeat = 0;
@@ -50,12 +50,12 @@ public class FuelGenerator extends ConsumeGenerator{
         public boolean canBeHeated() {
             return true;
         }
-
+//TODO: change this so power making drops by cold
         @Override
         public float getProgressIncrease(float base){
             return super.getProgressIncrease(base) / (FrostMethods.calcCold(recievedHeat) + 1f);
         }
-
+/*
         @Override
         public boolean acceptLiquid(Building source, Liquid liquid){
             if((liquid != Liquids.oil && !(liquid instanceof FrostLiquid)) || !super.acceptLiquid(source, liquid)){
@@ -68,6 +68,6 @@ public class FuelGenerator extends ConsumeGenerator{
                 }
             }
             return true;
-        }
+        }*/
     }
 }
