@@ -133,7 +133,8 @@ public class LimitedDrill extends Drill implements HeatReciever{
             }
 
             if(dominantItems > 0 && progress >= delay && items.total() < itemCapacity){
-		//delay = getDrillTime(dominantItem); 
+		//delay = getDrillTime(dominantItem);
+		FrostMethods.logUsefulShit(recievedHeat);
                 int amount = (int)(progress / delay);
                 for(int i = 0; i < amount; i++){
 			        if (allowedMineables.contains(tile.overlay())){
