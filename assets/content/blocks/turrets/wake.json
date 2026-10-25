@@ -1,5 +1,5 @@
 {
-	"type": "ItemTurret",
+	"type": "frostdustry.world.blocks.turrets.IceTurret",
 	"name": "Wake",
 	"description": "A Single barrel machine gun of texan invention, deals heavy knockback.",
 	"size": 2,

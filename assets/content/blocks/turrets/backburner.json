@@ -1,5 +1,5 @@
 {
-  "type": "liquidTurret",
+  "type": "frostdustry.world.blocks.turrets.WaterTurret",
   "name": "Backburner",
   "description": "CAUTION FLAMMABLE SUBSTANCE",
   "size": 2,

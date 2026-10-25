@@ -1,5 +1,5 @@
 {
-	"type": "ItemTurret",
+	"type": "frostdustry.world.blocks.turrets.IceTurret",
 	"name": "Split",
 	"description": "An automatic 40mm cannon turret firing APHET rounds. Targets highest health and has slow retargeting speeds with no movement prediction.",
 	"unitSort": "strongest",

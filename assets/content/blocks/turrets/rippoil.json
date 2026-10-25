@@ -1,5 +1,5 @@
 {
-  "type": "liquidTurret",
+  "type": "frostdustry.world.blocks.turrets.WaterTurret",
   "name": "Rippoil",
   "description": "Combining status effects can be extremely effective.",
   "size": 3,
