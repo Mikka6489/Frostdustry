@@ -5,14 +5,14 @@
   "health": 160,
   "size": 2,
   "hasItems": true,
-  "craftTime": 60,
+  "craftTime": 40,
   "itemCapacity": 10,
   "consumes": {
     "items": {
       "items": [
         {"item": "coal", "amount": 1},
-        {"item": "lead", "amount": 2},
-        {"item": "sand", "amount": 2}
+        {"item": "lead", "amount": 1},
+        {"item": "sand", "amount": 1}
       ]
     }
   },

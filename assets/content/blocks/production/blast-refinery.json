@@ -5,16 +5,16 @@
   "health": 440,
   "size": 3,
   "hasItems": true,
-  "craftTime": 30,
+  "craftTime": 60,
   "itemCapacity": 10,
   "liquidCapacity": 40,
   "consumes": {
-    "power": 6,
+    "power": 4,
     "items": {
       "items": [
         {
           "item": "pyratite",
-          "amount": 1
+          "amount": 3
         }
       ]
     },
@@ -22,14 +22,32 @@
       "liquids": [
         {
           "liquid": "gasoline",
-          "amount": 0.4
+          "amount": 0.3
         }
       ]
     }
   },
   "outputItem": {
     "item": "blast-compound",
-    "amount": 1
+    "amount": 2
+  },
+  "drawer": {
+    "type": "drawMulti",
+    "drawers": [
+      {
+        "type": "drawRegion",
+        "suffix": "-bottom"
+      },
+      {
+        "type": "drawRegion",
+        "suffix": "-spinner",
+        "spinSprite": true,
+        "rotateSpeed": 3
+      },
+      {
+        "type": "drawDefault"
+      }
+    ]
   },
   "requirements": [
     {

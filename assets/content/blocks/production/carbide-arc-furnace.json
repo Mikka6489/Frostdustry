@@ -1,7 +1,7 @@
 {
   "type": "HeatCrafter",
   "name": "Carbide Arc Furnace",
-  "description": "some bullshit makes carbide.",
+  "description": "Forges carbide from titanium and graphite. Requires heat.",
   "health": 575,
   "size": 3,
   "drawer": {
@@ -12,6 +12,10 @@
       },
       {
         "type": "drawFlame"
+      },
+      {
+        "type": "drawHeatInput",
+        "suffix": "-heat"
       }
     ]
   },

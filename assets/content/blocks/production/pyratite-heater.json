@@ -1,11 +1,11 @@
 {
   "type": "HeatProducer",
   "name": "Pyratite Heater",
-  "description": "burns pyratite to generate heat.",
+  "description": "Burns pyratite to generate heat.",
   "health": 480,
   "size": 3,
   "hasItems": true,
-  "craftTime": 120,
+  "craftTime": 80,
   "itemCapacity": 10,
   "heatOutput": 8,
   "consumes": {

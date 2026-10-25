@@ -14,18 +14,55 @@
 		"liquids": {
 			"liquids": [
 				{
-				"liquid": "diesel",
-				"amount": 0.3
+					"liquid": "diesel",
+					"amount": 0.3
 				}
 			]
 		}
 	},
-
-    "requirements": [
-		{"item": "lead", "amount": 120 },
-		{"item": "graphite", "amount": 70 },
-		{"item": "titanium", "amount": 70 },
-		{"item": "metaglass", "amount": 120}
+	"drawer": {
+		"type": "drawMulti",
+		"drawers": [
+			{
+				"type": "drawRegion",
+				"suffix": "-bottom"
+			},
+			{
+				"type": "drawPistons",
+				"sinMag": 3,
+				"sinScl": 5
+			},
+			{
+				"type": "drawRegion",
+				"suffix": "-mid"
+			},
+			{
+				"type": "drawLiquidTile",
+				"drawLiquid": "diesel",
+				"padding": 9
+			},
+			{
+				"type": "drawDefault"
+			}
+		]
+	},
+	"requirements": [
+		{
+			"item": "lead",
+			"amount": 120
+		},
+		{
+			"item": "graphite",
+			"amount": 70
+		},
+		{
+			"item": "titanium",
+			"amount": 70
+		},
+		{
+			"item": "metaglass",
+			"amount": 120
+		}
 	],
 	"category": "power",
 	"research": "gasoline-generator"

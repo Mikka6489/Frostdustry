@@ -33,6 +33,10 @@
       },
       {
         "type": "drawFlame"
+      },
+      {
+        "type": "drawHeatInput",
+        "suffix": "-heat"
       }
     ]
   },
