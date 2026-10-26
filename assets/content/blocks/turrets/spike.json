@@ -6,10 +6,10 @@
 	"health": 250,
 	"reload": 12,
 	"range": 110,
-        "inaccuracy": 2,
-        "outlineColor": "2d2f39",
-        "recoil": 1,
-        "maxAmmo": 10,
+  "inaccuracy": 2,
+  "outlineColor": "2d2f39",
+  "recoil": 1,
+  "maxAmmo": 10,
 	"shootSound": "shootElude",
 	"rotateSpeed": 16,
 	"ammoTypes": {
@@ -32,7 +32,7 @@
 			"speed": 5,
 			"lifetime": 30,
 			"ammoMultiplier": 1,
-                        "reloadMultiplier": 0.7,
+      "reloadMultiplier": 0.7,
 			"impact": "true",
 			"smokeEffect": "shootSmallSmoke"
 		},

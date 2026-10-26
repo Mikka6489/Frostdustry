@@ -1,0 +1,174 @@
+{
+	"type": "frostdustry.world.blocks.turrets.IceTurret",
+	"name": "Draco",
+	"description": "Heavy missle launcher.",
+	"size": 3,
+	"health": 1850,
+	"reload": 180,
+	"range": 400,
+	"inaccuracy": 2,
+	"outlineColor": "2d2f39",
+	"unitSort": "grouped",
+	"recoil": 0,
+	"shootX": 0,
+	"shootY": 8,
+	"shootSound": "shootArtillery",
+	"smokeEffect": "shootPayloadDriver",
+	"shootEffect": "shootBigSmoke2",
+	"coolantMultiplier": 2.5,
+	"rotateSpeed": 1,
+	"ammoPerShot": 10,
+	"itemCapacity": 60,
+	"drawer": {
+		"type": "DrawTurret",
+		"parts": [
+			{
+				"type": "regionPart",
+				"progress": "recoil",
+				"suffix": "-barrel",
+				"under": "true",
+				"moveY": -4
+			},
+			{
+				"type": "regionPart",
+				"progress": "recoil",
+				"suffix": "-mid",
+				"under": "true",
+				"moveY": -2
+			},
+			{
+				"type": "regionPart",
+				"suffix": "-body",
+				"under": "true"
+			}
+		]
+	},
+	"ammoTypes": {
+		"silicon": {
+			"type": "BasicBulletType",
+			"splashDamage": 740,
+			"splashDamageRadius": 40,
+			"damage": 450,
+			"backColor": "ffd37f",
+			"height": 16,
+			"width": 12,
+			"speed": 2,
+			"lifetime": 220,
+			"knockback": 10,
+			"homingPower": 0.4,
+			"ammoMultiplier": 1,
+			"hitEffect": "massiveExplosion",
+			"despawnEffect": "massiveExplosion",
+			"impact": "true",
+			"sprite": "missile",
+			"trailColor": "ffd37f",
+			"trailLength": 28,
+			"trailWidth": 3,
+			"trailSinScl": 2.5,
+			"trailSinMag": 0.5,
+			"trailEffect": "none"
+		},
+		"blast-compound": {
+			"type": "BasicBulletType",
+			"splashDamage": 1220,
+			"splashDamageRadius": 40,
+			"damage": 850,
+			"backColor": "ff795e",
+			"height": 16,
+			"width": 12,
+			"speed": 2,
+			"lifetime": 220,
+			"knockback": 10,
+			"homingPower": 0.4,
+			"ammoMultiplier": 1,
+			"hitEffect": "massiveExplosion",
+			"despawnEffect": "massiveExplosion",
+			"impact": "true",
+			"sprite": "missile",
+			"trailColor": "ff795e",
+			"trailLength": 28,
+			"trailWidth": 3,
+			"trailSinScl": 2.5,
+			"trailSinMag": 0.5,
+			"trailEffect": "none"
+		},
+		"carbide": {
+			"type": "BasicBulletType",
+			"splashDamage": 980,
+			"splashDamageRadius": 40,
+			"damage": 750,
+			"backColor": "89769a",
+			"height": 16,
+			"width": 12,
+			"speed": 2,
+			"lifetime": 220,
+			"knockback": 10,
+			"homingPower": 0.4,
+			"ammoMultiplier": 1,
+			"hitEffect": "massiveExplosion",
+			"despawnEffect": "massiveExplosion",
+			"impact": "true",
+			"sprite": "missile",
+			"trailColor": "89769a",
+			"trailLength": 28,
+			"trailWidth": 3,
+			"trailSinScl": 2.5,
+			"trailSinMag": 0.5,
+			"trailEffect": "none"
+		},
+		"plastanium": {
+			"type": "BasicBulletType",
+			"splashDamage": 2400,
+			"splashDamageRadius": 40,
+			"damage": 1650,
+			"backColor": "cbd97f",
+			"height": 16,
+			"width": 12,
+			"speed": 2,
+			"lifetime": 220,
+			"knockback": 10,
+			"homingPower": 0.4,
+			"ammoMultiplier": 1,
+			"hitEffect": "massiveExplosion",
+			"despawnEffect": "massiveExplosion",
+			"impact": "true",
+			"sprite": "missile",
+			"trailColor": "cbd97f",
+			"trailLength": 28,
+			"trailWidth": 3,
+			"trailSinScl": 2.5,
+			"trailSinMag": 0.5,
+			"trailEffect": "none"
+		}
+	},
+	"consumes": {
+		"liquids": {
+			"liquids": [
+				{
+					"liquid": "naptha",
+					"amount": 0.6
+				}
+			]
+		},
+		"coolant": {
+			"amount": 0.4,
+			"optional": true
+		}
+	},
+	"requirements": [
+		{
+			"item": "copper",
+			"amount": 130
+		},
+		{
+			"item": "graphite",
+			"amount": 100
+		},
+		{
+			"item": "metaglass",
+			"amount": 75
+		}
+	],
+	"category": "turret",
+	"research": "tesla"
+}

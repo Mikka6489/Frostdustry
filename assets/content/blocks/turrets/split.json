@@ -7,6 +7,7 @@
 	"health": 1450,
 	"reload": 40,
 	"range": 330,
+  "outlineColor": "2d2f39",
   "cooldownTime": 60,
   "coolantMultiplier": 2.5,
 	"ammoPerShot": 5,

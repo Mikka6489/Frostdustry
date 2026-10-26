@@ -28,7 +28,8 @@
         "plasmas": 3
       },
       {
-        "type": "drawDefault"
+        "type": "drawRegion",
+        "suffix": "-top"
       },
       {
         "type": "drawGlowRegion",
