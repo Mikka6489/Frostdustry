@@ -1,5 +1,5 @@
 {
-  "type": "frostdustry.world.blocks.drills.LimitedDrill",
+  "type": "frostdustry.world.blocks.drills.FrostDrill",
   "name": "Sturdy Drill",
   "description": "A more refined drill, but it's clearly still on its last legs.",
   "health": 200,
@@ -9,6 +9,7 @@
   "drawRim": false,
   "hasItems": true,
   "itemCapacity": 20,
+  "limitedDrill": true,
   "consumes": {
 	"liquid": {
 		"liquid": "water", 

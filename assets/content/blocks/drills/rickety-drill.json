@@ -1,5 +1,5 @@
 {
-  "type": "frostdustry.world.blocks.drills.LimitedDrill",
+  "type": "frostdustry.world.blocks.drills.FrostDrill",
   "name": "Rickety Drill",
   "description": "An old drill left behind by the last survivor.",
   "health": 200,
@@ -11,6 +11,7 @@
   "drawRim": false,
   "hasItems": true,
   "itemCapacity": 20,
+  "limitedDrill": true,
   "consumes": {
 	"liquid": {
 		"liquid": "water", 

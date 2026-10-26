@@ -146,8 +146,8 @@ public class LimitedDrill extends Drill {
                 int amount = (int)(progress / delay);
                 for(int i = 0; i < amount; i++){
 		        if (allowedMineables.contains(tile.overlay()) && dominantItem != null){
-                        if(!consumeOre(dominantItem)) break;
-			        }
+                        	if(!consumeOre(dominantItem)) break;
+			}
                     offload(dominantItem);
                 }
 

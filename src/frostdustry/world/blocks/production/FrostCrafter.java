@@ -56,7 +56,13 @@ public class FrostCrafter extends GenericCrafter{
                 recievedHeat = 0F;
             }
         }
-
+	@Override
+	public void draw(){
+		super.draw();
+		if (lastCraftTime > 25f) {
+			FrostMethods.drawStoppedOverlay(this);
+		}
+	}
         @Override
         public void updateTile(){
             if(efficiency > 0){

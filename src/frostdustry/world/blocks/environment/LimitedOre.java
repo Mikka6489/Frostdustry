@@ -10,6 +10,7 @@ public class LimitedOre extends OreBlock{
 
     public LimitedOre(String name){
         super(name);
+	saveData = true;
     }
 
     public void seedRandom(Tile tile){
