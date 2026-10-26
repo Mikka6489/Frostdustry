@@ -11,7 +11,7 @@
   "extinguish": false,
   "cooldownTime": 20,
   "shootCone": 3,
-  "inaccuracy": 0,
+  "inaccuracy": 5,
   "velocityRnd": 0.2,
   "recoil": 1,
   "rotateSpeed": 3,
@@ -22,60 +22,156 @@
   "liquidCapacity": 50,
   "ammoTypes": {
     "oil": {
-      "type": "FireBulletType",
+      "type": "MultiBulletType",
       "status": "burning",
       "statusDuration": 240,
-      "fireTrailChance": 0,
-      "inaccuracy": 5,
-      "velMin": 3,
-      "velMax": 6,
       "damage": 88,
       "speed": 4,
       "lifetime": 40,
       "hittable": false,
-      "ammoMultiplier": 1
+      "collidesAir": false,
+      "pierce": true,
+      "hitEffect": "hitFlameSmall",
+      "ammoMultiplier": 1,
+      "bullets": [
+        {
+          "type": "FireBulletType",
+          "fireTrailChance": 0,
+          "velMin": 3,
+          "velMax": 6,
+          "speed": 4,
+          "lifetime": 40,
+          "hittable": false,
+          "collidesAir": false
+        },
+        {
+          "type": "BulletType",
+          "status": "burning",
+          "statusDuration": 240,
+          "damage": 86,
+          "speed": 4,
+          "lifetime": 30,
+          "hittable": false,
+          "collidesAir": false,
+          "pierce": true,
+          "hitEffect": "hitFlameSmall",
+          "despawnEffect": "none"
+        }
+      ]
     },
     "diesel": {
-      "type": "FireBulletType",
+      "type": "MultiBulletType",
       "status": "burning",
       "statusDuration": 240,
-      "fireTrailChance": 0,
-      "inaccuracy": 5,
-      "velMin": 3,
-      "velMax": 6,
       "damage": 120,
       "speed": 4,
       "lifetime": 40,
       "hittable": false,
-      "ammoMultiplier": 1
+      "collidesAir": false,
+      "pierce": true,
+      "hitEffect": "hitFlameSmall",
+      "ammoMultiplier": 1,
+      "bullets": [
+        {
+          "type": "FireBulletType",
+          "fireTrailChance": 0,
+          "velMin": 3,
+          "velMax": 6,
+          "speed": 4,
+          "lifetime": 40,
+          "hittable": false,
+          "collidesAir": false
+        },
+        {
+          "type": "BulletType",
+          "status": "burning",
+          "statusDuration": 240,
+          "damage": 120,
+          "speed": 4,
+          "lifetime": 30,
+          "hittable": false,
+          "collidesAir": false,
+          "pierce": true,
+          "hitEffect": "hitFlameSmall",
+          "despawnEffect": "none"
+        }
+      ]
     },
     "naptha": {
-      "type": "FireBulletType",
+      "type": "MultiBulletType",
       "status": "burning",
       "statusDuration": 240,
-      "fireTrailChance": 0,
-      "inaccuracy": 5,
-      "velMin": 3,
-      "velMax": 6,
       "damage": 225,
       "speed": 4,
       "lifetime": 40,
       "hittable": false,
-      "ammoMultiplier": 2
+      "collidesAir": false,
+      "pierce": true,
+      "ammoMultiplier": 2,
+      "bullets": [
+        {
+          "type": "FireBulletType",
+          "fireTrailChance": 0,
+          "velMin": 3,
+          "velMax": 6,
+          "speed": 4,
+          "lifetime": 40,
+          "hittable": false,
+          "collidesAir": false
+        },
+        {
+          "type": "BulletType",
+          "status": "burning",
+          "statusDuration": 240,
+          "damage": 225,
+          "speed": 4,
+          "lifetime": 30,
+          "hittable": false,
+          "collidesAir": false,
+          "pierce": true,
+          "hitEffect": "hitFlameSmall",
+          "despawnEffect": "none",
+          "ammoMultiplier": 2
+        }
+      ]
     },
     "gasoline": {
-      "type": "FireBulletType",
+      "type": "MultiBulletType",
       "status": "burning",
       "statusDuration": 240,
-      "fireTrailChance": 0,
-      "inaccuracy": 5,
-      "velMin": 3,
-      "velMax": 6,
       "damage": 186,
       "speed": 4,
       "lifetime": 40,
       "hittable": false,
-      "ammoMultiplier": 1
+      "collidesAir": false,
+      "pierce": true,
+      "hitEffect": "hitFlameSmall",
+      "ammoMultiplier": 1,
+      "bullets": [
+        {
+          "type": "FireBulletType",
+          "fireTrailChance": 0,
+          "velMin": 3,
+          "velMax": 6,
+          "speed": 4,
+          "lifetime": 40,
+          "hittable": false,
+          "collidesAir": false
+        },
+        {
+          "type": "BulletType",
+          "status": "burning",
+          "statusDuration": 240,
+          "damage": 186,
+          "speed": 4,
+          "lifetime": 30,
+          "hittable": false,
+          "collidesAir": false,
+          "pierce": true,
+          "hitEffect": "hitFlameSmall",
+          "despawnEffect": "none"
+        }
+      ]
     }
   },
   "requirements": [
