@@ -1,6 +1,5 @@
 package frostdustry.world.blocks.environment;
 
-import arc.struct.*;
 import arc.math.*;
 import mindustry.world.Tile;
 import mindustry.world.blocks.environment.*;
@@ -8,7 +7,6 @@ import mindustry.content.*;
 
 public class LimitedOre extends OreBlock{
     private static final int maxOre = 1000;
-    private final IntMap<Integer> oreCounts = new IntMap<>();
 
     public LimitedOre(String name){
         super(name);
@@ -17,19 +15,19 @@ public class LimitedOre extends OreBlock{
     public void seedRandom(Tile tile){
         if(tile == null) return;
         int count = Mathf.random(300, maxOre);
-        oreCounts.put(tile.pos(), count);
+        tile.extraData = count;
     }
 
     public int getOreCount(Tile tile){
-        return oreCounts.get(tile.pos(), 0);
+        return tile.extraData;
     }
 
     public void setOreCount(Tile tile, int count){
         if(count <= 0){
-            oreCounts.remove(tile.pos());
+            tile.extraData = 0;
             tile.setOverlay(Blocks.air);
         }else{
-            oreCounts.put(tile.pos(), count);
+            tile.extraData = count;
         }
     }
 }

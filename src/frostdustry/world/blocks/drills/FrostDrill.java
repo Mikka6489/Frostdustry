@@ -2,8 +2,7 @@ package frostdustry.world.blocks.drills;
 
 import arc.util.*;
 import arc.math.*;
-import mindustry.type.*;
-import mindustry.world.blocks.environment.Floor;
+import mindustry.world.blocks.environment.*;
 import mindustry.world.blocks.production.*;
 import mindustry.world.*;
 import mindustry.world.meta.*;
@@ -14,9 +13,7 @@ import frostdustry.world.blocks.environment.*;
 
 import static mindustry.Vars.*;
 
-public class FrostDrill extends Drill implements HeatReciever{
-    public float recievedHeat = 0f;
-    FrostMethods FrostMethods = new FrostMethods();
+public class FrostDrill extends Drill {    
 
     public FrostDrill(String name) {
         super(name);
@@ -38,22 +35,33 @@ public class FrostDrill extends Drill implements HeatReciever{
         ));
     }
 
-    public void recieveHeat(float heat) {
-        recievedHeat = heat;
-    }
+    public class FrostDrillBuild extends DrillBuild implements HeatReciever{
+        public float recievedHeat, heatDuration;
+        FrostMethods FrostMethods = new FrostMethods();
 
-    public boolean canBeHeated() {
-        return true;
-    }
+        @Override
+        public void recieveHeat(float heat, float duration) {
+            if (heat >= recievedHeat - 0.001F) {
+                heatDuration = Math.max(heatDuration, duration);
+            }
 
-    @Override 
-    public float getDrillTime(Item item){
-        return super.getDrillTime(item) * (FrostMethods.calcCold(recievedHeat) * 2f + 1f);
-    }
+            recievedHeat = Math.max(recievedHeat, heat);
+        }
 
-    public class FrostDrillBuild extends DrillBuild {
-	//float delay = 10; 
-	@Override
+        @Override
+        public boolean canBeHeated() {
+            return true;
+        }
+
+        @Override
+        public void update(){
+            super.update();
+            if ((heatDuration -= Time.delta) <= 0.0F || !canBeHeated()) {
+                recievedHeat = 0F;
+            }
+        }
+
+	    @Override
         public void updateTile(){
             if(timer(timerDump, dumpTime / timeScale)){
                 dump(dominantItem != null && items.has(dominantItem) ? dominantItem : null);
@@ -62,10 +70,9 @@ public class FrostDrill extends Drill implements HeatReciever{
             if(dominantItem == null){
                 return;
             }
-
             timeDrilled += warmup * delta();
 
-            float delay = getDrillTime(dominantItem); 
+            float delay = getDrillTime(dominantItem) * (FrostMethods.calcCold(recievedHeat) * 2f + 1f); 
 
 	        if (delay > 2500f) efficiency = 0;
 
@@ -85,13 +92,10 @@ public class FrostDrill extends Drill implements HeatReciever{
             }
 
             if(dominantItems > 0 && progress >= delay && items.total() < itemCapacity){
-		//delay = getDrillTime(dominantItem);
-		FrostMethods.logUsefulShit(recievedHeat);
                 int amount = (int)(progress / delay);
                 for(int i = 0; i < amount; i++){
                     offload(dominantItem);
                 }
-		        //Log.info("Drill progress: @, delay: @, dominantItems: @, itemCapacity: @, items.total(): @", progress, delay, dominantItems, itemCapacity, items.total());
 
                 progress %= delay;
 

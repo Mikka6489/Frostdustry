@@ -222,7 +222,7 @@ public class Generator extends Block{
                 indexer.eachBlock(this, realRange, other -> {
                     HeatReciever receiver = heatReciever(other);
                     return receiver != null && receiver.canBeHeated();
-                }, other -> heatReciever(other).recieveHeat(FrostMethods.globalHeatLevel));
+                }, other -> heatReciever(other).recieveHeat(FrostMethods.globalHeatLevel, 80f));
             }
             if(efficiency > 0){
                 useProgress += delta();
@@ -231,7 +231,7 @@ public class Generator extends Block{
             if(useProgress >= useTime){
                 setHeatLevel(FrostMethods.globalHeatLevel);
                 updateHeaterStatus();
-                Log.info("generatoractive: @, heatlevel: @, efficiency; @", FrostMethods.generatorActive, FrostMethods.globalHeatLevel, efficiency);
+                //Log.info("generatoractive: @, heatlevel: @, efficiency; @", FrostMethods.generatorActive, FrostMethods.globalHeatLevel, efficiency);
                 useProgress %= useTime;
             }
         }

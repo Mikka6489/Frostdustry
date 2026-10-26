@@ -21,6 +21,7 @@ public class LogicHandler{
 			for(Tile tile : Vars.world.tiles){
 				if(tile.overlay() instanceof LimitedOre ore){
 					if (ore.getOreCount(tile) == 0) {
+						Log.info("changing ore count");
 						ore.seedRandom(tile);
 					}
 				}

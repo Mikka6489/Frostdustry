@@ -5,5 +5,6 @@ import mindustry.world.meta.*;
 public class FrostStat {
     public static final Stat
 
-    cold = new Stat("cold", StatCat.function);
+    minHeat = new Stat("minHeat", StatCat.function),
+    maxHeat = new Stat("MaxHeat", StatCat.function);
 }
