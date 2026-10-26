@@ -39,8 +39,16 @@ public class WaterTurret extends LiquidTurret{
         }
 
         @Override
+        public void draw(){
+            super.draw();
+            if ((FrostMethods.calcCold(recievedHeat) + 1f) > 4f) {
+                FrostMethods.drawStoppedOverlay(this);
+            }
+        }
+
+        @Override
         protected float baseReloadSpeed(){
-            return super.baseReloadSpeed() - (FrostMethods.calcCold(recievedHeat));
+            return super.baseReloadSpeed() - (FrostMethods.calcCold(recievedHeat) / 2);
         }
     }
 }

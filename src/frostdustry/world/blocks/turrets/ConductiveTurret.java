@@ -39,8 +39,16 @@ public class ConductiveTurret extends PowerTurret{
         }
 
         @Override
+        public void draw(){
+            super.draw();
+            if (baseReloadSpeed() < -1f) {
+                FrostMethods.drawStoppedOverlay(this);
+            }
+        }
+
+        @Override
         protected float baseReloadSpeed(){
-            return super.baseReloadSpeed() - (FrostMethods.calcCold(recievedHeat));
+            return super.baseReloadSpeed() - (FrostMethods.calcCold(recievedHeat) / 2);
         }
     }
 }

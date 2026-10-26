@@ -36,11 +36,22 @@ public class IceTurret extends ItemTurret{
             if ((heatDuration -= Time.delta) <= 0.0F || !canBeHeated()) {
                 recievedHeat = 0F;
             }
+            if (baseReloadSpeed() < -1f) {
+                efficiency = 0f;
+            }
+        }
+
+        @Override
+        public void draw(){
+            super.draw();
+            if ((FrostMethods.calcCold(recievedHeat) + 1f) > 4f) {
+                FrostMethods.drawStoppedOverlay(this);
+            }
         }
 
         @Override
         protected float baseReloadSpeed(){
-            return super.baseReloadSpeed() - (FrostMethods.calcCold(recievedHeat));
+            return super.baseReloadSpeed() - (FrostMethods.calcCold(recievedHeat) / 2);
         }
     }
 }
