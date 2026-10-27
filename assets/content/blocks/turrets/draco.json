@@ -145,7 +145,7 @@
 		"liquids": {
 			"liquids": [
 				{
-					"liquid": "naptha",
+					"liquid": "gasoline",
 					"amount": 0.6
 				}
 			]
@@ -178,5 +178,5 @@
 		}
 	],
 	"category": "turret",
-	"research": "tesla"
+	"research": "split"
 }

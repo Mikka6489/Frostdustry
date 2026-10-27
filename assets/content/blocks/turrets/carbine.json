@@ -1,0 +1,100 @@
+{
+  "type": "frostdustry.world.blocks.turrets.IceTurret",
+  "name": "Carbine",
+  "description": "A high fire rate, high projectile speed turret, Lacks target movement prediction.",
+  "size": 2,
+  "health": 960,
+  "reload": 24.5,
+  "range": 300,
+  "inaccuracy": 3,
+  "coolantMultiplier": 2.5,
+  "predictTarget": false,
+  "targetAir": true,
+  "targetGround": false,
+  "recoil": 1,
+  "rotateSpeed": 12,
+  "shootSound": "shootBreach",
+  "shootEffect": "shootSmall",
+  "shoot": {
+    "type": "ShootBarrel",
+    "shotDelay": 8.1,
+    "shots": 3,
+    "barrels": [3, 1, 0, 0, 1, 0, -3, 1, 0]
+  },
+  "consumes": {
+    "coolant": {
+      "amount": 0.2,
+      "optional": true
+    }
+  },
+  "ammoTypes": {
+    "metaglass": {
+      "type": "BasicBulletType",
+      "damage": 36,
+      "speed": 16,
+      "ammoMultiplier": 2,
+      "hitEffect": "flakExplosion",
+      "lifetime": 20,
+      "height": 10,
+      "width": 7,
+      "fragBullets": 6,
+      "fragBullet": {
+        "type": "BasicBulletType",
+        "lifetime": 10,
+        "speed": 4,
+        "damage": 22
+      }
+    },
+    "plastanium": {
+      "type": "BasicBulletType",
+      "damage": 52,
+      "speed": 16,
+      "ammoMultiplier": 3,
+      "backColor": "cbd97f",
+      "hitEffect": "flakExplosion",
+      "lifetime": 20,
+      "height": 10,
+      "width": 7,
+      "fragBullets": 8,
+      "fragBullet": {
+        "type": "BasicBulletType",
+        "lifetime": 10,
+        "speed": 4,
+        "damage": 38
+      }
+    },
+    "tungsten": {
+      "type": "BasicBulletType",
+      "damage": 34,
+      "backColor": "768a9a",
+      "speed": 16,
+      "ammoMultiplier": 3,
+      "hitEffect": "flakExplosion",
+      "lifetime": 20,
+      "height": 10,
+      "width": 7
+    },
+    "blast-compound": {
+      "type": "BasicBulletType",
+      "damage": 48,
+      "splashDamageRadius": 18.4,
+      "splashDamage": 32,
+      "speed": 16,
+      "status": "blasted",
+      "ammoMultiplier": 2,
+      "backColor": "ff795e",
+      "hitEffect": "flakExplosion",
+      "lifetime": 20,
+      "height": 10,
+      "width": 7
+    }
+  },
+  "requirements": [
+    {"item": "graphite" , "amount": 150},
+    {"item": "titanium" , "amount":  80}
+    {"item": "carbide"   , "amount": 125},
+    {"item": "tungsten", "amount":  45},
+  ],
+  "category": "turret",
+  "research": "spike"
+}

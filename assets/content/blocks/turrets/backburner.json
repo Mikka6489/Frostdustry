@@ -10,7 +10,7 @@
   "targetGround": true,
   "extinguish": false,
   "cooldownTime": 20,
-  "shootCone": 3,
+  "shootCone": 8,
   "inaccuracy": 5,
   "velocityRnd": 0.2,
   "recoil": 1,
@@ -181,5 +181,5 @@
     {"item": "silicon" , "amount": 75}
   ],
   "category": "turret",
-  "research": "split"
+  "research": "rippoil"
 }

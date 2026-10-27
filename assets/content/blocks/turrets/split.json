@@ -7,9 +7,11 @@
 	"health": 1450,
 	"reload": 40,
 	"range": 330,
-  "outlineColor": "2d2f39",
-  "cooldownTime": 60,
-  "coolantMultiplier": 2.5,
+	"targetAir": false,
+	"targetGround": true,
+	"outlineColor": "2d2f39",
+	"cooldownTime": 60,
+	"coolantMultiplier": 2.5,
 	"ammoPerShot": 5,
 	"ammoUseEffect": "casing4",
 	"ammoEjectBack": -2,
@@ -17,34 +19,34 @@
 	"shootCone": 1,
 	"rotateSpeed": 2.5,
 	"shake": 2,
-  "recoil": 0,
+	"recoil": 0,
 	"predictTarget": false,
 	"minWarmup": 0.9,
 	"targetInterval": 20,
-  "drawer": {
-    "type": "DrawTurret",
-    "parts": [
-      {
-        "type": "regionPart",
-        "progress": "recoil",
-        "suffix": "-barrel",
-        "under": "true",
-        "moveY": -4
-      },
-      {
-        "type": "regionPart",
-        "progress": "recoil",
-        "suffix": "-mid",
-        "under": "true",
-        "moveY": -2
-      },
-      {
-        "type": "regionPart",
-        "suffix": "-body",
-        "under": "true"
-      }
-    ]
-  },
+	"drawer": {
+		"type": "DrawTurret",
+		"parts": [
+			{
+				"type": "regionPart",
+				"progress": "recoil",
+				"suffix": "-barrel",
+				"under": "true",
+				"moveY": -4
+			},
+			{
+				"type": "regionPart",
+				"progress": "recoil",
+				"suffix": "-mid",
+				"under": "true",
+				"moveY": -2
+			},
+			{
+				"type": "regionPart",
+				"suffix": "-body",
+				"under": "true"
+			}
+		]
+	},
 	"ammoTypes": {
 		"tungsten": {
 			"type": "BasicBulletType",
@@ -107,13 +109,14 @@
 			"trailLength": 5
 		}
 	},
-  "consumes": {
-    "coolant": {
-      "amount": 0.4,
-      "optional": true
-    }
-  },
-	"requirements": [{
+	"consumes": {
+		"coolant": {
+			"amount": 0.4,
+			"optional": true
+		}
+	},
+	"requirements": [
+		{
 			"item": "graphite",
 			"amount": 130
 		},
@@ -131,5 +134,5 @@
 		}
 	],
 	"category": "turret",
-	"research": "generator"
+	"research": "wake"
 }

@@ -197,7 +197,7 @@
   },
   "requirements": [
     {
-      "item": "copper",
+      "item": "lead",
       "amount": 175
     },
     {
@@ -214,5 +214,5 @@
     }
   ],
   "category": "turret",
-  "research": "split"
+  "research": "wake"
 }
