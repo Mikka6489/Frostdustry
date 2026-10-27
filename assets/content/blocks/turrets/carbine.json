@@ -13,7 +13,7 @@
   "targetGround": false,
   "recoil": 1,
   "rotateSpeed": 12,
-  "shootSound": "shootBreach",
+  "shootSound": "shoot",
   "shootEffect": "shootSmall",
   "shoot": {
     "type": "ShootBarrel",

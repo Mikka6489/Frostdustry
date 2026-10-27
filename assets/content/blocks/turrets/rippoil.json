@@ -10,6 +10,7 @@
   "targetAir": false,
   "targetGround": true,
   "extinguish": true,
+  "shootY": 7,
   "recoil": 6,
   "shake": 2,
   "ammoPerShot": 20,
