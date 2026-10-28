@@ -139,7 +139,7 @@ public class Generator extends Block{
             if (canBurnCoal){
                     int coalCost = FrostMethods.globalCoalCost;
                     if(items.get(Items.coal) >= coalCost && FrostMethods.globalHeatLevel > 0){
-			Log.info("burning coal");
+			//Log.info("burning coal");
                         items.remove(Items.coal, coalCost);
                         FrostMethods.generatorActive = true;
                     } else { FrostMethods.generatorActive = false; }

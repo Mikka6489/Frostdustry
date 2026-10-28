@@ -59,7 +59,7 @@ public class FrostCrafter extends GenericCrafter{
 	@Override
 	public void draw(){
 		super.draw();
-		if ((FrostMethods.calcCold(recievedHeat) + 1f) > 4f) {// lastCraftTime < 12f
+		if ((lastCraftTime < 12f)) {// lastCraftTime < 12f
 			FrostMethods.drawStoppedOverlay(this);
 		}
 	}
@@ -73,7 +73,7 @@ public class FrostCrafter extends GenericCrafter{
                 displayCraftTime = Mathf.approachDelta(displayCraftTime, lastCraftTime, 2f);
                 lastCraftTime = craftTime / (FrostMethods.calcCold(recievedHeat) +1f);
 
-                if ((FrostMethods.calcCold(recievedHeat) + 1f) > 4f) efficiency = 0f;
+                if (lastCraftTime < 12f) efficiency = 0f;
 
                 //continuously output based on efficiency
                 if(outputLiquids != null){

@@ -22,8 +22,8 @@ public class FuelGenerator extends ConsumeGenerator{
             return new Bar(
                 () -> Core.bundle.format(
                     "bar.coldpower", 
-                    Strings.fixed(e.getBasePowerProduction() * 60f * e.timeScale(), 1),
-                    Strings.fixed(e.getPowerProduction() * 60f * e.timeScale(), 1)
+                    Strings.fixed(e.getBasePowerProduction() * 60f * e.timeScale(), 0),
+                    Strings.fixed(e.getPowerProduction() * 60f * e.timeScale(), 0)
                 ),
                 () -> Pal.ammo,
                 () -> e.warmup
@@ -56,7 +56,7 @@ public class FuelGenerator extends ConsumeGenerator{
                 recievedHeat = 0F;
             }
             if (getPowerProduction() < (getBasePowerProduction() / 3)) {
-                efficiency = 0f;
+                powerProduction = 0f;
             }
         }
 

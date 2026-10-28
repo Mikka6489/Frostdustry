@@ -44,7 +44,7 @@ public class IceTurret extends ItemTurret{
         @Override
         public void draw(){
             super.draw();
-            if ((FrostMethods.calcCold(recievedHeat) + 1f) > 4f) {
+            if (baseReloadSpeed() < -1f) {
                 FrostMethods.drawStoppedOverlay(this);
             }
         }

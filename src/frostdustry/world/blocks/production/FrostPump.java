@@ -39,6 +39,8 @@ public class FrostPump extends Pump{
             if ((FrostMethods.calcCold(recievedHeat) + 1f) > 3f) {
                 efficiency = 0f;
             }
+	    Log.info(pumpAmount);
+	    //Log.info(totalProgress());
         }
 
         @Override

@@ -122,7 +122,7 @@ public class FrostDrill extends Drill {
         @Override
         public void draw(){
             super.draw();
-            if ((FrostMethods.calcCold(recievedHeat) + 1f) > 4f) {//baseReloadSpeed() < -1f
+            if (lastDrillSpeed <= 0.002f) {//baseReloadSpeed() < -1f
                 FrostMethods.drawStoppedOverlay(this);
             }
         }
@@ -137,11 +137,11 @@ public class FrostDrill extends Drill {
                 return;
             }
             timeDrilled += warmup * delta();
-
+		Log.info(lastDrillSpeed);
             float delay = getDrillTime(dominantItem) * (FrostMethods.calcCold(recievedHeat) * 2f + 1f);
 	        float nonColdDelay = getDrillTime(dominantItem);
 
-	        if ((FrostMethods.calcCold(recievedHeat) + 1f) > 4f) efficiency = 0; //delay = 2500f
+	        if (lastDrillSpeed <= 0.002f) efficiency = 0; //delay = 2500f
 
             if(items.total() < itemCapacity && dominantItems > 0 && efficiency > 0){
                 float speed = Mathf.lerp(1f, liquidBoostIntensity, optionalEfficiency) * efficiency;
