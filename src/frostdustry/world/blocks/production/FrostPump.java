@@ -1,6 +1,5 @@
 package frostdustry.world.blocks.production;
 
-import arc.math.Mathf;
 import arc.util.*;
 import mindustry.world.blocks.production.*;
 
@@ -49,7 +48,7 @@ public class FrostPump extends Pump{
                 FrostMethods.drawStoppedOverlay(this);
             }
         }
-        
+
         @Override
         public float getProgressIncrease(float base){
             return super.getProgressIncrease(base) / (FrostMethods.calcCold(recievedHeat) + 1f);

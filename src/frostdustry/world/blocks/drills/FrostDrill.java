@@ -50,24 +50,25 @@ public class FrostDrill extends Drill {
     @Override
     public void setStats(){
         super.setStats();
-	if (limitedDrill) {
-        stats.replace(Stat.drillTier, StatValues.drillables(drillTime, hardnessDrillMultiplier, size * size, drillMultipliers, block ->
-            block instanceof Floor ore && allowedMineables.contains(ore) && !ore.wallOre && ore.itemDrop != null &&
-            ore.itemDrop.hardness <= tier && (blockedItems == null || !blockedItems.contains(ore.itemDrop)) &&
-            (indexer.isBlockPresent(ore) || state.isMenu())
-        ));
-	}else{
-        stats.replace(Stat.drillTier, StatValues.drillables(drillTime, hardnessDrillMultiplier, size * size, drillMultipliers, block ->
-            block instanceof Floor floor && !(floor instanceof LimitedOre) && !floor.wallOre && floor.itemDrop != null &&
-            floor.itemDrop.hardness <= tier && (blockedItems == null || !blockedItems.contains(floor.itemDrop)) &&
-            (indexer.isBlockPresent(floor) || state.isMenu())
-        ));
-	}
+        if (limitedDrill) {
+            stats.replace(Stat.drillTier, StatValues.drillables(drillTime, hardnessDrillMultiplier, size * size, drillMultipliers, block ->
+                block instanceof Floor ore && allowedMineables.contains(ore) && !ore.wallOre && ore.itemDrop != null &&
+                ore.itemDrop.hardness <= tier && (blockedItems == null || !blockedItems.contains(ore.itemDrop)) &&
+                (indexer.isBlockPresent(ore) || state.isMenu())
+            ));
+        }else{
+            stats.replace(Stat.drillTier, StatValues.drillables(drillTime, hardnessDrillMultiplier, size * size, drillMultipliers, block ->
+                block instanceof Floor floor && !(floor instanceof LimitedOre) && !floor.wallOre && floor.itemDrop != null &&
+                floor.itemDrop.hardness <= tier && (blockedItems == null || !blockedItems.contains(floor.itemDrop)) &&
+                (indexer.isBlockPresent(floor) || state.isMenu())
+            ));
+        }
     }
+
     @Override
     public void setBars(){
         super.setBars();
-	removeBar("drillspeed");
+	    removeBar("drillspeed");
         addBar("craftspeed", (FrostDrillBuild e) -> {
             return new Bar(
                 () -> Core.bundle.format(
@@ -79,17 +80,19 @@ public class FrostDrill extends Drill {
                 () -> e.warmup
             );
         });
-	if (limitedDrill){
-        addBar("orecount", entity -> {
-            FrostDrillBuild build = (FrostDrillBuild) entity;
-            return new Bar(
-                () -> "Ore: " + build.totalOreCount(),
-                () -> Pal.techBlue,
-                () -> Mathf.clamp(build.totalOreCount() / (float)(size * size * 20), 0f, 1f)
-            );
-        });
-	}
+
+        if (limitedDrill){
+            addBar("orecount", entity -> {
+                FrostDrillBuild build = (FrostDrillBuild) entity;
+                return new Bar(
+                    () -> "Ore: " + build.totalOreCount(),
+                    () -> Pal.techBlue,
+                    () -> Mathf.clamp(build.totalOreCount() / (float)(size * size * 20), 0f, 1f)
+                );
+            });
+        }
     }
+    
     public class FrostDrillBuild extends DrillBuild implements HeatReciever{
         public float recievedHeat, heatDuration, nonColdDrillSpeed;
         FrostMethods FrostMethods = new FrostMethods();

@@ -16,7 +16,7 @@ public class FrostMethods {
     public static int runningGenerators;
     public static int globalHeatLevel;
     public static int globalCoalCost;
-    public static int coalDropPerWave = 1;
+    public static int coalDropPerWave = 10;
 	public void drawStoppedOverlay(Building build){
 		int size = build.block.size;
 		Draw.rect(Core.atlas.find("frostdustry-cold-" + size), build.x, build.y, size * 8f, size * 8f);

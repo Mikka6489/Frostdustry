@@ -22,13 +22,13 @@ public class UIHandler {
             table.table(countdown -> {
                 countdown.defaults().pad(0f);
                 Label overlay = new Label("", Styles.outlineLabel);
-                overlay.setText(() -> Integer.toString(calcTemperature()));
+                overlay.setText(() -> calcTemperature() + "°C");
                 overlay.setAlignment(Align.center);
                 countdown.stack(
                     new Image(Core.atlas.find("frostdustry-thermometer")),
                     overlay
                 ).size(64f).pad(10f);
-                countdown.label(() -> Integer.toString(wavesUntilTemperatureDrop())).style(Styles.outlineLabel);
+                countdown.label(() -> "Waves: " + wavesUntilTemperatureDrop()).style(Styles.outlineLabel);
             }).left().colspan(2).pad(0f);
         });
     }

@@ -1,6 +1,9 @@
 package frostdustry.world.blocks.power;
 
+import arc.*;
 import arc.util.*;
+import mindustry.graphics.*;
+import mindustry.ui.*;
 import mindustry.world.blocks.power.*;
 
 import frostdustry.logic.*;
@@ -9,6 +12,23 @@ import frostdustry.type.*;
 public class FuelGenerator extends ConsumeGenerator{
     public FuelGenerator(String name){
         super(name);
+    }
+
+    @Override
+    public void setBars(){
+        super.setBars();
+	    removeBar("power");
+        addBar("coldpower", (FuelGeneratorBuild e) -> {
+            return new Bar(
+                () -> Core.bundle.format(
+                    "bar.coldpower", 
+                    Strings.fixed(e.getBasePowerProduction() * 60f * e.timeScale(), 1),
+                    Strings.fixed(e.getPowerProduction() * 60f * e.timeScale(), 1)
+                ),
+                () -> Pal.ammo,
+                () -> e.warmup
+            );
+        });
     }
 
     public class FuelGeneratorBuild extends ConsumeGeneratorBuild implements HeatReciever{
@@ -35,7 +55,7 @@ public class FuelGenerator extends ConsumeGenerator{
             if ((heatDuration -= Time.delta) <= 0.0F || !canBeHeated()) {
                 recievedHeat = 0F;
             }
-            if ((FrostMethods.calcCold(recievedHeat) + 1f) > 4f) {
+            if (getPowerProduction() < (getBasePowerProduction() / 3)) {
                 efficiency = 0f;
             }
         }
@@ -43,14 +63,18 @@ public class FuelGenerator extends ConsumeGenerator{
         @Override
         public void draw(){
             super.draw();
-            if ((FrostMethods.calcCold(recievedHeat) + 1f) > 4f) {
+            if (getPowerProduction() < (getBasePowerProduction() / 3)) {
                 FrostMethods.drawStoppedOverlay(this);
             }
         }
 
+        public float getBasePowerProduction(){
+            return super.getPowerProduction();
+        }
+
         @Override
         public float getPowerProduction(){
-            return super.getPowerProduction() / (FrostMethods.calcCold(recievedHeat) + 1f);
+            return getBasePowerProduction() / (FrostMethods.calcCold(recievedHeat) + 1f);
         }
     }
 }

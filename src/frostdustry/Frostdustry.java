@@ -22,7 +22,7 @@ public class Frostdustry extends Mod{
     }
 
     @Override
-    public void registerServerCommands(CommandHandler handler){
+    public void registerClientCommands(CommandHandler handler){
         handler.register("cold", "<value>", "Set the current cold attribute.", args -> {
             float value = Float.parseFloat(args[0]);
             Vars.state.rules.attributes.set(FrostMethods.cold, value);

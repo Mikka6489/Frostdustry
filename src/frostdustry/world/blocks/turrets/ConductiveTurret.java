@@ -41,7 +41,7 @@ public class ConductiveTurret extends PowerTurret{
         @Override
         public void draw(){
             super.draw();
-            if (baseReloadSpeed() < -1f) {
+            if ((FrostMethods.calcCold(recievedHeat) + 1f) > 4f) {//baseReloadSpeed() < -1f
                 FrostMethods.drawStoppedOverlay(this);
             }
         }
