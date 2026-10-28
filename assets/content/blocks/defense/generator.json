@@ -7,7 +7,7 @@
   "range": 200,
   "reload": 60,
   "heat": 1.25,
-  "itemCapacity": 500,
+  "itemCapacity": 5000,
   "alwaysUnlocked": true,
   "hasItems": true,
   "canRemove": false,
