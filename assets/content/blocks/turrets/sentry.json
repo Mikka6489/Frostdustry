@@ -27,23 +27,6 @@
       "impact": "true",
       "smokeEffect": "shootSmallSmoke"
     },
-    "pyratite": {
-      "type": "BasicBulletType",
-      "splashDamage": 24,
-      "splashDamageRadius": 20,
-      "damage": 56,
-      "backColor": "ef806c",
-      "height": 8,
-      "width": 6,
-      "speed": 6,
-      "lifetime": 50,
-      "knockback": 3,
-      "homingPower": 0.3,
-      "ammoMultiplier": 2,
-      "impact": "true",
-      "sprite": "missile",
-      "smokeEffect": "shootSmallSmoke"
-    },
     "titanium": {
       "type": "BasicBulletType",
       "damage": 45,

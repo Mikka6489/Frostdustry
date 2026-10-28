@@ -7,6 +7,7 @@
   "range": 290,
   "minRange": 50
   "reload": 120,
+  "outlineColor": "2d2f39",
   "targetAir": false,
   "targetGround": true,
   "extinguish": true,
