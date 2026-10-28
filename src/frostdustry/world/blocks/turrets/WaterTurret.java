@@ -36,6 +36,9 @@ public class WaterTurret extends LiquidTurret{
             if ((heatDuration -= Time.delta) <= 0.0F || !canBeHeated()) {
                 recievedHeat = 0F;
             }
+            if (baseReloadSpeed() < -1f) {
+                efficiency = 0f;
+            }
         }
 
         @Override

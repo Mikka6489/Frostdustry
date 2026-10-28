@@ -55,7 +55,7 @@ public class FuelGenerator extends ConsumeGenerator{
             if ((heatDuration -= Time.delta) <= 0.0F || !canBeHeated()) {
                 recievedHeat = 0F;
             }
-            if (getPowerProduction() < (getBasePowerProduction() / 3)) {
+            if (FrostMethods.calcCold(recievedHeat) > 3.5f) {
                 powerProduction = 0f;
             }
         }
@@ -63,7 +63,7 @@ public class FuelGenerator extends ConsumeGenerator{
         @Override
         public void draw(){
             super.draw();
-            if (getPowerProduction() < (getBasePowerProduction() / 3)) {
+            if (FrostMethods.calcCold(recievedHeat) > 3.5f) {
                 FrostMethods.drawStoppedOverlay(this);
             }
         }
