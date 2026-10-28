@@ -162,10 +162,12 @@ public class FrostDrill extends Drill {
             if(dominantItems > 0 && progress >= delay && items.total() < itemCapacity){
                 int amount = (int)(progress / delay);
                 for(int i = 0; i < amount; i++){
+			if (dominantItem != null) {
 		        if (allowedMineables.contains(tile.overlay()) && dominantItem != null && limitedDrill){
                         	if(!consumeOre(dominantItem)) break;
 			}
                     offload(dominantItem);
+			}
                 }
 
                 progress %= delay;
