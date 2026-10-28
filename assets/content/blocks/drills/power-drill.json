@@ -12,7 +12,7 @@
   "hasItems": true,
   "itemCapacity": 20,
   "consumes": {
-  "power": 5,
+  "power": 4,
 	"liquid": {
 		"liquid": "gasoline", 
 		"amount": 0.15,
