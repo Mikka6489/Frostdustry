@@ -18,5 +18,6 @@
     }
   ],
   "category": "effect",
+  "buildVisibility": "editorOnly",
   "research": "generator"
 }
