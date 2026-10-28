@@ -137,7 +137,7 @@ public class FrostDrill extends Drill {
                 return;
             }
             timeDrilled += warmup * delta();
-		Log.info(lastDrillSpeed);
+		//Log.info(lastDrillSpeed);
             float delay = getDrillTime(dominantItem) * (FrostMethods.calcCold(recievedHeat) * 2f + 1f);
 	        float nonColdDelay = getDrillTime(dominantItem);
 
