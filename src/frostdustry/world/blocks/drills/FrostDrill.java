@@ -166,8 +166,10 @@ public class FrostDrill extends Drill {
 		        if (allowedMineables.contains(tile.overlay()) && dominantItem != null && limitedDrill){
                         	if(!consumeOre(dominantItem)) break;
 			}
-                    offload(dominantItem);
+			if (dominantItem != null){
+                    		offload(dominantItem);
 			}
+		}
                 }
 
                 progress %= delay;
