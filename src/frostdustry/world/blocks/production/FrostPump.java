@@ -39,14 +39,13 @@ public class FrostPump extends Pump{
             if ((FrostMethods.calcCold(recievedHeat) + 1f) > 3f) {
                 efficiency = 0f;
             }
-	    Log.info(pumpAmount);
-	    //Log.info(totalProgress());
+	    
         }
 
         @Override
         public void draw(){
             super.draw();
-            if ((FrostMethods.calcCold(recievedHeat) + 1f) > 3f) {
+            if (FrostMethods.calcCold(recievedHeat) > 3f) {
                 FrostMethods.drawStoppedOverlay(this);
             }
         }
