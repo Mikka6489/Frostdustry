@@ -10,6 +10,7 @@
   "explosiveness": 0.7,
   "minHeatingRequired": 17,
   "maxHeatingRequired": 29,
+  "heatUpgrade": 2,
   "effect": "tarred",
   "color": "ffaa5f",
   "gasColor": "c1e8f5",

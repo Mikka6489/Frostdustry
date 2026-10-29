@@ -8,6 +8,7 @@ import frostdustry.world.meta.*;
 public class FrostLiquid extends Liquid{
     public int minHeatingRequired;
     public int maxHeatingRequired;
+    public int heatUpgrade = 1;
     
     public FrostLiquid(String name){
         super(name, new Color(Color.black));

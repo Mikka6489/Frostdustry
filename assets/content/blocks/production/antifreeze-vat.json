@@ -1,0 +1,54 @@
+{
+  "type": "frostdustry.world.blocks.production.FrostCrafter",
+  "name": "Anti-Freeze Vat",
+  "description": "some bullshit name it makes anti freeze.",
+  "health": 440,
+  "size": 3,
+  "hasLiquids": true,
+  "craftTime": 45,
+  "liquidCapacity": 40,
+  "maxEfficiency": 1.0,
+  "consumes": {
+    "items": [
+      {"item": "titanium", "amount": 2},
+      {"item": "blast-compound", "amount": 1}
+    ],
+    "liquids": [
+      {"liquid": "naptha", "amount": 0.6}
+    ]
+  },
+  "outputLiquids": [
+    {"liquid": "antifreeze", "amount": 0.6}
+  ],
+  "requirements": [
+    {"item": "graphite", "amount": 60},
+    {"item": "titanium", "amount": 120},
+    {"item": "tungsten", "amount": 120},
+    {"item": "carbide", "amount": 100},
+    {"item": "metaglass", "amount": 80}
+  ],
+  "drawer": {
+    "type": "drawMulti",
+    "drawers": [
+      {
+        "type": "drawRegion",
+        "suffix": "-bottom"
+      },
+      {
+        "type": "drawLiquidTile",
+        "drawLiquid": "oil"
+      },
+      {
+        "type": "drawRegion",
+        "suffix": "-spinner",
+        "spinSprite": true,
+        "rotateSpeed": 5
+      },
+      {
+        "type": "drawDefault"
+      }
+    ]
+  },
+  "category": "crafting",
+  "research": "oil-extractor"
+}

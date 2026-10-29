@@ -1,0 +1,36 @@
+{
+  "type": "frostdustry.world.blocks.defense.BlastFurnace",
+  "name": "Blast Furnace",
+  "description": "increases generator heat level.",
+  "health": 100,
+  "size": 2,
+  "hasLiquids": true,
+  "requirements": [
+    { "item": "lead", "amount": 50 },
+    { "item": "silicon", "amount": 20 },
+    { "item": "titanium", "amount": 35 }
+  ],
+  "drawer": {
+    "type": "drawMulti",
+    "drawers": [
+      {
+        "type": "drawRegion",
+        "suffix": "-bottom"
+      },
+      {
+        "type": "drawPlasma",
+        "plasmas": 3
+      },
+      {
+        "type": "drawRegion",
+        "suffix": "-top"
+      },
+      {
+        "type": "drawGlowRegion",
+        "blending": "additive"
+      }
+    ]
+  },
+  "category": "effect",
+  "research": "generator"
+}

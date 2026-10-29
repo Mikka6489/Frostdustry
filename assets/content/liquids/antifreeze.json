@@ -1,0 +1,20 @@
+{
+  "type": "frostdustry.type.FrostLiquid",
+  "name": "Anti-Freeze",
+  "description": "Expands the capabilities of the Generator.",
+  "coolant": "true",
+  "temperature": 0.1,
+  "viscosity": 0.5,
+  "flammability": 0,
+  "heatCapacity": 1.4,
+  "explosiveness": 0,
+  "heatUpgrade": 99,
+  "effect": "sapped",
+  "color": "9eabf799",
+  "gasColor": "c1e8f5",
+  "barColor": "9eabf799",
+  "research": {
+    "parent": "gasoline",
+    "planet": "frostLand"
+  }
+}

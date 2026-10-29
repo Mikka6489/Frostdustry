@@ -26,8 +26,6 @@ import static mindustry.Vars.*;
 public class Generator extends Block{
     public boolean canBurnCoal = true;    
     public DrawBlock drawer = new DrawDefault();
-    public static final int minHeatLevel = 0;
-    public static final int maxHeatLevel = 4;
 
     public boolean canRemove = true;
     public float heat = 1.5f;
@@ -110,25 +108,43 @@ public class Generator extends Block{
 
 	@Override
 	public boolean canBreak(Tile tile) {
-		return canRemove ? true : false;
+        return true;
+		//return canRemove ? true : false;
 	}
 
     public class GeneratorBuild extends Building implements Ranged{
-        public float heat, charge = Mathf.random(reload), phaseHeat, smoothEfficiency, useProgress, plasmaProgress, smoothRadius;
-        public int personalCoalCost;
+        public float heat, charge = Mathf.random(reload), phaseHeat, smoothEfficiency, useProgress, plasmaProgress, smoothRadius, heatUpgradeDuration;
+        public int personalCoalCost, personalHeatLevel;
 
-        public void wake(){
-		setHeatLevel(FrostMethods.globalHeatLevel);
+        public void updateHeatLevel(int heat, float duration) {
+            if (heat >= personalHeatLevel - 0.001F) {
+                heatUpgradeDuration = Math.max(heatUpgradeDuration, duration);
+            }
+
+            personalHeatLevel = Math.max(personalHeatLevel, heat);
+            FrostMethods.maxHeatLevel = FrostMethods.baseMaxHeat + personalHeatLevel;
+        }
+
+        @Override
+        public void update(){
+            super.update();
+            if ((heatUpgradeDuration -= Time.delta) <= 0.0F) {
+                FrostMethods.maxHeatLevel -= personalHeatLevel;
+                personalHeatLevel = 0;
+            }
+
+            setHeatLevel(FrostMethods.globalHeatLevel);
             if (canBurnCoal){
                     int coalCost = FrostMethods.globalCoalCost;
                     if(items.get(Items.coal) >= coalCost && FrostMethods.globalHeatLevel > 0){
-			FrostMethods.generatorActive = true;
+			        FrostMethods.generatorActive = true;
                     } else { FrostMethods.generatorActive = false; }
                 }
+//            Log.info("globalHeatLevel: @, globalHeatLevel: @", FrostMethods.maxHeatLevel, FrostMethods.globalHeatLevel);
         }
 
         public void setHeatLevel(int level){
-            int newLevel = Mathf.clamp(level, minHeatLevel, maxHeatLevel);
+            int newLevel = Mathf.clamp(level, FrostMethods.minHeatLevel, FrostMethods.maxHeatLevel);
             int newCoalCost = coalCost(FrostMethods.globalHeatLevel);
             FrostMethods.globalCoalCost += newCoalCost - personalCoalCost;
             personalCoalCost = newCoalCost;
@@ -137,13 +153,13 @@ public class Generator extends Block{
 
         public void updateHeaterStatus(){
             if (canBurnCoal){
-                    int coalCost = FrostMethods.globalCoalCost;
-                    if(items.get(Items.coal) >= coalCost && FrostMethods.globalHeatLevel > 0){
-			//Log.info("burning coal");
-                        items.remove(Items.coal, coalCost);
-                        FrostMethods.generatorActive = true;
-                    } else { FrostMethods.generatorActive = false; }
-                }
+                int coalCost = FrostMethods.globalCoalCost;
+                if(items.get(Items.coal) >= coalCost && FrostMethods.globalHeatLevel > 0){
+		            //Log.info("globalHeatLevel: @", FrostMethods.maxHeatLevel);
+                    items.remove(Items.coal, coalCost);
+                    FrostMethods.generatorActive = true;
+                } else { FrostMethods.generatorActive = false; }
+            }
         }
 
         @Override
@@ -205,7 +221,6 @@ public class Generator extends Block{
 
         @Override
         public void updateTile(){
-		wake();
             if (FrostMethods.generatorActive == false || FrostMethods.globalHeatLevel < 1){
                 efficiency = 0;
             }
@@ -239,20 +254,21 @@ public class Generator extends Block{
         @Override
         public void buildConfiguration(Table table){
             if (canBurnCoal) {
-                Slider slider = new Slider(minHeatLevel, maxHeatLevel, 1f, false);
+                Slider slider = new Slider(FrostMethods.minHeatLevel, FrostMethods.maxHeatLevel, 1f, false);
                 slider.setValue(FrostMethods.globalHeatLevel);
                 slider.changed(() -> configure(Math.round(slider.getValue())));
 
-                table.add("Heat").colspan(maxHeatLevel - minHeatLevel + 1).center().row();
+                table.add("Heat").colspan(FrostMethods.maxHeatLevel - FrostMethods.minHeatLevel + 1).center().row();
 
-                for(int level = minHeatLevel; level <= maxHeatLevel; level++){
+                for(int level = FrostMethods.minHeatLevel; level <= FrostMethods.maxHeatLevel; level++){
                     table.add(level == 0 ? "Off" : Integer.toString(level)).width(40f).center();
                 }
 
                 table.row();
-                table.add(slider).colspan(maxHeatLevel - minHeatLevel + 1).width(240f).height(40f);
+                table.add(slider).colspan(FrostMethods.maxHeatLevel - FrostMethods.minHeatLevel + 1).width(240f).height(40f);
             }
         }
+        
         @Override
         public float warmup(){
             return heat;

@@ -38,7 +38,6 @@
     ]
   },
   "category": "effect",
-  "buildVisibility": "editorOnly",
   "research": {
     "root": true,
     "name": "frostLand",

@@ -92,7 +92,7 @@ public class FrostDrill extends Drill {
             });
         }
     }
-    
+
     public class FrostDrillBuild extends DrillBuild implements HeatReciever{
         public float recievedHeat, heatDuration, nonColdDrillSpeed;
         FrostMethods FrostMethods = new FrostMethods();
@@ -162,14 +162,13 @@ public class FrostDrill extends Drill {
             if(dominantItems > 0 && progress >= delay && items.total() < itemCapacity){
                 int amount = (int)(progress / delay);
                 for(int i = 0; i < amount; i++){
-			if (dominantItem != null) {
-		        if (allowedMineables.contains(tile.overlay()) && dominantItem != null && limitedDrill){
-                        	if(!consumeOre(dominantItem)) break;
-			}
-			if (dominantItem != null){
-                    		offload(dominantItem);
-			}
-		}
+		            if (allowedMineables.contains(tile.overlay()) && dominantItem != null && limitedDrill){
+                        if(!consumeOre(dominantItem)) break;
+			        }
+			        if (dominantItem != null){
+                		offload(dominantItem);
+			
+                    }
                 }
 
                 progress %= delay;

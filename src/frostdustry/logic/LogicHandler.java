@@ -17,7 +17,8 @@ public class LogicHandler{
 			FrostMethods.globalCoalCost = 0;	
 		});
 
-		Events.on(WorldLoadEvent.class, e -> {	
+		Events.on(WorldLoadEvent.class, e -> {
+			FrostMethods.runningUpgraders = 0;
 			for(Tile tile : Vars.world.tiles){
 				if(tile.overlay() instanceof LimitedOre ore){
 					if (ore.getOreCount(tile) == 0) {	
@@ -29,7 +30,7 @@ public class LogicHandler{
 
 		Events.on(WaveEvent.class, e -> {
 			int wave = Vars.state.wave;
-			if (wave % FrostMethods.coalDropPerWave == 0) {
+			if (wave % FrostMethods.coldDropPerWave == 0) {
 				//Log.info("cold: " + FrostMethods.cold.env());
 				Vars.state.rules.attributes.set(FrostMethods.cold, FrostMethods.cold.env() + 0.5f);
 				Vars.state.envAttrs.set(FrostMethods.cold, FrostMethods.cold.env() + 0.5f);
@@ -38,4 +39,3 @@ public class LogicHandler{
 
 	};
 }
-

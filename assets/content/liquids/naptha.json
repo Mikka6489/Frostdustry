@@ -10,6 +10,7 @@
   "explosiveness": 0.8,
   "minHeatingRequired": 30,
   "maxHeatingRequired": 50,
+  "heatUpgrade": 3,
   "effect": "sapped",
   "color": "9eabf799",
   "gasColor": "c1e8f5",
