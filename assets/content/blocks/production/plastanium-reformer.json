@@ -1,7 +1,7 @@
 {
   "type": "frostdustry.world.blocks.production.FrostCrafter",
   "name": "Plastanium Reformer",
-  "description": "some bullshit makes plastanium.",
+  "description": "Forms plastanium from tungsten and titanium in naptha.",
   "health": 575,
   "size": 3,
   "drawer": {
@@ -33,6 +33,10 @@
   "hasPower": true,
   "hasItems": true,
   "craftTime": 90,
+  "craftEffect": "formsmoke",
+  "updateEffect": "plasticburn",
+  "ambientSound": "loopSmelter",
+  "ambientSoundVolume": 0.07,
   "itemCapacity": 10,
   "liquidCapacity": 40,
   "consumes": {

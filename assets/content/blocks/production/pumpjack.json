@@ -1,0 +1,73 @@
+{
+  "type": "AttributeCrafter",
+  "name": "Oil Pumpjack",
+  "description": "Pumps oil from a deposit. Consumes power.",
+  "attribute": "steam",
+  "health": 440,
+  "size": 3,
+  "hasLiquids": true,
+  "squareSprite": false,
+  "itemCapacity": 0,
+  "boostScale": 0.11111111,
+  "craftTime": 120,
+  "liquidCapacity": 180,
+  "minEfficiency": 8.9999,
+  "baseEfficiency": 0,
+  "craftEffect": "turbinegenerate",
+  "displayEfficiency": false,
+  "consumes": {
+    "power": 2
+  },
+  "outputLiquids": [
+    {
+      "liquid": "oil",
+      "amount": 1.5
+    }
+  ],
+  "requirements": [
+    {
+      "item": "copper",
+      "amount": 150
+    },
+    {
+      "item": "lead",
+      "amount": 100
+    },
+    {
+      "item": "titanium",
+      "amount": 175
+    },
+    {
+      "item": "metaglass",
+      "amount": 75
+    }
+  ],
+  "drawer": {
+    "type": "drawMulti",
+    "drawers": [
+      {
+        "type": "drawRegion",
+        "suffix": "-bottom"
+      },
+      {
+        "type": "drawBlurSpin",
+        "suffix": "-rotator",
+        "rotateSpeed": 6
+      },
+      {
+        "type": "drawRegion",
+        "suffix": "-mid"
+      },
+      {
+        "type": "drawLiquidTile",
+        "drawLiquid": "oil",
+        "padding": 9
+      },
+      {
+        "type": "drawDefault"
+      }
+    ]
+  },
+  "category": "production",
+  "research": "oil-extractor"
+}

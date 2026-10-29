@@ -1,11 +1,12 @@
 {
   "type": "frostdustry.world.blocks.production.FrostCrafter",
   "name": "Blast Refinery",
-  "description": "some bullshit name it makes better fuel.",
+  "description": "Refines blast compound from pyratite and gasoline. Requires power.",
   "health": 440,
   "size": 3,
   "hasItems": true,
   "craftTime": 60,
+  "craftEffect": "pulverizeRed",
   "itemCapacity": 10,
   "liquidCapacity": 40,
   "consumes": {

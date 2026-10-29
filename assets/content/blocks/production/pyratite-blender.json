@@ -1,11 +1,15 @@
 {
   "type": "frostdustry.world.blocks.production.FrostCrafter",
   "name": "Pyratite Blender",
-  "description": "some bullshit name it makes pyratite.",
+  "description": "Blends coal, lead and sand into pyratite.",
   "health": 160,
   "size": 2,
   "hasItems": true,
   "craftTime": 40,
+  "craftEffect": "pulverize",
+  "updateEffect": "pulverizeSmall",
+  "ambientSound": "loopGrind",
+  "ambientSoundVolume": 0.03,
   "itemCapacity": 10,
   "consumes": {
     "items": {

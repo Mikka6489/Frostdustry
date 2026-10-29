@@ -1,12 +1,12 @@
 {
   "type": "frostdustry.world.blocks.production.LiquidSwapCrafter",
   "name": "Oil Refinery",
-  "description": "some bullshit name it makes petrol.",
-  "health": 440,
+  "description": "Refines oil into various hydrocarbons through heated distillation. Output varies depending on input heat.",
+  "health": 840,
   "size": 3,
   "hasLiquids": true,
   "craftTime": 45,
-  "liquidCapacity": 40,
+  "liquidCapacity": 144,
   "maxEfficiency": 1.0,
   "consumes": {
     "liquids": [

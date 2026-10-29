@@ -1,22 +1,30 @@
 {
 	"type": "HeatProducer",
 	"name": "Impact Heater",
-	"description": "definitely not the heat generator tower from engineer gaming",
-	"health": 1880,
+	"description": "Incinerates blast compound to generate large amounts of heat. Requires power.",
+	"health": 1480,
 	"size": 4,
 	"squareSprite": false,
+	"ambientSound": "loopPulse",
+	"ambientSoundVolume": 0.08,
 	"buildCostMultiplier": 0.7,
 	"liquidCapacity": 100,
 	"warmupSpeed": 0.002,
-	"heatOutput": 40.0,
+	"heatOutput": 48.0,
 	"hasPower": true,
 	"consumes": {
 		"power": 4,
+		"liquids": [
+			{
+				"liquid": "water",
+				"amount": 0.25
+			}
+		],
 		"items": {
 			"items": [
 				{
-				"item": "blast-compound",
-				"amount": 1
+					"item": "blast-compound",
+					"amount": 1
 				}
 			]
 		}

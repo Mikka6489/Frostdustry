@@ -1,11 +1,13 @@
 {
   "type": "frostdustry.world.blocks.production.FrostCrafter",
   "name": "Coal Synthesiser",
-  "description": "make oil to coal coal good coal",
+  "description": "Synthesises coal from oil. Requires power.",
   "health": 160,
   "size": 2,
   "hasItems": true,
   "craftTime": 30,
+  "craftEffect": "coalSmeltsmoke",
+  "updateEffect": "plasticburn",
   "itemCapacity": 10,
   "liquidCapacity": 60,
   "consumes": {
