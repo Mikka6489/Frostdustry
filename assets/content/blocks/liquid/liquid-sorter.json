@@ -1,5 +1,5 @@
 {
-  "type": "frostdustry.world.blocks.distribution.LiquidSorter",
+  "type": "frostdustry.world.blocks.liquid.LiquidSorter",
   "name": "Liquid Sorter",
   "description": "Moves items at such an incredible speed it may as-well have been teleported. Moves around 72 items/second.",
   "health": 150,

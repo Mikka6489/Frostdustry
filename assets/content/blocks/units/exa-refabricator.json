@@ -1,0 +1,28 @@
+{
+  "type": "frostdustry.world.blocks.units.FrostReconstructor",
+  "name": "Exa Refabricator",
+  "description": "Synthesises coal from oil. Requires power.",
+  "health": 160,
+  "size": 9,
+  "consumes": {
+    "power": 25
+  },
+  "constructTime": 14400,
+  "upgrades": [
+    ["antumbra", "eclipse"],
+    ["arkyid", "toxopid"],
+    ["scepter", "reign"],
+    ["sei", "omura"],
+    ["quad", "oct"],
+    ["vela", "corvus"],
+    ["aegires", "navanax"]
+  ],
+  "researchCostMultiplier": 0.5,
+  "requirements": [
+    { "item": "copper", "amount": 50 },
+    { "item": "lead", "amount": 120 },
+    { "item": "silicon", "amount": 80 }
+  ],
+  "category": "units",
+  "research": "generator"
+}

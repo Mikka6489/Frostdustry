@@ -1,0 +1,28 @@
+{
+  "type": "frostdustry.world.blocks.units.FrostReconstructor",
+  "name": "Mega Refabricator",
+  "description": "Synthesises coal from oil. Requires power.",
+  "health": 160,
+  "size": 3,
+  "consumes": {
+    "power": 3
+  },
+  "constructTime": 1800,
+  "upgrades": [
+    ["horizon", "zenith"],
+    ["mace", "fortress"],
+    ["poly", "mega"],
+    ["minke", "bryde"],
+    ["pulsar", "quasar"],
+    ["atrax", "spiroct"],
+    ["oxynoe", "cyerce"]
+  ],
+  "researchCostMultiplier": 0.5,
+  "requirements": [
+    { "item": "copper", "amount": 50 },
+    { "item": "lead", "amount": 120 },
+    { "item": "silicon", "amount": 80 }
+  ],
+  "category": "units",
+  "research": "generator"
+}

@@ -1,0 +1,28 @@
+{
+  "type": "frostdustry.world.blocks.units.FrostReconstructor",
+  "name": "Giga Refabricator",
+  "description": "Synthesises coal from oil. Requires power.",
+  "health": 160,
+  "size": 5,
+  "consumes": {
+    "power": 6
+  },
+  "constructTime": 600,
+  "upgrades": [
+    ["nova", "pulsar"],
+    ["dagger", "mace"],
+    ["crawler", "atrax"],
+    ["flare", "horizon"],
+    ["mono", "poly"],
+    ["risso", "minke"],
+    ["retusa", "oxynoe"]
+  ],
+  "researchCostMultiplier": 0.5,
+  "requirements": [
+    { "item": "copper", "amount": 50 },
+    { "item": "lead", "amount": 120 },
+    { "item": "silicon", "amount": 80 }
+  ],
+  "category": "units",
+  "research": "generator"
+}

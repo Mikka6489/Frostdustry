@@ -1,0 +1,36 @@
+{
+  "type": "frostdustry.world.blocks.units.FrostFactory",
+  "name": "Navel Fabricator",
+  "description": "Synthesises coal from oil. Requires power.",
+  "health": 160,
+  "size": 3,
+  "consumes": {
+    "power": 1.2
+  },
+  "plans": [
+    {
+      "unit": "risso",
+      "time": 2700,
+      "requirements": [
+        { "item": "silicon", "amount": 20 },
+        { "item": "silicon", "amount": 35 }
+      ]
+    },
+    {
+      "unit": "retusa",
+      "time": 600,
+      "requirements": [
+        { "item": "silicon", "amount": 15 },
+        { "item": "titanium", "amount": 30 }
+      ]
+    }
+  ],
+  "researchCostMultiplier": 0.5,
+  "requirements": [
+    { "item": "copper", "amount": 50 },
+    { "item": "lead", "amount": 120 },
+    { "item": "silicon", "amount": 80 }
+  ],
+  "category": "units",
+  "research": "generator"
+}

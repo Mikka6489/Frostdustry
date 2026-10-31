@@ -1,0 +1,35 @@
+{
+  "type": "frostdustry.world.blocks.units.FrostFactory",
+  "name": "Aerial Fabricator",
+  "description": "Synthesises coal from oil. Requires power.",
+  "health": 160,
+  "size": 3,
+  "consumes": {
+    "power": 1.2
+  },
+  "plans": [
+    {
+      "unit": "flare",
+      "time": 2700,
+      "requirements": [
+        { "item": "silicon", "amount": 15 }
+      ]
+    },
+    {
+      "unit": "mono",
+      "time": 600,
+      "requirements": [
+        { "item": "silicon", "amount": 30 },
+        { "item": "coal", "amount": 15 }
+      ]
+    }
+  ],
+  "researchCostMultiplier": 0.5,
+  "requirements": [
+    { "item": "copper", "amount": 50 },
+    { "item": "lead", "amount": 120 },
+    { "item": "silicon", "amount": 80 }
+  ],
+  "category": "units",
+  "research": "generator"
+}

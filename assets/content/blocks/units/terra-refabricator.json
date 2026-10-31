@@ -1,0 +1,28 @@
+{
+  "type": "frostdustry.world.blocks.units.FrostReconstructor",
+  "name": "Terra Refabricator",
+  "description": "Synthesises coal from oil. Requires power.",
+  "health": 160,
+  "size": 7,
+  "consumes": {
+    "power": 13
+  },
+  "constructTime": 5400,
+  "upgrades": [
+    ["zenith", "antumbra"],
+    ["spiroct", "arkyid"],
+    ["fortress", "scepter"],
+    ["bryde", "sei"],
+    ["mega", "quad"],
+    ["quasar", "vela"],
+    ["cyerce", "aegires"]
+  ],
+  "researchCostMultiplier": 0.5,
+  "requirements": [
+    { "item": "copper", "amount": 50 },
+    { "item": "lead", "amount": 120 },
+    { "item": "silicon", "amount": 80 }
+  ],
+  "category": "units",
+  "research": "generator"
+}

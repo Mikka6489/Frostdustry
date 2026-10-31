@@ -1,4 +1,4 @@
-package frostdustry.world.blocks.distribution;
+package frostdustry.world.blocks.liquid;
 
 import arc.*;
 import arc.graphics.g2d.*;
